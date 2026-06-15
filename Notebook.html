@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos HexaCore</title>
+
+    <style>
+        :root {
+            --bg: #0f1115;
+            --card: #181c23;
+            --card2: #11151b;
+            --azul: #0066ff;
+            --azul-hover: #0052cc;
+            --texto: #ffffff;
+            --texto-sec: #9ca3af;
+            --borda: #252b36;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--texto);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .header {
+            width: 100%;
+            background: var(--card2);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-top {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 24px;
+            padding: 14px 40px;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        .logo img {
+            width: 170px;
+        }
+
+        .search {
+            display: flex;
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            justify-self: center;
+        }
+
+        .search input {
+            width: 100%;
+            background: var(--card);
+            border: 1px solid var(--borda);
+            padding: 12px 16px;
+            color: white;
+            outline: none;
+            border-radius: 14px 0 0 14px;
+            font-size: 12px;
+        }
+
+        .search button {
+            width: 56px;
+            border: none;
+            background: var(--azul);
+            color: white;
+            font-size: 16px;
+            border-radius: 0 14px 14px 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search button:hover {
+            background: var(--azul-hover);
+        }
+
+        .icons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+            white-space: nowrap;
+        }
+
+        .icons a {
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .icons a:hover {
+            color: var(--azul);
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            background: var(--card2);
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        .menu a {
+            position: relative;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.9px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--azul);
+        }
+
+        .menu a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0%;
+            height: 2px;
+            background: var(--azul);
+            transition: 0.3s;
+        }
+
+        .menu a:hover::after {
+            width: 100%;
+        }
+
+        .conteudo-produtos {
+            border-top: 1px solid var(--borda);
+            padding: 28px 24px 40px;
+            background: var(--bg);
+        }
+
+        .produtos-destaque {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .produto-loja {
+            width: 250px;
+            background: var(--card);
+            border: 1px solid var(--borda);
+            border-radius: 22px;
+            overflow: hidden;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .produto-loja:hover {
+            transform: translateY(-8px);
+            border-color: var(--azul);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .produto-loja img {
+            width: 100%;
+            height: 230px;
+            object-fit: contain;
+            background: var(--card2);
+            padding: 20px;
+        }
+
+        .info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .info h2 {
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            font-weight: 600;
+            min-height: 45px;
+        }
+
+        .estrelas {
+            color: #facc15;
+            margin-bottom: 10px;
+        }
+
+        .preco-antigo {
+            color: var(--texto-sec);
+            text-decoration: line-through;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .preco {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .btn-comprar {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--azul);
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-comprar:hover {
+            background: var(--azul-hover);
+        }
+
+        .modal-login {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-conteudo {
+            background-color: #1a1a1a;
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid #0047b3;
+            width: 320px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .fechar {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            color: #aaa;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-conteudo h2 {
+            color: #0047b3;
+            margin-bottom: 20px;
+        }
+
+        .modal-conteudo input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn-login {
+            background: #0047b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .links-modal {
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .links-modal a {
+            color: #0047b3;
+            text-decoration: underline;
+        }
+
+        .carrinho-lateral {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            right: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            border-left: 2px solid #0047b3;
+        }
+
+        .fechar-carrinho {
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            font-size: 36px;
+            color: #0047b3;
+            cursor: pointer;
+        }
+
+        .carrinho-conteudo {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .item-carrinho-vazio {
+            color: #888;
+            margin-top: 50px;
+        }
+
+        .btn-finalizar {
+            background-color: #0047b3;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            display: block;
+            margin: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        @media(max-width: 768px) {
+            .header-top {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .icons {
+                justify-content: center;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="modalLogin" class="modal-login">
+        <div class="modal-conteudo">
+            <span class="fechar" onclick="fecharLogin()">&times;</span>
+            <h2>Área do Cliente</h2>
+            <input type="text" placeholder="E-mail ou Usuário">
+            <input type="password" placeholder="Senha">
+            <button class="btn-login">ENTRAR</button>
+
+            <div class="links-modal">
+                <p>Não tem conta? <a href="#">Cadastre-se</a></p>
+                <p><a href="#">Esqueci minha senha</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="meuCarrinho" class="carrinho-lateral">
+        <span class="fechar-carrinho" onclick="fecharCarrinho()">&times;</span>
+
+        <div class="carrinho-conteudo">
+            <h2 style="color: #ffffff;">Meu Carrinho</h2>
+            <hr border="1" color="#333">
+            <p class="item-carrinho-vazio">Seu carrinho está vazio :(</p>
+            <a href="#" class="btn-finalizar">FINALIZAR COMPRA</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-top">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://i.imgur.com/bri4wau.png">
+                </a>
+            </div>
+
+            <div class="search">
+                <input type="text" placeholder="O que você está procurando?">
+                <button>🔍</button>
+            </div>
+
+            <div class="icons">
+                <a href="javascript:void(0)" onclick="abrirLogin()">👤 Minha Conta</a>
+                <a href="javascript:void(0)" onclick="abrirCarrinho()">🛒 Carrinho</a>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <a href="Pc gamer.html">PC GAMER</a>
+            <a href="Notebooks.html">NOTEBOOKS</a>
+            <a href="https://mautz01.github.io/perifericos-hexacore/">PERIFÉRICOS</a>
+            <a href="https://mautz01.github.io/ofertas-hexacore/">OFERTAS</a>
+        </nav>
+    </header>
+
+    <main class="conteudo-produtos">
+        <div class="produtos-destaque" id="listaProdutos"></div>
+    </main>
+
+    <script src="produtos.js"></script>
+
+    <script>
+        function abrirLogin() {
+            document.getElementById("modalLogin").style.display = "block";
+        }
+
+        function fecharLogin() {
+            document.getElementById("modalLogin").style.display = "none";
+        }
+
+        function abrirCarrinho() {
+            document.getElementById("meuCarrinho").style.width = "320px";
+        }
+
+        function fecharCarrinho() {
+            document.getElementById("meuCarrinho").style.width = "0";
+        }
+
+        renderizarProdutos();
+    </script>
+
+</body>
+
+</html>

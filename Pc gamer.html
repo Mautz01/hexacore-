@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HexaCore - PC Gamer</title>
+<style>
+:root {
+  --bg:#0f1115;--card:#181c23;--card2:#11151b;--azul:#0066ff;--azul-hover:#0052cc;
+  --texto:#ffffff;--texto-sec:#9ca3af;--borda:#252b36;--destaque:#00b7ff;
+  --cinza:#9ca3af;--verde:#00c853;--card3:#1a1d24;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',Arial,sans-serif;background:var(--bg);color:var(--texto);overflow-x:hidden;padding-top:130px;}
+a{text-decoration:none;color:white;}
+
+/* HEADER */
+.header{width:100%;background:var(--card2);border-bottom:1px solid var(--borda);position:fixed;top:0;z-index:999;backdrop-filter:blur(10px);transition:.3s;}
+.header-top{display:flex;align-items:center;justify-content:space-between;padding:12px 40px;}
+.logo img{width:190px;}
+.search{flex:1;display:flex;max-width:700px;margin:0 50px;}
+.search input{width:100%;background:var(--card);border:1px solid var(--borda);padding:15px 20px;color:white;outline:none;border-radius:14px 0 0 14px;font-size:15px;}
+.search button{width:65px;border:none;background:var(--azul);color:white;font-size:20px;border-radius:0 14px 14px 0;cursor:pointer;transition:.3s;}
+.search button:hover{background:var(--azul-hover);}
+.icons{display:flex;gap:25px;}
+.icons a{font-size:15px;font-weight:600;transition:.3s;cursor:pointer;}
+.icons a:hover{color:var(--azul);}
+.menu{display:flex;justify-content:center;align-items:center;gap:60px;background:var(--card2);padding:12px;border-top:1px solid var(--borda);}
+.menu a{position:relative;font-size:14px;font-weight:700;letter-spacing:1px;transition:.3s;}
+.menu a:hover{color:var(--azul);}
+.menu a::after{content:"";position:absolute;left:0;bottom:-8px;width:0%;height:2px;background:var(--azul);transition:.3s;}
+.menu a:hover::after{width:100%;}
+.header.scroll{background:rgba(17,21,27,.92);backdrop-filter:blur(14px);box-shadow:0 5px 20px rgba(0,0,0,.4);}
+.header.scroll .menu{height:0;opacity:0;overflow:hidden;padding:0;border:none;}
+.header.scroll .header-top{padding:14px 50px;}
+
+/* MODAL BASE */
+.modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.85);backdrop-filter:blur(4px);}
+.modal-box{background:#13161c;border:1px solid var(--azul);border-radius:20px;padding:35px;width:380px;margin:8% auto;position:relative;}
+.modal-box h2{color:var(--azul);margin-bottom:22px;font-size:22px;}
+.modal-close{position:absolute;right:18px;top:12px;color:#aaa;font-size:26px;cursor:pointer;background:none;border:none;}
+.modal-close:hover{color:white;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-size:13px;color:var(--cinza);margin-bottom:6px;}
+.form-group input{width:100%;padding:12px 16px;background:var(--card);border:1px solid var(--borda);border-radius:10px;color:white;font-size:14px;outline:none;transition:.3s;}
+.form-group input:focus{border-color:var(--azul);}
+.btn-modal{width:100%;padding:13px;background:var(--azul);color:white;border:none;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;transition:.3s;margin-top:6px;}
+.btn-modal:hover{background:var(--azul-hover);}
+.modal-link{text-align:center;margin-top:16px;font-size:13px;color:var(--cinza);}
+.modal-link a{color:var(--azul);cursor:pointer;}
+.modal-link a:hover{text-decoration:underline;}
+.modal-msg{font-size:13px;padding:10px 14px;border-radius:8px;margin-bottom:14px;display:none;}
+.modal-msg.erro{background:#2d1515;border:1px solid #ff4444;color:#ff8888;}
+.modal-msg.ok{background:#0d2d1a;border:1px solid #00c853;color:#00c853;}
+
+/* CARRINHO LATERAL */
+.carrinho-lateral{height:100%;width:0;position:fixed;z-index:2000;top:0;right:0;background:#0d1016;overflow-x:hidden;transition:.4s;border-left:2px solid var(--azul);box-shadow:-5px 0 25px rgba(0,0,0,.6);}
+.fechar-carrinho{position:absolute;top:18px;left:20px;font-size:32px;color:var(--azul);cursor:pointer;background:none;border:none;}
+.carrinho-conteudo{padding:70px 20px 20px;}
+.carrinho-conteudo h2{font-size:20px;margin-bottom:12px;}
+.item-carrinho-vazio{color:#666;text-align:center;margin-top:50px;}
+.cart-item{display:flex;gap:12px;margin:14px 0;padding:12px;border:1px solid var(--borda);border-radius:12px;position:relative;}
+.cart-item img{width:75px;height:75px;object-fit:contain;background:var(--card2);border-radius:8px;}
+.cart-item-info{flex:1;}
+.cart-item-info h4{font-size:12px;margin-bottom:6px;line-height:1.4;}
+.cart-item-info p{color:var(--verde);font-weight:700;font-size:14px;}
+.cart-remove{position:absolute;top:8px;right:8px;background:none;border:none;color:#666;cursor:pointer;font-size:18px;}
+.cart-remove:hover{color:#ff4444;}
+.cart-total{border-top:1px solid var(--borda);padding-top:14px;margin-top:14px;font-size:18px;font-weight:700;}
+.btn-finalizar{display:block;background:var(--azul);color:white;padding:14px;text-align:center;border-radius:12px;margin-top:16px;font-weight:700;cursor:pointer;border:none;width:100%;font-size:15px;transition:.3s;}
+.btn-finalizar:hover{background:var(--azul-hover);}
+.btn-limpar-cart{display:block;background:transparent;color:var(--cinza);padding:10px;text-align:center;border-radius:12px;margin-top:8px;font-size:13px;cursor:pointer;border:1px solid var(--borda);width:100%;transition:.3s;}
+.btn-limpar-cart:hover{border-color:#ff4444;color:#ff4444;}
+
+/* TOAST */
+.toast{position:fixed;bottom:30px;right:30px;background:#13161c;border:1px solid var(--verde);color:var(--verde);padding:14px 22px;border-radius:12px;font-weight:600;z-index:9999;opacity:0;transform:translateY(20px);transition:.4s;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+.toast.erro{border-color:#ff4444;color:#ff4444;}
+
+/* LISTAGEM */
+#pagina-listagem{display:block;}
+#pagina-produto,#pagina-admin,#pagina-pedidos{display:none;}
+.produtos-destaque{display:flex;gap:25px;flex-wrap:wrap;justify-content:center;padding:30px 20px;}
+.produto-loja{width:250px;background:var(--card);border:1px solid var(--borda);border-radius:22px;overflow:hidden;transition:.3s;}
+.produto-loja:hover{transform:translateY(-8px);border-color:var(--azul);box-shadow:0 15px 35px rgba(0,0,0,.5);}
+.produto-loja img{width:100%;height:230px;object-fit:contain;background:var(--card2);padding:20px;}
+.info{padding:20px;}
+.info h2{font-size:15px;line-height:1.5;margin-bottom:12px;font-weight:600;}
+.estrelas{color:#facc15;margin-bottom:10px;}
+.info .preco-antigo{color:var(--texto-sec);text-decoration:line-through;margin-bottom:5px;}
+.info .preco{font-size:28px;font-weight:800;margin-bottom:8px;}
+.parcelado{color:var(--texto-sec);font-size:13px;margin-bottom:18px;}
+.btn-comprar{display:block;width:100%;text-align:center;background:var(--azul);padding:14px;border-radius:12px;font-weight:700;transition:.3s;cursor:pointer;border:none;color:white;font-size:14px;}
+.btn-comprar:hover{background:var(--azul-hover);}
+.badge-sem-estoque{background:#2d1515;color:#ff6666;font-size:11px;padding:4px 10px;border-radius:6px;margin-bottom:10px;display:inline-block;}
+
+/* PRODUTO DETALHE */
+.container-produto{max-width:1400px;margin:auto;padding:40px;display:grid;grid-template-columns:1fr 420px;gap:40px;}
+.galeria{background:var(--card);border:1px solid var(--borda);border-radius:20px;padding:20px;}
+.imagem-principal{width:95%;border-radius:15px;margin-bottom:20px;}
+.miniaturas{display:flex;gap:15px;}
+.miniaturas img{width:90px;border-radius:10px;cursor:pointer;border:2px solid transparent;transition:.3s;}
+.miniaturas img:hover{border-color:var(--destaque);transform:scale(1.05);}
+.info-produto{background:var(--card);border:1px solid var(--borda);border-radius:20px;padding:30px;height:fit-content;position:sticky;top:20px;}
+.titulo{font-size:28px;margin-bottom:15px;line-height:1.3;}
+.avaliacao{color:gold;margin-bottom:15px;}
+.preco-antigo{color:var(--cinza);text-decoration:line-through;font-size:18px;}
+.preco{font-size:42px;font-weight:bold;color:var(--verde);margin:10px 0;}
+.pix{color:var(--cinza);margin-bottom:20px;}
+.parcelamento{background:#13161c;border:1px solid var(--borda);padding:15px;border-radius:12px;margin-bottom:25px;line-height:30px;}
+.botao-comprar{width:100%;padding:18px;border:none;border-radius:14px;background:var(--destaque);color:white;font-size:20px;font-weight:bold;cursor:pointer;transition:.3s;margin-bottom:15px;}
+.botao-comprar:hover{transform:scale(1.02);background:#0095cc;}
+.botao-carrinho{width:100%;padding:16px;border-radius:14px;border:2px solid var(--destaque);background:transparent;color:white;font-size:18px;cursor:pointer;transition:.3s;}
+.botao-carrinho:hover{background:var(--destaque);}
+.descricao{max-width:1400px;margin:20px auto;background:var(--card);border:1px solid var(--borda);border-radius:20px;padding:35px;}
+.descricao h2{margin-bottom:20px;font-size:28px;}
+.descricao p{color:var(--cinza);line-height:30px;font-size:17px;}
+.especificacoes{margin-top:30px;}
+.item-spec{display:flex;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--borda);}
+.nome-spec{color:var(--cinza);}
+.valor-spec{font-weight:bold;}
+.btn-voltar{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--borda);color:var(--texto);padding:12px 24px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:.3s;margin:20px 40px 0;}
+.btn-voltar:hover{border-color:var(--azul);color:var(--azul);}
+
+/* ADMIN */
+.admin-wrap{max-width:1200px;margin:auto;padding:30px 40px;}
+.admin-wrap h1{font-size:28px;margin-bottom:6px;}
+.admin-wrap p{color:var(--cinza);margin-bottom:30px;}
+.admin-tabs{display:flex;gap:12px;margin-bottom:28px;}
+.tab-btn{padding:10px 24px;border-radius:10px;border:1px solid var(--borda);background:transparent;color:var(--cinza);cursor:pointer;font-size:14px;font-weight:600;transition:.3s;}
+.tab-btn.ativo{background:var(--azul);color:white;border-color:var(--azul);}
+.tab-btn:hover:not(.ativo){border-color:var(--azul);color:white;}
+.tab-content{display:none;}
+.tab-content.ativo{display:block;}
+
+/* Tabela admin */
+.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--borda);}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:var(--card2);}
+th{padding:14px 18px;text-align:left;font-size:13px;color:var(--cinza);font-weight:600;border-bottom:1px solid var(--borda);}
+td{padding:14px 18px;font-size:14px;border-bottom:1px solid var(--borda);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.02);}
+.td-img{width:60px;height:50px;object-fit:contain;background:var(--card2);border-radius:8px;}
+.badge{padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600;}
+.badge-ok{background:#0d2d1a;color:#00c853;}
+.badge-sem{background:#2d1515;color:#ff6666;}
+.btn-acao{padding:7px 14px;border-radius:8px;border:none;cursor:pointer;font-size:12px;font-weight:600;transition:.3s;margin:0 3px;}
+.btn-edit{background:#1a2a1a;color:#00c853;border:1px solid #00c853;}
+.btn-edit:hover{background:#00c853;color:#000;}
+.btn-del{background:#2a1a1a;color:#ff4444;border:1px solid #ff4444;}
+.btn-del:hover{background:#ff4444;color:#fff;}
+
+/* Form produto */
+.form-prod{background:var(--card);border:1px solid var(--borda);border-radius:16px;padding:28px;margin-bottom:24px;}
+.form-prod h3{margin-bottom:20px;font-size:18px;color:var(--destaque);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-grid.g3{grid-template-columns:1fr 1fr 1fr;}
+.form-full{grid-column:1/-1;}
+.form-group select{width:100%;padding:12px 16px;background:var(--card);border:1px solid var(--borda);border-radius:10px;color:white;font-size:14px;outline:none;}
+.form-group textarea{width:100%;padding:12px 16px;background:var(--card);border:1px solid var(--borda);border-radius:10px;color:white;font-size:14px;outline:none;resize:vertical;min-height:80px;}
+.btn-salvar{padding:12px 28px;background:var(--azul);color:white;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:15px;transition:.3s;}
+.btn-salvar:hover{background:var(--azul-hover);}
+.btn-cancelar{padding:12px 24px;background:transparent;color:var(--cinza);border:1px solid var(--borda);border-radius:10px;font-weight:600;cursor:pointer;font-size:14px;margin-left:10px;transition:.3s;}
+.btn-cancelar:hover{border-color:#ff4444;color:#ff4444;}
+
+/* Pedidos */
+.pedido-card{background:var(--card);border:1px solid var(--borda);border-radius:14px;padding:20px;margin-bottom:16px;}
+.pedido-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.pedido-id{font-size:13px;color:var(--cinza);}
+.pedido-data{font-size:12px;color:var(--cinza);}
+.pedido-status{padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;}
+.status-pendente{background:#2a2000;color:#facc15;}
+.status-aprovado{background:#0d2d1a;color:#00c853;}
+.pedido-itens{font-size:13px;color:var(--cinza);margin-bottom:10px;}
+.pedido-total{font-size:18px;font-weight:700;color:var(--verde);}
+.select-status{padding:6px 12px;background:var(--card2);border:1px solid var(--borda);color:white;border-radius:8px;font-size:12px;cursor:pointer;}
+
+/* Estatísticas */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+.stat-card{background:var(--card);border:1px solid var(--borda);border-radius:14px;padding:20px;}
+.stat-card .stat-num{font-size:32px;font-weight:800;color:var(--azul);}
+.stat-card .stat-label{font-size:13px;color:var(--cinza);margin-top:4px;}
+
+/* Minha conta */
+.conta-wrap{max-width:700px;margin:auto;padding:30px 40px;}
+.conta-card{background:var(--card);border:1px solid var(--borda);border-radius:16px;padding:28px;margin-bottom:20px;}
+.conta-card h3{font-size:18px;margin-bottom:18px;color:var(--destaque);}
+.conta-info p{margin-bottom:10px;font-size:15px;}
+.conta-info span{color:var(--cinza);}
+.btn-logout{padding:11px 24px;background:transparent;color:#ff4444;border:1px solid #ff4444;border-radius:10px;font-weight:600;cursor:pointer;font-size:14px;transition:.3s;}
+.btn-logout:hover{background:#ff4444;color:white;}
+
+footer{border-top:1px solid var(--borda);background:var(--card2);text-align:center;padding:40px;color:var(--texto-sec);margin-top:60px;}
+
+@media(max-width:1000px){.container-produto{grid-template-columns:1fr;padding:20px;}.stats-grid{grid-template-columns:1fr 1fr;}.form-grid{grid-template-columns:1fr;}}
+@media(max-width:700px){.header-top{padding:12px 20px;}.search{margin:0 15px;}.menu{gap:20px;}.btn-voltar{margin:15px 20px 0;}.admin-wrap,.conta-wrap{padding:20px;}.stats-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<!-- MODAL LOGIN -->
+<div id="modalLogin" class="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fecharModal('modalLogin')">×</button>
+    <h2>🔐 Entrar</h2>
+    <div id="msg-login" class="modal-msg"></div>
+    <div class="form-group"><label>E-mail</label><input type="email" id="login-email" placeholder="seu@email.com"></div>
+    <div class="form-group"><label>Senha</label><input type="password" id="login-senha" placeholder="••••••••"></div>
+    <button class="btn-modal" onclick="fazerLogin()">ENTRAR</button>
+    <div class="modal-link"><p>Não tem conta? <a onclick="trocarModal('modalLogin','modalCadastro')">Cadastre-se</a></p></div>
+  </div>
+</div>
+
+<!-- MODAL CADASTRO -->
+<div id="modalCadastro" class="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fecharModal('modalCadastro')">×</button>
+    <h2>✨ Criar Conta</h2>
+    <div id="msg-cadastro" class="modal-msg"></div>
+    <div class="form-group"><label>Nome</label><input type="text" id="cad-nome" placeholder="Seu nome"></div>
+    <div class="form-group"><label>E-mail</label><input type="email" id="cad-email" placeholder="seu@email.com"></div>
+    <div class="form-group"><label>Senha</label><input type="password" id="cad-senha" placeholder="Mínimo 6 caracteres"></div>
+    <button class="btn-modal" onclick="fazerCadastro()">CRIAR CONTA</button>
+    <div class="modal-link"><p>Já tem conta? <a onclick="trocarModal('modalCadastro','modalLogin')">Entrar</a></p></div>
+  </div>
+</div>
+
+<!-- MODAL FINALIZAR PEDIDO -->
+<div id="modalPedido" class="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fecharModal('modalPedido')">×</button>
+    <h2>🛒 Finalizar Pedido</h2>
+    <div id="resumo-pedido" style="margin-bottom:20px;"></div>
+    <div class="form-group"><label>Endereço de entrega</label><input type="text" id="pedido-end" placeholder="Rua, número, cidade"></div>
+    <div class="form-group"><label>Forma de pagamento</label>
+      <select id="pedido-pag" style="width:100%;padding:12px 16px;background:var(--card);border:1px solid var(--borda);border-radius:10px;color:white;font-size:14px;outline:none;">
+        <option value="PIX">PIX</option>
+        <option value="Cartão de Crédito">Cartão de Crédito</option>
+        <option value="Boleto">Boleto</option>
+      </select>
+    </div>
+    <button class="btn-modal" onclick="confirmarPedido()">CONFIRMAR PEDIDO</button>
+  </div>
+</div>
+
+<!-- CARRINHO LATERAL -->
+<div id="meuCarrinho" class="carrinho-lateral">
+  <button class="fechar-carrinho" onclick="fecharCarrinho()">×</button>
+  <div class="carrinho-conteudo">
+    <h2>Meu Carrinho</h2>
+    <hr style="border-color:var(--borda);margin-bottom:14px;">
+    <div id="listaCarrinho"></div>
+    <div id="cart-footer" style="display:none;">
+      <div class="cart-total" id="cart-total"></div>
+      <button class="btn-finalizar" onclick="abrirFinalizarPedido()">FINALIZAR COMPRA</button>
+      <button class="btn-limpar-cart" onclick="limparCarrinho()">Limpar carrinho</button>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-top">
+    <div class="logo"><a href="javascript:void(0)" onclick="nav('listagem')"><img src="https://i.imgur.com/bri4wau.png"></a></div>
+    <div class="search"><input type="text" id="searchInput" placeholder="O que você está procurando?" oninput="filtrarProdutos()"><button>🔍</button></div>
+    <div class="icons">
+      <a id="btn-conta" onclick="abrirConta()">👤 <span id="label-conta">Minha Conta</span></a>
+      <a onclick="abrirCarrinho()">🛒 Carrinho <span id="cart-count" style="background:var(--azul);color:white;border-radius:50%;padding:1px 7px;font-size:12px;display:none;">0</span></a>
+    </div>
+  </div>
+  <nav class="menu">
+        <a href="Pc gamer.html">PC GAMER</a>
+        <a href="Notebook.html">NOTEBOOKS</a>
+        <a href="perifericos.html">PERIFÉRICOS</a>
+        <a href="ofertas.html">OFERTAS</a>
+    <a id="menu-admin" style="display:none;color:var(--destaque);" onclick="nav('admin')">⚙ ADMIN</a>
+  </nav>
+</header>
+
+<!-- LISTAGEM -->
+<div id="pagina-listagem">
+  <div class="produtos-destaque" id="gridProdutos"></div>
+  <footer>©️ 2025 HexaCore — Todos os direitos reservados</footer>
+</div>
+
+<!-- DETALHE PRODUTO -->
+<div id="pagina-produto">
+  <button class="btn-voltar" onclick="nav('listagem')">← Voltar</button>
+  <div id="detalhe-prod"></div>
+  <footer>©️ 2025 HexaCore — Todos os direitos reservados</footer>
+</div>
+
+<!-- ADMIN -->
+<div id="pagina-admin">
+  <div class="admin-wrap">
+    <h1>⚙ Painel Admin</h1>
+    <p>Gerencie produtos, pedidos e usuários da HexaCore.</p>
+    <div class="stats-grid" id="statsGrid"></div>
+    <div class="admin-tabs">
+      <button class="tab-btn ativo" onclick="abaAdmin('produtos')">Produtos</button>
+      <button class="tab-btn" onclick="abaAdmin('pedidos')">Pedidos</button>
+      <button class="tab-btn" onclick="abaAdmin('usuarios')">Usuários</button>
+    </div>
+
+    <!-- ABA PRODUTOS -->
+    <div id="tab-produtos" class="tab-content ativo">
+      <div id="form-produto-wrap"></div>
+      <button class="btn-salvar" style="margin-bottom:18px;" onclick="mostrarFormProduto()">+ Novo Produto</button>
+      <div class="table-wrap"><table id="tabelaProdutos"><thead><tr><th>Img</th><th>Nome</th><th>Preço</th><th>Estoque</th><th>Ações</th></tr></thead><tbody id="tbodyProdutos"></tbody></table></div>
+    </div>
+
+    <!-- ABA PEDIDOS -->
+    <div id="tab-pedidos" class="tab-content">
+      <div id="listaPedidosAdmin"></div>
+    </div>
+
+    <!-- ABA USUÁRIOS -->
+    <div id="tab-usuarios" class="tab-content">
+      <div class="table-wrap"><table><thead><tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Pedidos</th></tr></thead><tbody id="tbodyUsuarios"></tbody></table></div>
+    </div>
+  </div>
+  <footer>©️ 2025 HexaCore — Todos os direitos reservados</footer>
+</div>
+
+<!-- MINHA CONTA / PEDIDOS -->
+<div id="pagina-pedidos">
+  <div class="conta-wrap">
+    <div class="conta-card" id="conta-info-box"></div>
+    <div class="conta-card">
+      <h3>📦 Meus Pedidos</h3>
+      <div id="meus-pedidos-lista"></div>
+    </div>
+  </div>
+  <footer>©️ 2025 HexaCore — Todos os direitos reservados</footer>
+</div>
+
+<script>
+/* ===================== DB ===================== */
+const DB = {
+  get: k => { try { return JSON.parse(localStorage.getItem(k)||'null'); } catch(e){return null;} },
+  set: (k,v) => localStorage.setItem(k, JSON.stringify(v)),
+  // Produtos (chave local da página)
+  getProdutos: () => DB.get('hxc_produtos') || [],
+  setProdutos: v => DB.set('hxc_produtos', v),
+  // Usuários — chave unificada
+  getUsuarios: () => DB.get('hx_usuarios') || [],
+  setUsuarios: v => DB.set('hx_usuarios', v),
+  // Sessão — chave unificada (objeto completo)
+  getSessao: () => DB.get('hx_usuarioLogado'),
+  setSessao: v => {
+    DB.set('hx_usuarioLogado', v);
+    if(v){
+      localStorage.setItem('usuarioLogado','true');
+      localStorage.setItem('nomeUsuario', v.nome||'');
+      localStorage.setItem('emailUsuario', v.email||'');
+    } else {
+      localStorage.removeItem('usuarioLogado');
+      localStorage.removeItem('nomeUsuario');
+      localStorage.removeItem('emailUsuario');
+    }
+  },
+  // Carrinho — chave unificada por UID
+  getCarrinho: () => { const s=DB.getSessao(); const uid=s?s.id:'guest'; return DB.get('hx_carrinho_'+uid)||[]; },
+  setCarrinho: v => { const s=DB.getSessao(); const uid=s?s.id:'guest'; DB.set('hx_carrinho_'+uid, v); },
+  // Pedidos — chave unificada por UID
+  getPedidos: () => { const s=DB.getSessao(); const uid=s?s.id:'guest'; return DB.get('hx_pedidos_'+uid)||[]; },
+  setPedidos: v => { const s=DB.getSessao(); const uid=s?s.id:'guest'; DB.set('hx_pedidos_'+uid, v); },
+};
+
+/* ===== SEED de produtos iniciais ===== */
+function seedProdutos() {
+  if (DB.getProdutos().length > 0) return;
+  const prods = [
+    {id:1,nome:"PC Gamer Hexacore IV, Intel i5-12400F, GeForce RTX 4060 Ti 8GB, 16GB DDR4, SSD M.2 480GB",precoAntigo:"R$ 6.999,90",preco:"R$ 5.789,90",precoNum:5789.90,parcela:"R$ 482,41",estrelas:5,avaliações:245,estoque:true,
+    imgs:["https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/a/-/a-pc-cv500l-bk-c-fan-box-001_2_11.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/a/-/a-pc-cv500l-bk-c-fan-box-003_2_11.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/a/-/a-pc-cv500l-bk-c-fan-box-004_2_11.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/m/c/mcr-cv500l-bk-pc-005_16_27.jpg"],
+    desc:"PC gamer ideal para jogos em Full HD e Quad HD com alta performance.",
+    specs:[["Processador","Intel Core i5-12400F"],["Placa de Vídeo","GeForce RTX 4060 Ti 8GB"],["Memória RAM","16GB DDR4"],["Armazenamento","SSD M.2 480GB"],["Fonte","650W 80 Plus"]]},
+
+    {id:2,nome:"PC Gamer Hexhigh Ryzen 7 5700X, RTX 5060 8GB, 32GB RAM, SSD 1TB",precoAntigo:"R$ 15.999,00",preco:"R$ 13.450,00",precoNum:13450,parcela:"R$ 1.120,83",estrelas:5,avaliações:67,estoque:true,
+    imgs:["https://images0.kabum.com.br/produtos/fotos/sync_mirakl/939940/xlarge/PC-Gamer-Barato-Ryzen-5-5600gt-16gb-Ram-Ddr4-SSD-512gb-Nvme-Aquario-Preto-Win-11-Pro_1770930100.jpg","https://images0.kabum.com.br/produtos/fotos/sync_mirakl/939940/xlarge/PC-Gamer-Barato-Ryzen-5-5600gt-16gb-Ram-Ddr4-SSD-512gb-Nvme-Aquario-Preto-Win-11-Pro_1770930101.jpg","https://images0.kabum.com.br/produtos/fotos/sync_mirakl/939940/xlarge/PC-Gamer-Barato-Ryzen-5-5600gt-16gb-Ram-Ddr4-SSD-512gb-Nvme-Aquario-Preto-Win-11-Pro_1770930102.jpg","https://images0.kabum.com.br/produtos/fotos/sync_mirakl/939940/xlarge/PC-Gamer-Barato-Ryzen-5-5600gt-16gb-Ram-Ddr4-SSD-512gb-Nvme-Aquario-Preto-Win-11-Pro_1770930103.jpg"],
+    desc:"PC gamer premium focado em máxima performance para jogos, streaming e multitarefa.",
+    specs:[["Processador","AMD Ryzen 7 5700X"],["Placa de Vídeo","RTX 5060 8GB"],["Memória RAM","32GB DDR4"],["Armazenamento","SSD 1TB"],["Refrigeração","Water Cooler 240mm"],["Sistema Operacional","Windows 11 Pro"]]},
+
+    {id:3,nome:"PC Gamer Ryzen 5 5500, RTX 3060, 16GB RAM, SSD 512GB",precoAntigo:"R$ 4.999,00",preco:"R$ 3.799,00",precoNum:3799,parcela:"R$ 316,58",estrelas:4,avaliações:69,estoque:true,
+    imgs:["https://shopinfo.vteximg.com.br/arquivos/ids/1712698-1000-1000/1.png?v=638871365339900000","https://shopinfo.vteximg.com.br/arquivos/ids/1712699-1000-1000/2.png?v=638871365340070000","https://shopinfo.vteximg.com.br/arquivos/ids/1712700-400-400/3.png?v=638871365340070000","https://shopinfo.vteximg.com.br/arquivos/ids/1712701-1000-1000/4.png?v=638871365340070000"],
+    desc:"PC Gamer projetado para excelente desempenho em jogos competitivos e títulos atuais.",
+    specs:[["Processador","AMD Ryzen 5 5500"],["Placa de Vídeo","GeForce RTX 3060"],["Memória RAM","16GB DDR4"],["Armazenamento","SSD 512GB"],["Sistema Operacional","Windows 11 Pro"]]},
+
+    {id:4,nome:"PC Gamer Intel i5-12400F, RTX 4060, 16GB RAM, SSD 1TB",precoAntigo:"R$ 6.200,00",preco:"R$ 5.299,00",precoNum:5299,parcela:"R$ 441,58",estrelas:5,avaliações:67,estoque:true,
+    imgs:["https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/p/o/pouter-4-branco-com_fan-001_2.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/p/o/pouter-4-branco-com_fan-002_2.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/p/o/pouter-4-branco-com_fan-003_2.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/p/o/pouter-4-branco-com_fan-004_2.jpg"],
+    desc:"PC Gamer de alto desempenho para jogos populares com ótima qualidade gráfica.",
+    specs:[["Processador","Intel Core i5-12400F"],["Placa de Vídeo","GeForce RTX 4060"],["Memória RAM","16GB DDR4"],["Armazenamento","SSD 1TB"],["Sistema Operacional","Windows 11 Pro"]]},
+
+    {id:5,nome:"PC Gamer Ryzen 7 5700X, RTX 4070, 32GB RAM, SSD 1TB",precoAntigo:"R$ 9.999,00",preco:"R$ 8.499,00",precoNum:8499,parcela:"R$ 708,25",estrelas:5,avaliações:67,estoque:true,
+    imgs:["https://shopinfo.vteximg.com.br/arquivos/ids/1672798-1000-1000/1.png?v=638998536762600000","https://shopinfo.vteximg.com.br/arquivos/ids/1672800-1000-1000/3.png?v=638998536855070000","https://shopinfo.vteximg.com.br/arquivos/ids/1672799-1000-1000/2.png?v=638998536806730000","https://shopinfo.vteximg.com.br/arquivos/ids/1672801-1000-1000/4.png?v=638998536957830000"],
+    desc:"PC Gamer de alta performance para jogadores exigentes e criadores de conteúdo.",
+    specs:[["Processador","AMD Ryzen 7 5700X"],["Placa de Vídeo","GeForce RTX 4070"],["Memória RAM","32GB DDR4"],["Armazenamento","SSD 1TB"],["Sistema Operacional","Windows 11 Pro"]]},
+
+    {id:6,nome:"PC Gamer Ryzen 5 4600G (sem GPU), 16GB RAM, SSD 480GB",precoAntigo:"R$ 2.999,00",preco:"R$ 2.199,00",precoNum:2199,parcela:"R$ 183,25",estrelas:3,avaliações:42,estoque:true,
+    imgs:["https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/n/a/narok_amd_gpu-01_3_3.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/n/a/narok_amd_gpu-02_2_6.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/n/a/narok_amd_gpu-03_5.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/n/a/narok_amd_gpu-04_5.jpg"],
+    desc:"PC de entrada ideal para jogos leves, estudos e uso diário.",
+    specs:[["Processador","AMD Ryzen 5 4600G"],["Placa de Vídeo","Radeon Integrada"],["Memória RAM","16GB DDR4"],["Armazenamento","SSD 480GB"],["Sistema Operacional","Windows 11 Pro"]]},
+
+    {id:7,nome:"PC Gamer Intel i7-12700K, RTX 4080, 32GB RAM, SSD 2TB",precoAntigo:"R$ 15.999,00",preco:"R$ 13.990,00",precoNum:13990,parcela:"R$ 1.165,83",estrelas:5,avaliações:67,estoque:true,
+    imgs:["https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/c/v/cv500l-water_fan-media-001_3_27.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/c/v/cv500l-water_fan-media-003_4_3.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/m/c/mcr-cv500l-bk-pc-005_16_5.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/c/v/cv500l-water_fan-media-002_3_27.jpg"],
+    desc:"PC Gamer entusiasta para desempenho extremo em games AAA, streaming e edição.",
+    specs:[["Processador","Intel Core i7-12700K"],["Placa de Vídeo","GeForce RTX 4080"],["Memória RAM","32GB DDR4"],["Armazenamento","SSD 2TB"],["Sistema Operacional","Windows 11 Pro"]]},
+
+    {id:8,nome:"PC Gamer Ryzen 5 5600, GTX 1660 Super, 16GB RAM, SSD 500GB",precoAntigo:"R$ 4.200,00",preco:"R$ 3.499,00",precoNum:3499,parcela:"R$ 291,58",estrelas:4,avaliações:67,estoque:true,
+    imgs:["https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/a/-/a-pc-apus-rgb-cgpu-m_dia-001_3_4_1.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/a/-/a-pc-apus-rgb-cgpu-m_dia-003_5_3_1.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/a/-/a-pc-apus-rgb-cgpu-m_dia-004_3_3_1.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/a/p/apusrgb_03_4_3_1.jpg"],
+    desc:"PC Gamer ideal para jogos competitivos em Full HD com excelente custo-benefício.",
+    specs:[["Processador","AMD Ryzen 5 5600"],["Placa de Vídeo","GeForce GTX 1660 Super"],["Memória RAM","16GB DDR4"],["Armazenamento","SSD 500GB"],["Sistema Operacional","Windows 11 Pro"]]},
+
+    {id:9,nome:"PC Gamer Ryzen 9 7900X, RTX 4090, 64GB RAM, SSD 2TB",precoAntigo:"R$ 25.000,00",preco:"R$ 21.990,00",precoNum:21990,parcela:"R$ 1.832,50",estrelas:5,avaliações:67,estoque:true,
+    imgs:["https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/a/gabinete-gamer-pichau-voyager-one-config-preto-001_5_34.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/a/gabinete-gamer-pichau-voyager-one-config-preto-002_3_60.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/a/gabinete-gamer-pichau-voyager-one-config-preto-003_4_63.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/a/gabinete-gamer-pichau-voyager-one-config-preto-005_4_59.jpg"],
+    desc:"PC ultra premium para máximo desempenho em 4K, IA, renderização e produção profissional.",
+    specs:[["Processador","AMD Ryzen 9 7900X"],["Placa de Vídeo","GeForce RTX 4090"],["Memória RAM","64GB DDR5"],["Armazenamento","SSD NVMe 2TB"],["Sistema Operacional","Windows 11 Pro"]]},
+
+    {id:10,nome:"PC Gamer Intel i3-12100F, GTX 1650, 8GB RAM, SSD 240GB",precoAntigo:"R$ 2.799,00",preco:"R$ 2.199,00",precoNum:2199,parcela:"R$ 183,25",estrelas:3,avaliações:67,estoque:true,
+    imgs:["https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/p/c/pc-pichau-cv100-gpu-m-001_1_16.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/p/c/pc-pichau-cv100-gpu-m-002_1_16.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/p/c/pc-pichau-cv100-gpu-m-003_1_16.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/p/c/pc-pichau-cv100-gpu-m-004_1_16.jpg"],
+    desc:"PC Gamer de entrada para jogos competitivos em Full HD com ótimo custo-benefício.",
+    specs:[["Processador","Intel Core i3-12100F"],["Placa de Vídeo","GeForce GTX 1650"],["Memória RAM","8GB DDR4"],["Armazenamento","SSD 240GB"],["Sistema Operacional","Windows 11 Pro"]]},
+  ];
+  DB.setProdutos(prods);
+}
+
+/* ===== SEED admin padrão ===== */
+function seedAdmin() {
+  const users = DB.getUsuarios();
+  if (!users.find(u=>u.email==='admin@hexacore.com')) {
+    users.push({id: Date.now(), nome:'Admin HexaCore', email:'admin@hexacore.com', senha:'admin123', perfil:'admin'});
+    DB.setUsuarios(users);
+  }
+}
+
+/* ===== NAV ===== */
+const paginas = ['pagina-listagem','pagina-produto','pagina-admin','pagina-pedidos'];
+function nav(p) {
+  paginas.forEach(x => document.getElementById(x).style.display='none');
+  if(p==='listagem'){document.getElementById('pagina-listagem').style.display='block'; renderGrid();}
+  else if(p==='produto') document.getElementById('pagina-produto').style.display='block';
+  else if(p==='admin'){document.getElementById('pagina-admin').style.display='block'; renderAdmin();}
+  else if(p==='pedidos'){document.getElementById('pagina-pedidos').style.display='block'; renderMinhaConta();}
+  window.scrollTo(0,0);
+}
+
+/* ===== RENDER GRID ===== */
+function estrelas(n){ return '★'.repeat(n)+'☆'.repeat(5-n); }
+
+function renderGrid(filtro='') {
+  const prods = DB.getProdutos().filter(p => p.nome.toLowerCase().includes(filtro.toLowerCase()));
+  const el = document.getElementById('gridProdutos');
+  el.innerHTML = prods.map(p => `
+    <div class="produto-loja">
+      <img src="${p.imgs[0]}" loading="lazy">
+      <div class="info">
+        <h2>${p.nome}</h2>
+        <div class="estrelas">${estrelas(p.estrelas)}</div>
+        ${!p.estoque?'<span class="badge-sem-estoque">Sem estoque</span>':''}
+        <p class="preco-antigo">de ${p.precoAntigo}</p>
+        <p class="preco">Por ${p.preco}</p>
+        <p class="parcelado">em até 12x de ${p.parcela}</p>
+        <button class="btn-comprar" onclick="abrirProduto(${p.id})">Ver Produto</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filtrarProdutos(){renderGrid(document.getElementById('searchInput').value);}
+
+/* ===== DETALHE PRODUTO ===== */
+function abrirProduto(id){
+  const p = DB.getProdutos().find(x=>x.id===id);
+  if(!p) return;
+  const box = document.getElementById('detalhe-prod');
+  box.innerHTML = `
+    <div class="container-produto">
+      <div class="galeria">
+        <img src="${p.imgs[0]}" class="imagem-principal" id="img-det">
+        <div class="miniaturas">${p.imgs.map((img,i)=>`<img src="${img}" onclick="document.getElementById('img-det').src='${img}'">`).join('')}</div>
+      </div>
+      <div class="info-produto">
+        <h1 class="titulo">${p.nome}</h1>
+        <div class="avaliacao">${estrelas(p.estrelas)} (${p.avaliações} avaliações)</div>
+        <div class="preco-antigo">${p.precoAntigo}</div>
+        <div class="preco">${p.preco}</div>
+        <div class="pix">À vista no PIX com 15% OFF</div>
+        <div class="parcelamento">✔ 12x de ${p.parcela} sem juros<br>✔ Até 18x no cartão<br>✔ Frete grátis para todo Brasil</div>
+        ${p.estoque
+          ? `<button class="botao-comprar" onclick="adicionarCarrinho(${p.id})">COMPRAR AGORA</button>
+             <button class="botao-carrinho" onclick="adicionarCarrinho(${p.id})">ADICIONAR AO CARRINHO</button>`
+          : `<button class="botao-comprar" disabled style="opacity:.4;cursor:not-allowed;">FORA DE ESTOQUE</button>`
+        }
+      </div>
+    </div>
+    <div class="descricao" style="margin:20px 40px;">
+      <h2>Descrição</h2>
+      <p>${p.desc}</p>
+      <div class="especificacoes">
+        ${p.specs.map(s=>`<div class="item-spec"><span class="nome-spec">${s[0]}</span><span class="valor-spec">${s[1]}</span></div>`).join('')}
+      </div>
+    </div>`;
+  nav('produto');
+}
+
+/* ===== CARRINHO ===== */
+function adicionarCarrinho(id){
+  const p = DB.getProdutos().find(x=>x.id===id);
+  if(!p||!p.estoque) return;
+  const cart = DB.getCarrinho();
+  const ex = cart.find(x=>x.id===id);
+  if(ex) ex.qty=(ex.qty||1)+1;
+  else cart.push({id:p.id,nome:p.nome,preco:p.preco,precoNum:p.precoNum,img:p.imgs[0],qty:1});
+  DB.setCarrinho(cart);
+  atualizarCarrinhoUI();
+  toast('✔ Produto adicionado ao carrinho!');
+  abrirCarrinho();
+}
+
+function atualizarCarrinhoUI(){
+  const cart = DB.getCarrinho();
+  const lista = document.getElementById('listaCarrinho');
+  const footer = document.getElementById('cart-footer');
+  const count = document.getElementById('cart-count');
+  const total = cart.reduce((s,x)=>s+(x.precoNum*(x.qty||1)),0);
+  const qtd = cart.reduce((s,x)=>s+(x.qty||1),0);
+  count.textContent=qtd; count.style.display=qtd>0?'inline':'none';
+  if(cart.length===0){
+    lista.innerHTML='<p class="item-carrinho-vazio">Seu carrinho está vazio :(</p>';
+    footer.style.display='none'; return;
+  }
+  lista.innerHTML = cart.map(item=>`
+    <div class="cart-item">
+      <img src="${item.img}">
+      <div class="cart-item-info">
+        <h4>${item.nome.substring(0,50)}...</h4>
+        <p>${item.preco} ${item.qty>1?'x'+item.qty:''}</p>
+      </div>
+      <button class="cart-remove" onclick="removerCarrinho(${item.id})">×</button>
+    </div>`).join('');
+  document.getElementById('cart-total').innerHTML = `Total: <span style="color:var(--verde)">R$ ${total.toLocaleString('pt-BR',{minimumFractionDigits:2})}</span>`;
+  footer.style.display='block';
+}
+
+function removerCarrinho(id){
+  DB.setCarrinho(DB.getCarrinho().filter(x=>x.id!==id));
+  atualizarCarrinhoUI();
+}
+
+function limparCarrinho(){DB.setCarrinho([]); atualizarCarrinhoUI();}
+function abrirCarrinho(){document.getElementById('meuCarrinho').style.width='360px';}
+function fecharCarrinho(){document.getElementById('meuCarrinho').style.width='0';}
+
+/* ===== PEDIDOS ===== */
+function abrirFinalizarPedido(){
+  const cart = DB.getCarrinho();
+  if(!cart.length){toast('Carrinho vazio!','erro'); return;}
+  const sess = DB.getSessao();
+  if(!sess){toast('Faça login para finalizar!','erro'); abrirModal('modalLogin'); return;}
+  const total = cart.reduce((s,x)=>s+(x.precoNum*(x.qty||1)),0);
+  document.getElementById('resumo-pedido').innerHTML=`
+    <div style="background:var(--card2);border-radius:10px;padding:14px;font-size:13px;color:var(--cinza);">
+      ${cart.map(x=>`<p>• ${x.nome.substring(0,40)}... — ${x.preco}</p>`).join('')}
+      <p style="margin-top:10px;font-size:16px;font-weight:700;color:var(--verde)">Total: R$ ${total.toLocaleString('pt-BR',{minimumFractionDigits:2})}</p>
+    </div>`;
+  fecharCarrinho();
+  abrirModal('modalPedido');
+}
+
+function confirmarPedido(){
+  const end = document.getElementById('pedido-end').value.trim();
+  const pag = document.getElementById('pedido-pag').value;
+  if(!end){toast('Informe o endereço!','erro'); return;}
+  const cart = DB.getCarrinho();
+  const sess = DB.getSessao();
+  const total = cart.reduce((s,x)=>s+(x.precoNum*(x.qty||1)),0);
+  const pedido = {
+    id:'#'+Math.random().toString(36).substr(2,6).toUpperCase(),
+    userId: sess.id, userEmail: sess.email,
+    itens: cart, total, endereco:end, pagamento:pag,
+    status:'Pendente', data: new Date().toLocaleString('pt-BR')
+  };
+  const pedidos = DB.getPedidos();
+  pedidos.push(pedido);
+  DB.setPedidos(pedidos);
+  DB.setCarrinho([]);
+  atualizarCarrinhoUI();
+  fecharModal('modalPedido');
+  toast('🎉 Pedido realizado com sucesso! '+pedido.id);
+}
+
+/* ===== LOGIN / CADASTRO / SESSÃO ===== */
+function fazerLogin(){
+  const email = document.getElementById('login-email').value.trim();
+  const senha = document.getElementById('login-senha').value;
+  const users = DB.getUsuarios();
+  const u = users.find(x=>x.email.toLowerCase()===email.toLowerCase() && x.senha===senha);
+  if(!u){showModalMsg('msg-login','E-mail ou senha incorretos.','erro'); return;}
+  DB.setSessao(u);
+  fecharModal('modalLogin');
+  atualizarHeaderSessao();
+  toast('Bem-vindo(a), '+u.nome+'! 👾');
+}
+
+function fazerCadastro(){
+  const nome = document.getElementById('cad-nome').value.trim();
+  const email = document.getElementById('cad-email').value.trim().toLowerCase();
+  const senha = document.getElementById('cad-senha').value;
+  if(!nome||!email||!senha){showModalMsg('msg-cadastro','Preencha todos os campos.','erro'); return;}
+  if(senha.length<6){showModalMsg('msg-cadastro','Senha deve ter ao menos 6 caracteres.','erro'); return;}
+  const users = DB.getUsuarios();
+  if(users.find(u=>u.email.toLowerCase()===email)){showModalMsg('msg-cadastro','E-mail já cadastrado.','erro'); return;}
+  const novoUser = {id:Date.now(), nome, email, senha, perfil:'cliente'};
+  users.push(novoUser);
+  DB.setUsuarios(users);
+  DB.setSessao(novoUser);
+  fecharModal('modalCadastro');
+  atualizarHeaderSessao();
+  toast('Conta criada com sucesso! 🎉');
+}
+
+function logout(){
+  DB.setSessao(null);
+  atualizarHeaderSessao();
+  nav('listagem');
+  toast('Você saiu da conta.');
+}
+
+function atualizarHeaderSessao(){
+  const sess = DB.getSessao();
+  const label = document.getElementById('label-conta');
+  const adminMenu = document.getElementById('menu-admin');
+  if(sess){
+    label.textContent = 'Olá, ' + sess.nome.split(' ')[0];
+    adminMenu.style.display = sess.perfil==='admin'?'block':'none';
+  } else {
+    label.textContent = 'Minha Conta';
+    adminMenu.style.display='none';
+  }
+}
+
+function abrirConta(){
+  const sess = DB.getSessao();
+  if(!sess){abrirModal('modalLogin'); return;}
+  nav('pedidos');
+}
+
+/* ===== MINHA CONTA ===== */
+function renderMinhaConta(){
+  const sess = DB.getSessao();
+  if(!sess) return;
+  document.getElementById('conta-info-box').innerHTML=`
+    <h3>👤 Dados da Conta</h3>
+    <div class="conta-info">
+      <p><span>Nome:</span> ${sess.nome}</p>
+      <p><span>E-mail:</span> ${sess.email}</p>
+      <p><span>Perfil:</span> ${sess.perfil==='admin'?'<span style="color:var(--destaque)">Administrador</span>':'Cliente'}</p>
+    </div>
+    <br>
+    <button class="btn-logout" onclick="logout()">Sair da Conta</button>`;
+  const pedidos = DB.getPedidos().filter(p=>p.userId===sess.id);
+  const lista = document.getElementById('meus-pedidos-lista');
+  if(!pedidos.length){lista.innerHTML='<p style="color:var(--cinza)">Nenhum pedido ainda.</p>'; return;}
+  lista.innerHTML = pedidos.reverse().map(p=>`
+    <div class="pedido-card">
+      <div class="pedido-header">
+        <span class="pedido-id">${p.id} — ${p.data}</span>
+        <span class="pedido-status ${p.status==='Aprovado'?'status-aprovado':'status-pendente'}">${p.status}</span>
+      </div>
+      <div class="pedido-itens">${p.itens.map(i=>`• ${i.nome.substring(0,40)}...`).join('<br>')}</div>
+      <div class="pedido-total">R$ ${p.total.toLocaleString('pt-BR',{minimumFractionDigits:2})}</div>
+    </div>`).join('');
+}
+
+/* ===== ADMIN ===== */
+function renderAdmin(){
+  const prods = DB.getProdutos();
+  const users = DB.getUsuarios();
+  const pedidos = DB.getPedidos();
+  const totalVendas = pedidos.reduce((s,p)=>s+p.total,0);
+  document.getElementById('statsGrid').innerHTML=`
+    <div class="stat-card"><div class="stat-num">${prods.length}</div><div class="stat-label">Produtos</div></div>
+    <div class="stat-card"><div class="stat-num">${users.length}</div><div class="stat-label">Usuários</div></div>
+    <div class="stat-card"><div class="stat-num">${pedidos.length}</div><div class="stat-label">Pedidos</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--verde);font-size:22px;">R$ ${totalVendas.toLocaleString('pt-BR',{minimumFractionDigits:2})}</div><div class="stat-label">Faturamento</div></div>`;
+  renderTabelaProdutos();
+  renderTabelaUsuarios();
+  renderPedidosAdmin();
+}
+
+function abaAdmin(aba){
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.remove('ativo'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('ativo'));
+  const abas=['produtos','pedidos','usuarios'];
+  const idx=abas.indexOf(aba);
+  document.querySelectorAll('.tab-btn')[idx].classList.add('ativo');
+  document.getElementById('tab-'+aba).classList.add('ativo');
+}
+
+function renderTabelaProdutos(){
+  const prods = DB.getProdutos();
+  document.getElementById('tbodyProdutos').innerHTML = prods.map(p=>`
+    <tr>
+      <td><img src="${p.imgs[0]}" class="td-img"></td>
+      <td style="max-width:300px;font-size:13px;">${p.nome}</td>
+      <td style="color:var(--verde);font-weight:700;">${p.preco}</td>
+      <td><span class="badge ${p.estoque?'badge-ok':'badge-sem'}">${p.estoque?'Em estoque':'Sem estoque'}</span></td>
+      <td>
+        <button class="btn-acao btn-edit" onclick="editarProduto(${p.id})">Editar</button>
+        <button class="btn-acao btn-del" onclick="deletarProduto(${p.id})">Excluir</button>
+      </td>
+    </tr>`).join('');
+}
+
+function renderTabelaUsuarios(){
+  const users = DB.getUsuarios();
+  const pedidos = DB.getPedidos();
+  document.getElementById('tbodyUsuarios').innerHTML = users.map(u=>`
+    <tr>
+      <td>${u.nome}</td>
+      <td>${u.email}</td>
+      <td><span class="badge ${u.perfil==='admin'?'badge-ok':'badge-sem'}">${u.perfil}</span></td>
+      <td>${pedidos.filter(p=>p.userId===u.id).length}</td>
+    </tr>`).join('');
+}
+
+function renderPedidosAdmin(){
+  const pedidos = DB.getPedidos();
+  const el = document.getElementById('listaPedidosAdmin');
+  if(!pedidos.length){el.innerHTML='<p style="color:var(--cinza)">Nenhum pedido cadastrado.</p>'; return;}
+  el.innerHTML = [...pedidos].reverse().map(p=>`
+    <div class="pedido-card">
+      <div class="pedido-header">
+        <span><strong>${p.id}</strong> — <span class="pedido-id">${p.userEmail}</span></span>
+        <span class="pedido-data">${p.data}</span>
+      </div>
+      <div class="pedido-itens">${p.itens.map(i=>`• ${i.nome.substring(0,50)}...`).join('<br>')}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;">
+        <div class="pedido-total">R$ ${p.total.toLocaleString('pt-BR',{minimumFractionDigits:2})}</div>
+        <select class="select-status" onchange="mudarStatusPedido('${p.id}',this.value)">
+          <option ${p.status==='Pendente'?'selected':''}>Pendente</option>
+          <option ${p.status==='Aprovado'?'selected':''}>Aprovado</option>
+          <option ${p.status==='Enviado'?'selected':''}>Enviado</option>
+          <option ${p.status==='Entregue'?'selected':''}>Entregue</option>
+        </select>
+      </div>
+    </div>`).join('');
+}
+
+function mudarStatusPedido(id, status){
+  const pedidos = DB.getPedidos();
+  const p = pedidos.find(x=>x.id===id);
+  if(p) p.status=status;
+  DB.setPedidos(pedidos);
+  toast('Status atualizado: '+status);
+}
+
+/* FORM PRODUTO */
+let editandoId = null;
+function mostrarFormProduto(id=null){
+  editandoId=id;
+  const p = id ? DB.getProdutos().find(x=>x.id===id) : null;
+  document.getElementById('form-produto-wrap').innerHTML=`
+    <div class="form-prod">
+      <h3>${id?'✏️ Editar Produto':'➕ Novo Produto'}</h3>
+      <div class="form-grid">
+        <div class="form-group form-full"><label>Nome do Produto</label><input id="fp-nome" value="${p?p.nome:''}" placeholder="Nome completo do produto"></div>
+        <div class="form-group"><label>Preço (ex: R$ 5.799,00)</label><input id="fp-preco" value="${p?p.preco:''}" placeholder="R$ 0,00"></div>
+        <div class="form-group"><label>Preço Numérico (ex: 5799.00)</label><input id="fp-precoNum" type="number" value="${p?p.precoNum:''}" placeholder="0.00"></div>
+        <div class="form-group"><label>Preço Antigo</label><input id="fp-precoAntigo" value="${p?p.precoAntigo:''}" placeholder="R$ 0,00"></div>
+        <div class="form-group"><label>Parcela (12x de...)</label><input id="fp-parcela" value="${p?p.parcela:''}" placeholder="R$ 0,00"></div>
+        <div class="form-group"><label>Estrelas (1-5)</label><input id="fp-estrelas" type="number" min="1" max="5" value="${p?p.estrelas:5}"></div>
+        <div class="form-group"><label>Estoque</label><select id="fp-estoque"><option value="true" ${!p||p.estoque?'selected':''}>Em estoque</option><option value="false" ${p&&!p.estoque?'selected':''}>Sem estoque</option></select></div>
+        <div class="form-group form-full"><label>URL Imagem 1 (principal)</label><input id="fp-img0" value="${p?p.imgs[0]:''}" placeholder="https://..."></div>
+        <div class="form-group"><label>URL Imagem 2</label><input id="fp-img1" value="${p&&p.imgs[1]?p.imgs[1]:''}" placeholder="https://..."></div>
+        <div class="form-group"><label>URL Imagem 3</label><input id="fp-img2" value="${p&&p.imgs[2]?p.imgs[2]:''}" placeholder="https://..."></div>
+        <div class="form-group form-full"><label>Descrição</label><textarea id="fp-desc">${p?p.desc:''}</textarea></div>
+      </div>
+      <br>
+      <button class="btn-salvar" onclick="salvarProduto()">Salvar</button>
+      <button class="btn-cancelar" onclick="document.getElementById('form-produto-wrap').innerHTML=''">Cancelar</button>
+    </div>`;
+}
+
+function salvarProduto(){
+  const nome=document.getElementById('fp-nome').value.trim();
+  const preco=document.getElementById('fp-preco').value.trim();
+  const precoNum=parseFloat(document.getElementById('fp-precoNum').value)||0;
+  const precoAntigo=document.getElementById('fp-precoAntigo').value.trim();
+  const parcela=document.getElementById('fp-parcela').value.trim();
+  const estrelas=parseInt(document.getElementById('fp-estrelas').value)||5;
+  const estoque=document.getElementById('fp-estoque').value==='true';
+  const imgs=[document.getElementById('fp-img0').value.trim(),document.getElementById('fp-img1').value.trim(),document.getElementById('fp-img2').value.trim()].filter(Boolean);
+  const desc=document.getElementById('fp-desc').value.trim();
+  if(!nome||!preco||!imgs.length){toast('Preencha nome, preço e ao menos 1 imagem.','erro'); return;}
+  const prods=DB.getProdutos();
+  if(editandoId){
+    const p=prods.find(x=>x.id===editandoId);
+    Object.assign(p,{nome,preco,precoNum,precoAntigo,parcela,estrelas,estoque,imgs,desc});
+  } else {
+    prods.push({id:Date.now(),nome,preco,precoNum,precoAntigo,parcela,estrelas,avaliações:0,estoque,imgs,desc,specs:[]});
+  }
+  DB.setProdutos(prods);
+  document.getElementById('form-produto-wrap').innerHTML='';
+  renderAdmin();
+  toast('Produto salvo com sucesso!');
+}
+
+function editarProduto(id){mostrarFormProduto(id);}
+
+function deletarProduto(id){
+  if(!confirm('Excluir este produto?')) return;
+  DB.setProdutos(DB.getProdutos().filter(x=>x.id!==id));
+  renderAdmin();
+  toast('Produto excluído.');
+}
+
+/* ===== MODAIS ===== */
+function abrirModal(id){document.getElementById(id).style.display='block';}
+function fecharModal(id){document.getElementById(id).style.display='none'; document.querySelectorAll('.modal-msg').forEach(m=>m.style.display='none');}
+function trocarModal(de,para){fecharModal(de); abrirModal(para);}
+function showModalMsg(id,msg,tipo){const el=document.getElementById(id);el.textContent=msg;el.className='modal-msg '+tipo;el.style.display='block';}
+window.onclick=e=>{['modalLogin','modalCadastro','modalPedido'].forEach(id=>{if(e.target.id===id)fecharModal(id);});};
+
+/* ===== TOAST ===== */
+function toast(msg, tipo=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast'+(tipo?' '+tipo:'');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+/* ===== HEADER SCROLL ===== */
+window.addEventListener('scroll',()=>{
+  document.querySelector('.header').classList.toggle('scroll', window.scrollY>100);
+});
+
+/* ===== INIT ===== */
+seedProdutos();
+seedAdmin();
+atualizarHeaderSessao();
+atualizarCarrinhoUI();
+renderGrid();
+</script>
+</body>
+</html>

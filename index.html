@@ -1,0 +1,2654 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HexaCore- Computadores</title>
+    <style>
+        :root {
+            --bg: #0f1115;
+            --card: #181c23;
+            --card2: #11151b;
+            --azul: #0066ff;
+            --azul-hover: #0052cc;
+            --texto: #ffffff;
+            --texto-sec: #9ca3af;
+            --borda: #252b36;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+       body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--texto);
+    overflow-x: hidden;
+
+    padding-top: 170px;
+}
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        /* HEADER */
+
+               .header {
+    width: 100%;
+    background: var(--card2);
+    border-bottom: 1px solid var(--borda);
+
+    position: fixed;
+
+    top: 0;
+    z-index: 999;
+
+    backdrop-filter: blur(10px);
+
+    transition: 0.3s;
+}
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+             padding: 12px 40px;
+}
+/* HEADER MINIMIZADO */
+
+header.scroll {
+
+    background: rgba(17,21,27,0.92);
+
+    backdrop-filter: blur(14px);
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+/* ESCONDE O MENU */
+
+.header.scroll .menu {
+
+    height: 0;
+
+    opacity: 0;
+
+    overflow: hidden;
+
+    padding: 0;
+
+    border: none;
+}
+
+/* HEADER MENOR */
+
+.header.scroll .header-top {
+
+    padding: 14px 50px;
+}
+
+/* LOGO */
+
+.header.scroll .logo img {
+
+    width: 190px;
+}
+
+/* PESQUISA */
+
+.header.scroll .search input {
+
+    padding: 12px 18px;
+}
+
+/* BOTÃO PESQUISA */
+
+.header.scroll .search button {
+
+    width: 58px;
+}
+.logo img {
+    width: 190px;
+}
+
+        /* PESQUISA */
+
+        .search {
+            flex: 1;
+            display: flex;
+            max-width: 700px;
+            margin: 0 50px;
+        }
+
+        .search input {
+            width: 100%;
+            background: var(--card);
+            border: 1px solid var(--borda);
+            padding: 15px 20px;
+            color: white;
+            outline: none;
+            border-radius: 14px 0 0 14px;
+            font-size: 15px;
+        }
+
+        .search button {
+            width: 65px;
+            border: none;
+            background: var(--azul);
+            color: white;
+            font-size: 20px;
+            border-radius: 0 14px 14px 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search button:hover {
+            background: var(--azul-hover);
+        }
+
+        /* ICONES */
+
+        .icons {
+            display: flex;
+            gap: 25px;
+        }
+
+        .icons a {
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .icons a:hover {
+            color: var(--azul);
+        }
+
+        /* MENU */
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+
+            background: var(--card2);
+
+            padding: 18px;
+
+            border-top: 1px solid var(--borda);
+        }
+
+        .menu a {
+            position: relative;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--azul);
+        }
+
+        .menu a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0%;
+            height: 2px;
+            background: var(--azul);
+            transition: 0.3s;
+        }
+
+        .menu a:hover::after {
+            width: 100%;
+        }
+
+        /* CARROSSEL */
+
+        .carrossel {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            overflow: hidden;
+            transform: translateY(-30px);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right,
+                    rgba(0, 0, 0, 0.8),
+                    rgba(0, 0, 0, 0.3));
+        }
+
+        .conteudo {
+            position: absolute;
+            top: 50%;
+            left: 80px;
+            transform: translateY(-50%);
+            max-width: 600px;
+        }
+
+        .conteudo h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .conteudo p {
+            color: #d1d5db;
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .botao-comprar {
+            background: var(--azul);
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .botao-comprar:hover {
+            background: var(--azul-hover);
+            transform: translateY(-2px);
+        }
+
+        /* SETAS */
+
+        .botao {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            background: rgba(0, 0, 0, 0.5);
+
+            border: none;
+
+            color: white;
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            font-size: 18px;
+        }
+
+        .esquerda {
+            left: 20px;
+        }
+
+        .direita {
+            right: 20px;
+        }
+
+        /* INDICADORES */
+
+        .indicadores {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .indicadores span {
+            width: 10px;
+            height: 10px;
+            background: white;
+            display: inline-block;
+            margin: 5px;
+            border-radius: 50%;
+            opacity: 0.4;
+            cursor: pointer;
+        }
+
+        .ativo {
+            opacity: 1 !important;
+        }
+
+        /* BANNER */
+
+        .banner {
+            margin: 60px 80px;
+
+            padding: 70px;
+
+            border-radius: 24px;
+
+            background: linear-gradient(90deg,
+                    #0066ff,
+                    #0047b3);
+
+            text-align: center;
+        }
+
+        .banner h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .banner p {
+            color: #dbeafe;
+            font-size: 18px;
+        }
+        
+        .card-conteudo {
+            position: relative;
+            z-index: 2;
+            padding: 25px;
+        }
+
+        .card-conteudo h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .card-conteudo p {
+            color: #d1d5db;
+        }
+
+        /* TITULO */
+
+        .titulo {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+
+        .titulo h1 {
+            font-size: 40px;
+        }
+
+        /* PRODUTOS */
+
+        .produtos-destaque {
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+            gap: 25px;
+
+            padding: 0 80px 80px;
+        }
+
+        .produto-loja {
+            background: var(--card);
+
+            border: 1px solid var(--borda);
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            transition: 0.3s;
+        }
+
+        .produto-loja:hover {
+            transform: translateY(-8px);
+
+            border-color: var(--azul);
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .produto-loja img {
+            width: 100%;
+            height: 230px;
+
+            object-fit: contain;
+
+            background: var(--card2);
+
+            padding: 20px;
+        }
+
+        .info {
+            padding: 20px;
+        }
+
+        .info h2 {
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .estrelas {
+            color: #facc15;
+            margin-bottom: 10px;
+        }
+
+        .preco-antigo {
+            color: var(--texto-sec);
+            text-decoration: line-through;
+            margin-bottom: 5px;
+        }
+
+        .preco {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .parcelado {
+            color: var(--texto-sec);
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .btn-comprar {
+            display: block;
+
+            width: 100%;
+
+            text-align: center;
+
+            background: var(--azul);
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+        .btn-comprar:hover {
+            background: var(--azul-hover);
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid var(--borda);
+
+            background: var(--card2);
+
+            text-align: center;
+
+            padding: 40px;
+
+            color: var(--texto-sec);
+        }
+
+        /* RESPONSIVO */
+
+        @media(max-width: 900px) {
+
+            .header-top {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .search {
+                width: 100%;
+                margin: 0;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .conteudo {
+                left: 30px;
+                right: 30px;
+            }
+
+            .conteudo h2 {
+                font-size: 32px;
+            }
+
+            .banner {
+                margin: 30px 20px;
+                padding: 40px 20px;
+            }
+
+            .produtos-destaque {
+                padding: 0 20px 50px;
+            }
+
+            .produtos {
+                padding: 20px;
+            }
+        }
+
+        /* --- ESTILO DO MODAL DE LOGIN --- */
+        .modal-login {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-conteudo {
+            background-color: #1a1a1a;
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid #0047b3;
+            width: 320px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .fechar {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            color: #aaa;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-conteudo h2 {
+            color: #0047b3;
+            margin-bottom: 20px;
+        }
+
+        .modal-conteudo input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn-login {
+            background: #0047b3;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .links-modal {
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .links-modal a {
+            color: #0047b3;
+            text-decoration: underline;
+        }
+
+        /* --- NOVO: ESTILO DO CARRINHO LATERAL --- */
+        .carrinho-lateral {
+            height: 100%;
+            width: 0; /* Começa fechado */
+            position: fixed;
+            z-index: 2000; /* Acima de tudo */
+            top: 0;
+            right: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s; /* Efeito de deslizar */
+            padding-top: 60px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            border-left: 2px solid #0047b3;
+        }
+
+        .carrinho-lateral .fechar-carrinho {
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            font-size: 36px;
+            color: #0047b3;
+            cursor: pointer;
+        }
+
+        .carrinho-conteudo {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .item-carrinho-vazio {
+            color: #888;
+            margin-top: 50px;
+        }
+
+        .btn-finalizar {
+            background-color: #0047b3;
+            color: black;
+            padding: 15px;
+            text-decoration: none;
+            display: block;
+            margin: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* ============================================
+           SISTEMA COMPLETO - NOVOS ESTILOS
+           ============================================ */
+
+        /* TOAST NOTIFICATION */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0066ff;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0,102,255,0.4);
+            max-width: 320px;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .toast.erro { background: #dc2626; box-shadow: 0 8px 30px rgba(220,38,38,0.4); }
+        .toast.sucesso { background: #16a34a; box-shadow: 0 8px 30px rgba(22,163,74,0.4); }
+
+        /* BADGE CARRINHO */
+        .badge-carrinho {
+            background: #dc2626;
+            color: white;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 6px;
+            margin-left: 3px;
+            display: inline-block;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* MODAL GENÉRICO */
+        .hx-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 3000;
+            backdrop-filter: blur(4px);
+            overflow-y: auto;
+        }
+        .hx-modal-overlay.ativo { display: flex; align-items: flex-start; justify-content: center; padding: 40px 20px; }
+
+        .hx-modal-box {
+            background: #13171f;
+            border: 1px solid #1e2a3d;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 520px;
+            padding: 36px;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+        }
+        .hx-modal-box.large { max-width: 720px; }
+
+        .hx-modal-titulo {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hx-modal-titulo span { font-size: 24px; }
+
+        .hx-fechar-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 28px;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.2s;
+            background: none;
+            border: none;
+        }
+        .hx-fechar-modal:hover { color: white; }
+
+        /* TABS LOGIN/CADASTRO */
+        .hx-tabs {
+            display: flex;
+            border-bottom: 1px solid #1e2a3d;
+            margin-bottom: 24px;
+        }
+        .hx-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            color: #555;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .hx-tab.ativo { color: #0066ff; border-bottom-color: #0066ff; }
+
+        /* INPUTS */
+        .hx-campo {
+            margin-bottom: 14px;
+        }
+        .hx-campo label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #9ca3af;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .hx-campo input, .hx-campo select {
+            width: 100%;
+            background: #0d1017;
+            border: 1px solid #1e2a3d;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .hx-campo input:focus, .hx-campo select:focus {
+            border-color: #0066ff;
+        }
+        .hx-campo select option { background: #13171f; }
+
+        .hx-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 6px;
+        }
+        .hx-btn-primario {
+            background: linear-gradient(135deg, #0066ff, #0047b3);
+            color: white;
+        }
+        .hx-btn-primario:hover { background: linear-gradient(135deg, #0052cc, #003d99); transform: translateY(-1px); }
+        .hx-btn-secundario {
+            background: #1e2a3d;
+            color: white;
+            margin-top: 10px;
+        }
+        .hx-btn-secundario:hover { background: #253349; }
+        .hx-btn-perigo {
+            background: #dc2626;
+            color: white;
+        }
+        .hx-btn-perigo:hover { background: #b91c1c; }
+
+        /* DIVIDER */
+        .hx-divider {
+            border: none;
+            border-top: 1px solid #1e2a3d;
+            margin: 20px 0;
+        }
+
+        /* CARRINHO ITENS */
+        .carrinho-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #1a1f2b;
+        }
+        .carrinho-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: #0d1017;
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .carrinho-item-info { flex: 1; text-align: left; }
+        .carrinho-item-info p { font-size: 12px; color: #ccc; line-height: 1.4; }
+        .carrinho-item-info strong { font-size: 14px; color: #0066ff; }
+        .carrinho-item-controles {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .carrinho-item-controles button {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #1e2a3d;
+            background: #0d1017;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+        .carrinho-item-controles button:hover { background: #0066ff; border-color: #0066ff; }
+        .carrinho-item-controles span { font-size: 14px; font-weight: 700; min-width: 20px; text-align: center; }
+        .carrinho-item-remover {
+            background: none;
+            border: none;
+            color: #dc2626;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .carrinho-total-box {
+            background: #0d1017;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        .carrinho-total-box p {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+        .carrinho-total-box .total-final {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 800;
+            color: white;
+            border-top: 1px solid #1e2a3d;
+            padding-top: 12px;
+            margin-top: 8px;
+        }
+
+        /* STEPS CHECKOUT */
+        .hx-steps {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 28px;
+        }
+        .hx-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+        }
+        .hx-step.ativo { color: #0066ff; }
+        .hx-step.feito { color: #16a34a; }
+        .hx-step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid currentColor;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .hx-step-linha {
+            width: 40px;
+            height: 2px;
+            background: #1e2a3d;
+            margin: 0 4px;
+        }
+
+        /* MÉTODOS PAGAMENTO */
+        .metodos-pagamento {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .metodo-card {
+            border: 2px solid #1e2a3d;
+            border-radius: 12px;
+            padding: 16px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .metodo-card:hover, .metodo-card.selecionado {
+            border-color: #0066ff;
+            background: rgba(0,102,255,0.08);
+        }
+        .metodo-card .metodo-icon { font-size: 28px; margin-bottom: 6px; }
+        .metodo-card .metodo-nome { font-size: 12px; font-weight: 600; color: #ccc; }
+
+        /* PIX */
+        .pix-box {
+            background: #0d1017;
+            border: 1px solid #1e2a3d;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+        .pix-qr {
+            width: 150px;
+            height: 150px;
+            background: white;
+            border-radius: 8px;
+            margin: 16px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #333;
+        }
+        .pix-chave {
+            background: #13171f;
+            border: 1px solid #1e2a3d;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: #9ca3af;
+            margin: 12px 0;
+            word-break: break-all;
+        }
+
+        /* PAINEL USUÁRIO */
+        .painel-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #1e2a3d;
+            padding-bottom: 16px;
+        }
+        .painel-nav-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #1e2a3d;
+            background: transparent;
+            color: #9ca3af;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .painel-nav-btn:hover, .painel-nav-btn.ativo {
+            background: #0066ff;
+            color: white;
+            border-color: #0066ff;
+        }
+        .painel-secao { display: none; }
+        .painel-secao.ativa { display: block; }
+
+        /* PEDIDO CARD */
+        .pedido-card {
+            background: #0d1017;
+            border: 1px solid #1e2a3d;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .pedido-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .pedido-id { font-size: 13px; font-weight: 700; color: #0066ff; }
+        .pedido-status {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        .status-aprovado { background: rgba(22,163,74,0.15); color: #4ade80; }
+        .status-pendente { background: rgba(234,179,8,0.15); color: #facc15; }
+        .status-cancelado { background: rgba(220,38,38,0.15); color: #f87171; }
+
+        .pedido-info {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+        .pedido-info strong { color: white; }
+
+        /* FAVORITO */
+        .btn-fav {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 4px;
+            transition: transform 0.2s;
+        }
+        .btn-fav:hover { transform: scale(1.2); }
+
+        .fav-card {
+            background: #0d1017;
+            border: 1px solid #1e2a3d;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .fav-card img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            background: #13171f;
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .fav-info { flex: 1; }
+        .fav-info p { font-size: 13px; color: #9ca3af; margin-top: 4px; }
+        .fav-info strong { font-size: 14px; }
+
+        /* ENDEREÇO CARD */
+        .end-card {
+            background: #0d1017;
+            border: 1px solid #1e2a3d;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .end-card h4 { font-size: 14px; margin-bottom: 8px; color: #0066ff; }
+        .end-card p { font-size: 13px; color: #9ca3af; line-height: 1.6; }
+        .end-card-acoes { display: flex; gap: 8px; margin-top: 10px; }
+        .end-card-acoes button {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #1e2a3d;
+            background: transparent;
+            color: #9ca3af;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .end-card-acoes button:hover { background: #1e2a3d; color: white; }
+
+        /* SUCESSO PEDIDO */
+        .sucesso-pedido {
+            text-align: center;
+            padding: 20px;
+        }
+        .sucesso-pedido .icone-sucesso {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        .sucesso-pedido h2 { font-size: 24px; margin-bottom: 8px; }
+        .sucesso-pedido p { color: #9ca3af; margin-bottom: 6px; }
+        .sucesso-pedido .num-pedido {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0066ff;
+            margin: 12px 0;
+        }
+
+        /* CAMPOS 2 COL */
+        .hx-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media(max-width: 480px) {
+            .hx-row { grid-template-columns: 1fr; }
+            .metodos-pagamento { grid-template-columns: 1fr; }
+            .hx-modal-box { padding: 24px 16px; }
+        }
+
+        /* OVERLAY backdrop extra */
+        #overlayFundo {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+        }
+
+        /* CONTA HEADER */
+        .conta-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .conta-header:hover { color: #0066ff; }
+
+        /* CARD FORMULARIO CHECKOUT */
+        .checkout-resumo {
+            background: #0d1017;
+            border: 1px solid #1e2a3d;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            max-height: 220px;
+            overflow-y: auto;
+        }
+        .checkout-resumo-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #9ca3af;
+            padding: 6px 0;
+            border-bottom: 1px solid #1a1f2b;
+        }
+        .checkout-resumo-item:last-child { border-bottom: none; }
+
+        /* DADOS PESSOAIS */
+        .dados-pessoais-info {
+            background: #0d1017;
+            border: 1px solid #1e2a3d;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .dados-pessoais-info p {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-bottom: 6px;
+        }
+        .dados-pessoais-info strong { color: white; }
+
+        /* VAZIO */
+        .hx-vazio {
+            text-align: center;
+            padding: 40px 20px;
+            color: #555;
+        }
+        .hx-vazio .hx-vazio-icon { font-size: 48px; margin-bottom: 12px; }
+        .hx-vazio p { font-size: 14px; }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== TOAST ========== -->
+    <div id="toastMsg" class="toast"></div>
+
+    <!-- ========== OVERLAY FUNDO CARRINHO ========== -->
+    <div id="overlayFundo" onclick="fecharCarrinho()"></div>
+
+    <!-- ====================================================
+         MODAL DE LOGIN / CADASTRO (SUBSTITUÍDO PELO NOVO)
+         ==================================================== -->
+    <div id="modalLogin" class="modal-login">
+        <div class="modal-conteudo">
+            <span class="fechar" onclick="fecharLogin()">&times;</span>
+            <h2>Área do Cliente</h2>
+            <input type="text" placeholder="E-mail ou Usuário">
+            <input type="password" placeholder="Senha">
+            <button class="btn-login">ENTRAR</button>
+            <div class="links-modal">
+                <p>Não tem conta? <a href="#">Cadastre-se</a></p>
+                <p><a href="#">Esqueci minha senha</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         MODAL AUTH (LOGIN + CADASTRO NOVO)
+         ==================================================== -->
+    <div id="modalAuth" class="hx-modal-overlay">
+        <div class="hx-modal-box">
+            <button class="hx-fechar-modal" onclick="fecharModalAuth()">×</button>
+
+            <div class="hx-tabs">
+                <div class="hx-tab ativo" id="tabLogin" onclick="trocarTab('login')">Entrar</div>
+                <div class="hx-tab" id="tabCadastro" onclick="trocarTab('cadastro')">Criar Conta</div>
+            </div>
+
+            <!-- LOGIN -->
+            <div id="painelLogin">
+                <div class="hx-modal-titulo"><span>🔐</span> Bem-vindo de volta</div>
+                <div class="hx-campo">
+                    <label>E-mail</label>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com">
+                </div>
+                <div class="hx-campo">
+                    <label>Senha</label>
+                    <input type="password" id="loginSenha" placeholder="••••••••">
+                </div>
+                <button class="hx-btn hx-btn-primario" onclick="realizarLogin()">Entrar na conta</button>
+                <p style="text-align:center; margin-top:14px; font-size:13px; color:#555;">
+                    Não tem conta? <span style="color:#0066ff; cursor:pointer;" onclick="trocarTab('cadastro')">Cadastre-se grátis</span>
+                </p>
+            </div>
+
+            <!-- CADASTRO -->
+            <div id="painelCadastro" style="display:none;">
+                <div class="hx-modal-titulo"><span>✨</span> Criar sua conta</div>
+                <div class="hx-campo">
+                    <label>Nome completo</label>
+                    <input type="text" id="cadNome" placeholder="Pedro Silva">
+                </div>
+                <div class="hx-campo">
+                    <label>E-mail</label>
+                    <input type="email" id="cadEmail" placeholder="seu@email.com">
+                </div>
+                <div class="hx-campo">
+                    <label>Telefone</label>
+                    <input type="text" id="cadTelefone" placeholder="(11) 99999-9999">
+                </div>
+                <div class="hx-campo">
+                    <label>Senha</label>
+                    <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres">
+                </div>
+                <div class="hx-campo">
+                    <label>Confirmar senha</label>
+                    <input type="password" id="cadSenhaConf" placeholder="Repita a senha">
+                </div>
+                <button class="hx-btn hx-btn-primario" onclick="realizarCadastro()">Criar conta grátis</button>
+                <p style="text-align:center; margin-top:14px; font-size:13px; color:#555;">
+                    Já tem conta? <span style="color:#0066ff; cursor:pointer;" onclick="trocarTab('login')">Entrar</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         CARRINHO LATERAL (SIDEBAR)
+         ==================================================== -->
+    <div id="meuCarrinho" class="carrinho-lateral">
+        <span class="fechar-carrinho" onclick="fecharCarrinho()">&times;</span>
+        <div class="carrinho-conteudo">
+            <h2 style="color:#ffffff; margin-bottom:4px;">🛒 Meu Carrinho</h2>
+            <p style="font-size:12px; color:#555; margin-bottom:12px;" id="carrinhoQtdLabel">0 itens</p>
+            <hr style="border-color:#1e2a3d; margin-bottom:16px;">
+            <div id="listaCarrinho">
+                <div class="hx-vazio">
+                    <div class="hx-vazio-icon">🛒</div>
+                    <p>Seu carrinho está vazio</p>
+                </div>
+            </div>
+            <div id="totalCarrinho" style="display:none;" class="carrinho-total-box">
+                <p>Subtotal <span id="subtotalValor">R$ 0,00</span></p>
+                <p>Frete <span style="color:#4ade80;">Grátis</span></p>
+                <div class="total-final">Total <span id="totalValor">R$ 0,00</span></div>
+            </div>
+            <button class="btn-finalizar" style="cursor:pointer; border:none; color:white; font-size:15px;" onclick="abrirCheckout()">FINALIZAR COMPRA →</button>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         MODAL CHECKOUT
+         ==================================================== -->
+    <div id="modalCheckout" class="hx-modal-overlay">
+        <div class="hx-modal-box large">
+            <button class="hx-fechar-modal" onclick="fecharCheckout()">×</button>
+
+            <div class="hx-steps" id="stepsCheckout">
+                <div class="hx-step ativo" id="step1"><div class="hx-step-num">1</div> Endereço</div>
+                <div class="hx-step-linha"></div>
+                <div class="hx-step" id="step2"><div class="hx-step-num">2</div> Pagamento</div>
+                <div class="hx-step-linha"></div>
+                <div class="hx-step" id="step3"><div class="hx-step-num">3</div> Confirmação</div>
+            </div>
+
+            <!-- PASSO 1: ENDEREÇO -->
+            <div id="checkoutPasso1">
+                <div class="hx-modal-titulo"><span>📦</span> Endereço de entrega</div>
+
+                <div class="checkout-resumo" id="resumoCheckout"></div>
+
+                <div class="hx-row">
+                    <div class="hx-campo">
+                        <label>Nome completo</label>
+                        <input type="text" id="endNome" placeholder="Pedro Silva">
+                    </div>
+                    <div class="hx-campo">
+                        <label>CPF</label>
+                        <input type="text" id="endCPF" placeholder="000.000.000-00">
+                    </div>
+                </div>
+                <div class="hx-row">
+                    <div class="hx-campo">
+                        <label>CEP</label>
+                        <input type="text" id="endCEP" placeholder="00000-000" oninput="buscarCEP(this.value)">
+                    </div>
+                    <div class="hx-campo">
+                        <label>Telefone</label>
+                        <input type="text" id="endTelefone" placeholder="(11) 99999-9999">
+                    </div>
+                </div>
+                <div class="hx-campo">
+                    <label>Logradouro</label>
+                    <input type="text" id="endRua" placeholder="Rua, Avenida...">
+                </div>
+                <div class="hx-row">
+                    <div class="hx-campo">
+                        <label>Número</label>
+                        <input type="text" id="endNumero" placeholder="123">
+                    </div>
+                    <div class="hx-campo">
+                        <label>Complemento</label>
+                        <input type="text" id="endComplemento" placeholder="Apto, Bloco...">
+                    </div>
+                </div>
+                <div class="hx-row">
+                    <div class="hx-campo">
+                        <label>Bairro</label>
+                        <input type="text" id="endBairro" placeholder="Bairro">
+                    </div>
+                    <div class="hx-campo">
+                        <label>Cidade / Estado</label>
+                        <input type="text" id="endCidade" placeholder="São Paulo / SP">
+                    </div>
+                </div>
+                <div class="hx-campo">
+                    <label>Salvar endereço?</label>
+                    <select id="salvarEndereco">
+                        <option value="sim">Sim, salvar para próximas compras</option>
+                        <option value="nao">Não</option>
+                    </select>
+                </div>
+                <button class="hx-btn hx-btn-primario" onclick="avancarPasso2()">Continuar → Pagamento</button>
+            </div>
+
+            <!-- PASSO 2: PAGAMENTO -->
+            <div id="checkoutPasso2" style="display:none;">
+                <div class="hx-modal-titulo"><span>💳</span> Forma de pagamento</div>
+
+                <div class="metodos-pagamento">
+                    <div class="metodo-card selecionado" id="metPIX" onclick="selecionarMetodo('PIX')">
+                        <div class="metodo-icon">📱</div>
+                        <div class="metodo-nome">PIX</div>
+                    </div>
+                    <div class="metodo-card" id="metCartao" onclick="selecionarMetodo('Cartão')">
+                        <div class="metodo-icon">💳</div>
+                        <div class="metodo-nome">Cartão</div>
+                    </div>
+                    <div class="metodo-card" id="metBoleto" onclick="selecionarMetodo('Boleto')">
+                        <div class="metodo-icon">📄</div>
+                        <div class="metodo-nome">Boleto</div>
+                    </div>
+                </div>
+
+                <!-- PIX -->
+                <div id="painelPIX" class="pix-box">
+                    <p style="font-size:13px; color:#9ca3af;">Escaneie o QR Code ou copie a chave PIX</p>
+                    <div class="pix-qr" id="pixQR">
+                        <div style="width:130px;height:130px;background:repeating-linear-gradient(0deg,#000 0px,#000 4px,#fff 4px,#fff 8px),repeating-linear-gradient(90deg,#000 0px,#000 4px,#fff 4px,#fff 8px);opacity:0.8;border-radius:4px;"></div>
+                    </div>
+                    <div class="pix-chave" id="pixChave">hexacore@pix.com.br</div>
+                    <button class="hx-btn hx-btn-secundario" onclick="copiarPIX()" style="margin-top:8px;">📋 Copiar chave PIX</button>
+                </div>
+
+                <!-- CARTÃO -->
+                <div id="painelCartao" style="display:none;">
+                    <div class="hx-campo">
+                        <label>Número do cartão</label>
+                        <input type="text" id="cartaoNum" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatarCartao(this)">
+                    </div>
+                    <div class="hx-campo">
+                        <label>Nome no cartão</label>
+                        <input type="text" id="cartaoNome" placeholder="PEDRO SILVA">
+                    </div>
+                    <div class="hx-row">
+                        <div class="hx-campo">
+                            <label>Validade</label>
+                            <input type="text" id="cartaoVal" placeholder="MM/AA" maxlength="5">
+                        </div>
+                        <div class="hx-campo">
+                            <label>CVV</label>
+                            <input type="text" id="cartaoCVV" placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+                    <div class="hx-campo">
+                        <label>Parcelas</label>
+                        <select id="cartaoParcelas"></select>
+                    </div>
+                </div>
+
+                <!-- BOLETO -->
+                <div id="painelBoleto" style="display:none;" class="pix-box">
+                    <p style="font-size:13px; color:#9ca3af; margin-bottom:12px;">Boleto bancário</p>
+                    <p style="font-size:20px; margin-bottom:12px;">📄</p>
+                    <p style="font-size:13px; color:#9ca3af;">Vencimento em <strong style="color:white;">3 dias úteis</strong></p>
+                    <p style="font-size:12px; color:#555; margin-top:8px;">O código será gerado após confirmar o pedido</p>
+                </div>
+
+                <hr class="hx-divider">
+                <div class="carrinho-total-box">
+                    <p>Total do pedido <span id="totalPagamento">R$ 0,00</span></p>
+                </div>
+
+                <button class="hx-btn hx-btn-primario" onclick="confirmarPedido()">✅ Confirmar pedido</button>
+                <button class="hx-btn hx-btn-secundario" onclick="voltarPasso1()">← Voltar</button>
+            </div>
+
+            <!-- PASSO 3: CONFIRMAÇÃO/SUCESSO -->
+            <div id="checkoutPasso3" style="display:none;">
+                <div class="sucesso-pedido">
+                    <div class="icone-sucesso">🎉</div>
+                    <h2>Pedido realizado!</h2>
+                    <p>Obrigado pela sua compra na HexaCore</p>
+                    <div class="num-pedido" id="numeroPedidoGerado">PED000000</div>
+                    <p id="statusPagamentoFinal" style="margin-bottom:20px;"></p>
+                    <button class="hx-btn hx-btn-primario" onclick="fecharCheckout(); abrirPainel()">Ver meus pedidos</button>
+                    <button class="hx-btn hx-btn-secundario" onclick="fecharCheckout()">Continuar comprando</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         MODAL PAINEL DO USUÁRIO
+         ==================================================== -->
+    <div id="modalPainel" class="hx-modal-overlay">
+        <div class="hx-modal-box large">
+            <button class="hx-fechar-modal" onclick="fecharPainel()">×</button>
+
+            <div class="hx-modal-titulo" id="painelNomeUsuario"><span>👤</span> Minha conta</div>
+
+            <div class="painel-nav">
+                <button class="painel-nav-btn ativo" onclick="trocarSecaoPainel('pedidos', this)">📦 Pedidos</button>
+                <button class="painel-nav-btn" onclick="trocarSecaoPainel('favoritos', this)">❤️ Favoritos</button>
+                <button class="painel-nav-btn" onclick="trocarSecaoPainel('enderecos', this)">📍 Endereços</button>
+                <button class="painel-nav-btn" onclick="trocarSecaoPainel('dados', this)">✏️ Dados pessoais</button>
+                <button class="painel-nav-btn" style="margin-left:auto; background:rgba(220,38,38,0.1); border-color:#dc2626; color:#f87171;" onclick="realizarLogout()">🚪 Sair</button>
+            </div>
+
+            <!-- PEDIDOS -->
+            <div id="secaoPedidos" class="painel-secao ativa">
+                <div id="listaPedidosPainel"></div>
+            </div>
+
+            <!-- FAVORITOS -->
+            <div id="secaoFavoritos" class="painel-secao">
+                <div id="listaFavoritosPainel"></div>
+            </div>
+
+            <!-- ENDEREÇOS -->
+            <div id="secaoEnderecos" class="painel-secao">
+                <div id="listaEnderecosPainel"></div>
+                <button class="hx-btn hx-btn-secundario" style="margin-top:12px;" onclick="abrirAdicionarEndereco()">+ Adicionar endereço</button>
+            </div>
+
+            <!-- DADOS PESSOAIS -->
+            <div id="secaoDados" class="painel-secao">
+                <div id="dadosPessoaisConteudo"></div>
+                <button class="hx-btn hx-btn-primario" style="margin-top:12px;" onclick="salvarDadosPessoais()">Salvar alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         MODAL ADICIONAR ENDEREÇO
+         ==================================================== -->
+    <div id="modalAdicionarEndereco" class="hx-modal-overlay">
+        <div class="hx-modal-box">
+            <button class="hx-fechar-modal" onclick="fecharAdicionarEndereco()">×</button>
+            <div class="hx-modal-titulo"><span>📍</span> Novo endereço</div>
+            <div class="hx-campo">
+                <label>Identificação</label>
+                <input type="text" id="novoEndId" placeholder="Casa, Trabalho...">
+            </div>
+            <div class="hx-campo">
+                <label>CEP</label>
+                <input type="text" id="novoEndCEP" placeholder="00000-000">
+            </div>
+            <div class="hx-campo">
+                <label>Logradouro</label>
+                <input type="text" id="novoEndRua" placeholder="Rua, Avenida...">
+            </div>
+            <div class="hx-row">
+                <div class="hx-campo">
+                    <label>Número</label>
+                    <input type="text" id="novoEndNum" placeholder="123">
+                </div>
+                <div class="hx-campo">
+                    <label>Complemento</label>
+                    <input type="text" id="novoEndComp" placeholder="Apto...">
+                </div>
+            </div>
+            <div class="hx-row">
+                <div class="hx-campo">
+                    <label>Bairro</label>
+                    <input type="text" id="novoEndBairro" placeholder="Bairro">
+                </div>
+                <div class="hx-campo">
+                    <label>Cidade / Estado</label>
+                    <input type="text" id="novoEndCidade" placeholder="São Paulo / SP">
+                </div>
+            </div>
+            <button class="hx-btn hx-btn-primario" onclick="salvarNovoEndereco()">Salvar endereço</button>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-top">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://i.imgur.com/bri4wau.png">
+                </a>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="O que você está procurando?">
+                <button>🔍</button>
+            </div>
+            <div class="icons">
+                <a href="javascript:void(0)" onclick="cliqueConta()" id="linkConta" class="conta-header">
+                    👤 <span id="textoContaHeader">Minha Conta</span>
+                </a>
+                <a href="javascript:void(0)" onclick="abrirCarrinho()">
+                    🛒 Carrinho <span class="badge-carrinho" id="badgeCarrinho" style="display:none;">0</span>
+                </a>
+            </div>
+        </div>
+        <nav class="menu">
+        <a href="Pc gamer.html">PC GAMER</a>
+        <a href="Notebook.html">NOTEBOOKS</a>
+        <a href="perifericos.html">PERIFÉRICOS</a>
+        <a href="ofertas.html">OFERTAS</a>
+        </nav>
+    </header>
+
+    <div class="carrossel">
+        <div class="slides" id="slides">
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1593640495253-23196b27a87f">
+                <div class="overlay"></div>
+                <div class="conteudo">
+                    <h2>PC Gamer de Alta Performance</h2>
+                    <p>Equipado com tecnologia de última geração para rodar qualquer jogo com máxima qualidade e fluidez.</p>
+                    <a href="Pc gamer.html" class="botao-comprar">Ver mais</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7">
+                <div class="overlay"></div>
+                <div class="conteudo">
+                    <h2>Setup Gamer Completo</h2>
+                    <p>Iluminação RGB, ergonomia e desempenho para transformar sua experiência nos jogos.</p>
+                    <a href="#" class="botao-comprar">Explorar</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8">
+                <div class="overlay"></div>
+                <div class="conteudo">
+                    <h2>Notebooks Gamer Potentes</h2>
+                    <p>Alta performance com mobilidade, ideal para quem joga e trabalha em qualquer lugar.</p>
+                    <a href="#" class="botao-comprar">Conferir</a>
+                </div>
+            </div>
+        </div>
+        <button class="botao esquerda" onclick="voltar()">❮</button>
+        <button class="botao direita" onclick="avancar()">❯</button>
+        <div class="indicadores" id="indicadores"></div>
+    </div>
+
+    <section class="banner">
+        <a href="#">
+            <h2>Promoção da Semana!</h2>
+            <p>Computadores com até 30% de desconto</p>
+        </a>
+    </section>
+
+    <div class="oferta">
+        <h1 style="text-align:center;">💲Ofertas em Destaque💲</h1>
+    </div>
+
+    <div class="produtos-destaque">
+        <div class="produto-loja" data-id="1" data-nome="Ventoinha Corsair AF140" data-preco="39.99" data-imagem="https://i.postimg.cc/8PmP75WS/ventoinha.jpg">
+            <img src="https://i.postimg.cc/8PmP75WS/ventoinha.jpg" alt="Ventoinha Corsair">
+            <div class="info">
+                <h2>Ventoinha Corsair AF140</h2>
+                <div class="estrelas">★★★★☆</div>
+                <p class="preco-antigo">de R$ 52,93</p>
+                <p class="preco">Por R$ 39,99 no PIX</p>
+                <p class="parcelado">em até 4x de R$ 11,76</p>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <a href="#" class="btn-comprar" style="flex:1;" onclick="adicionarAoCarrinho(this); return false;">Comprar</a>
+                    <button class="btn-fav" onclick="toggleFavorito(1, 'Ventoinha Corsair AF140', 'R$ 39,99 no PIX', 'https://i.postimg.cc/8PmP75WS/ventoinha.jpg', this)">🤍</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="produto-loja" data-id="2" data-nome="PC Gamer Hexacore IV" data-preco="5789.00" data-imagem="https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/a/-/a-pc-cv500l-bk-c-fan-box-001_2_11.jpg">
+            <img src="https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/a/-/a-pc-cv500l-bk-c-fan-box-001_2_11.jpg" alt="PC Gamer Custo-Benefício">
+            <div class="info">
+                <h2>PC Gamer Hexacore IV, Intel i5-12400F, GeForce RTX 4060 Ti 8GB, 16GB DDR4, SSD M.2 480GB</h2>
+                <div class="estrelas">★★★★★</div>
+                <p class="preco-antigo">de R$ 6.999</p>
+                <p class="preco">Por R$ 5.789</p>
+                <p class="parcelado">em até 12x de R$ 482,42</p>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <a href="produto1.html" class="btn-comprar" style="flex:1;" onclick="adicionarAoCarrinho(this); return false;">Comprar</a>
+                    <button class="btn-fav" onclick="toggleFavorito(2, 'PC Gamer Hexacore IV', 'R$ 5.789', 'https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/a/-/a-pc-cv500l-bk-c-fan-box-001_2_11.jpg', this)">🤍</button>
+                </div>
+                <p style="font-size:12px; color:#aaa; margin-top:3px;">*Inclui: Ryzen 5 5600 + RTX 4060 / 16GB RAM / SSD 1TB / Fonte 650W</p>
+            </div>
+        </div>
+
+        <div class="produto-loja" data-id="3" data-nome="PC Gamer Hexhigh Ryzen 7 5700x" data-preco="8990.00" data-imagem="https://i.postimg.cc/T3hMTYJt/gaj.jpg">
+            <img src="https://i.postimg.cc/T3hMTYJt/gaj.jpg" alt="PC Gamer Intermediário">
+            <div class="info">
+                <h2>PC Gamer Hexhigh Ryzen 7 5700x| RTX 5060 8GB| 32gb Ram|SSD 1TB| Water Cooler 240mm| WINDOWS 11 Pro| Edição Full Black Premium</h2>
+                <div class="estrelas">★★★★★</div>
+                <p class="preco-antigo">de R$ 10.499</p>
+                <p class="preco">Por R$ 8.990</p>
+                <p class="parcelado">em até 12x de R$ 749,17</p>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <a href="produto2.html" class="btn-comprar" style="flex:1;" onclick="adicionarAoCarrinho(this); return false;">Comprar</a>
+                    <button class="btn-fav" onclick="toggleFavorito(3, 'PC Gamer Hexhigh Ryzen 7 5700x', 'R$ 8.990', 'https://i.postimg.cc/T3hMTYJt/gaj.jpg', this)">🤍</button>
+                </div>
+                <p style="font-size:12px; color:#aaa; margin-top:3px;">*Inclui: Ryzen 7 7800X3D + RTX 4070 / 32GB RAM / SSD 2TB</p>
+            </div>
+        </div>
+
+        <div class="produto-loja" data-id="4" data-nome="PC Gamer Hexquick-force" data-preco="13450.00" data-imagem="https://i.postimg.cc/T3S81MkY/2gamer-png.webp">
+            <img src="https://i.postimg.cc/T3S81MkY/2gamer-png.webp" alt="PC Gamer High-End">
+            <div class="info">
+                <h2>PC Gamer Hexquick-force, Ryzen 7 5600g, GeForce RTX 5070 Ti, 16GB DDR4, 500GB SSD NVMe, Gabinete Lateral de Vidro</h2>
+                <div class="estrelas">★★★★★</div>
+                <p class="preco-antigo">de R$ 15.999</p>
+                <p class="preco">Por R$ 13.450</p>
+                <p class="parcelado">em até 12x de R$ 1.120,83</p>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <a href="produto3.html" class="btn-comprar" style="flex:1;" onclick="adicionarAoCarrinho(this); return false;">Comprar</a>
+                    <button class="btn-fav" onclick="toggleFavorito(4, 'PC Gamer Hexquick-force', 'R$ 13.450', 'https://i.postimg.cc/T3S81MkY/2gamer-png.webp', this)">🤍</button>
+                </div>
+                <p style="font-size:12px; color:#aaa; margin-top:3px;">*Inclui: Ryzen 9 + RTX 4080 / 32GB RAM / SSD 2TB + Cooler</p>
+            </div>
+        </div>
+
+        <div class="produto-loja" data-id="5" data-nome="Mouse Gamer Logitech G203 LIGHTSYNC RGB" data-preco="129.90" data-imagem="https://i.imgur.com/L3HPyHC.jpeg">
+            <img src="https://i.imgur.com/L3HPyHC.jpeg" alt="Logitech G203 Lightsync">
+            <div class="info">
+                <h2>Mouse Gamer Logitech G203 LIGHTSYNC RGB, Efeito de Ondas de Cores, 6 Botões Programáveis e Até 8.000 DPI - Preto</h2>
+                <div class="estrelas">★★★★☆</div>
+                <p class="preco">A partir de R$ 129,90</p>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <a href="#" class="btn-comprar" style="flex:1;" onclick="adicionarAoCarrinho(this); return false;">Comprar</a>
+                    <button class="btn-fav" onclick="toggleFavorito(5, 'Mouse Gamer Logitech G203 LIGHTSYNC RGB', 'R$ 129,90', 'https://i.imgur.com/L3HPyHC.jpeg', this)">🤍</button>
+                </div>
+                <p style="font-size:12px; color:#aaa; margin-top:3px;">Sensor preciso, ótimo custo‑benefício.</p>
+            </div>
+        </div>
+
+        <div class="produto-loja" data-id="6" data-nome="Mouse Gamer Razer Basilisk V3" data-preco="279.90" data-imagem="https://i.postimg.cc/LXtGxqmn/razer1-png.webp">
+            <img src="https://i.postimg.cc/LXtGxqmn/razer1-png.webp" alt="Razer Basilisk V3">
+            <div class="info">
+                <h2>Mouse Gamer Razer Basilisk V3, RGB Chroma, 26000 DPI, Optical Switch, 11 Botões, Preto</h2>
+                <div class="estrelas">★★★★★</div>
+                <p class="preco">A partir de R$ 279,90</p>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <a href="#" class="btn-comprar" style="flex:1;" onclick="adicionarAoCarrinho(this); return false;">Comprar</a>
+                    <button class="btn-fav" onclick="toggleFavorito(6, 'Mouse Gamer Razer Basilisk V3', 'R$ 279,90', 'https://i.postimg.cc/LXtGxqmn/razer1-png.webp', this)">🤍</button>
+                </div>
+                <p style="font-size:12px; color:#aaa; margin-top:3px;">Bom para jogos variados, botões programáveis.</p>
+            </div>
+        </div>
+
+        <div class="produto-loja" data-id="7" data-nome="Mouse Gamer Logitech G305 LIGHTSPEED" data-preco="229.90" data-imagem="https://i.postimg.cc/tRzLPVrv/log1-png.webp">
+            <img src="https://i.postimg.cc/tRzLPVrv/log1-png.webp" alt="Logitech G305 Lightspeed">
+            <div class="info">
+                <h2>Mouse Gamer Sem Fio, Logitech G305 LIGHTSPEED com 6 Botões Programáveis e Até 12.000 DPI - Preto</h2>
+                <div class="estrelas">★★★★☆</div>
+                <p class="preco">A partir de R$ 229,90</p>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <a href="#" class="btn-comprar" style="flex:1;" onclick="adicionarAoCarrinho(this); return false;">Comprar</a>
+                    <button class="btn-fav" onclick="toggleFavorito(7, 'Mouse Gamer Logitech G305 LIGHTSPEED', 'R$ 229,90', 'https://i.postimg.cc/tRzLPVrv/log1-png.webp', this)">🤍</button>
+                </div>
+                <p style="font-size:12px; color:#aaa; margin-top:3px;">Wireless com ótimo sensor e bateria duradoura.</p>
+            </div>
+        </div>
+
+        <div class="produto-loja" data-id="8" data-nome="Monitor Gamer AOC LEGEND 27 240Hz" data-preco="1099.00" data-imagem="https://i.postimg.cc/QNSyVZt5/monitor.jpg">
+            <img src="https://i.postimg.cc/QNSyVZt5/monitor.jpg" alt="Monitor Gamer AOC LEGEND 27 240Hz">
+            <div class="info">
+                <h2>Monitor Gamer AOC LEGEND 27 240Hz 0,5ms, Preta/Vermelho, MEDIO, C27G2ZE</h2>
+                <div class="estrelas">★★★★☆</div>
+                <p class="preco">A partir de R$ 1.099,00</p>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <a href="#" class="btn-comprar" style="flex:1;" onclick="adicionarAoCarrinho(this); return false;">Comprar</a>
+                    <button class="btn-fav" onclick="toggleFavorito(8, 'Monitor Gamer AOC LEGEND 27 240Hz', 'R$ 1.099,00', 'https://i.postimg.cc/QNSyVZt5/monitor.jpg', this)">🤍</button>
+                </div>
+                <p style="font-size:12px; color:#aaa; margin-top:3px;">240 Hz com FreeSync para jogos rápidos.</p>
+            </div>
+        </div>
+
+        <div class="produto-loja" data-id="9" data-nome="Monitor Gamer LG UltraGear 27" data-preco="1024.00" data-imagem="https://i.imgur.com/GXWRmhw.jpeg">
+            <img src="https://i.imgur.com/GXWRmhw.jpeg" alt="Monitor Gamer LG UltraGear 27">
+            <div class="info">
+                <h2>Monitor Gamer LG UltraGear 27" 27GS60F-B IPS Full HD 180Hz 1ms (GtG) NVIDIA® G-SYNC® AMD FreeSync™</h2>
+                <div class="estrelas">★★★★★</div>
+                <p class="preco">A partir de R$ 1.024,00</p>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <a href="#" class="btn-comprar" style="flex:1;" onclick="adicionarAoCarrinho(this); return false;">Comprar</a>
+                    <button class="btn-fav" onclick="toggleFavorito(9, 'Monitor Gamer LG UltraGear 27', 'R$ 1.024,00', 'https://i.imgur.com/GXWRmhw.jpeg', this)">🤍</button>
+                </div>
+                <p style="font-size:12px; color:#aaa; margin-top:3px;">Resolução maior e taxa de atualização rápida.</p>
+            </div>
+        </div>
+
+        <div class="produto-loja" data-id="10" data-nome="Monitor Gamer Curvo LG UltraGear 34" data-preco="3799.00" data-imagem="https://i.postimg.cc/L8J7rQmw/monitorcurvo-png.webp">
+            <img src="https://i.postimg.cc/L8J7rQmw/monitorcurvo-png.webp" alt="Monitor Gamer Curvo LG UltraGear 34">
+            <div class="info">
+                <h2>Monitor Gamer Curvo LG UltraGear 34", 2K WQHD, UltraWide, 160Hz, 1ms, FreeSync Premium, HDR10, Som Integrado - 34GP63A-B</h2>
+                <div class="estrelas">★★★★★</div>
+                <p class="preco">A partir de R$ 3.799,00</p>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <a href="#" class="btn-comprar" style="flex:1;" onclick="adicionarAoCarrinho(this); return false;">Comprar</a>
+                    <button class="btn-fav" onclick="toggleFavorito(10, 'Monitor Gamer Curvo LG UltraGear 34', 'R$ 3.799,00', 'https://i.postimg.cc/L8J7rQmw/monitorcurvo-png.webp', this)">🤍</button>
+                </div>
+                <p style="font-size:12px; color:#aaa; margin-top:3px;">Imersão máxima para jogos e produtividade.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 HexaCore - Todos os direitos reservados</p>
+    </footer>
+
+    <!-- ============================================================
+         SCRIPTS ORIGINAIS
+         ============================================================ -->
+    <script>
+        const header = document.querySelector(".header");
+
+        window.addEventListener("scroll", () => {
+            if(window.scrollY > 100){
+                header.classList.add("scroll");
+            } else {
+                header.classList.remove("scroll");
+            }
+        });
+
+        function carregarCarrinho() {
+            let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+            let lista = document.getElementById("listaCarrinho");
+            let total = 0;
+
+            lista.innerHTML = "";
+
+            carrinho.forEach((produto, index) => {
+                total += produto.preco;
+                lista.innerHTML += `
+                    <div style="border:1px solid #333;padding:10px;margin:10px 0;border-radius:10px;">
+                        <img src="${produto.imagem}" width="70">
+                        <p>${produto.nome}</p>
+                        <p>R$ ${produto.preco.toFixed(2)}</p>
+                    </div>
+                `;
+            });
+
+            document.getElementById("totalCarrinho").innerHTML = "Total: R$ " + total.toFixed(2);
+        }
+
+        carregarCarrinho();
+    </script>
+
+    <script>
+        // --- SCRIPT DO CARROSSEL ---
+        let index = 0;
+        const slides = document.getElementById("slides");
+        const total = slides.children.length;
+        const indicadores = document.getElementById("indicadores");
+
+        for (let i = 0; i < total; i++) {
+            let span = document.createElement("span");
+            span.onclick = () => irPara(i);
+            indicadores.appendChild(span);
+        }
+
+        function atualizar() {
+            if (!slides) return;
+            slides.style.transform = `translateX(-${index * 100}%)`;
+            if(indicadores.children.length > 0) {
+                [...indicadores.children].forEach((b, i) => {
+                    b.classList.toggle("ativo", i === index);
+                });
+            }
+        }
+
+        function avancar() {
+            index = (index + 1) % total;
+            atualizar();
+        }
+
+        function voltar() {
+            index = (index - 1 + total) % total;
+            atualizar();
+        }
+
+        function irPara(i) {
+            index = i;
+            atualizar();
+        }
+
+        setInterval(avancar, 4000);
+        atualizar();
+
+        // --- SCRIPT DO LOGIN (ORIGINAL - mantido) ---
+        function abrirLogin() {
+            document.getElementById("modalLogin").style.display = "block";
+        }
+
+        function fecharLogin() {
+            document.getElementById("modalLogin").style.display = "none";
+        }
+
+        // --- SCRIPT DO CARRINHO (ORIGINAL - mantido) ---
+        function abrirCarrinho() {
+            document.getElementById("meuCarrinho").style.width = "380px";
+            document.getElementById("overlayFundo").style.display = "block";
+            HX.renderizarCarrinho();
+        }
+
+        function fecharCarrinho() {
+            document.getElementById("meuCarrinho").style.width = "0";
+            document.getElementById("overlayFundo").style.display = "none";
+        }
+
+        // Fechar modais se clicar fora
+        window.onclick = function (event) {
+            let modal = document.getElementById("modalLogin");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <!-- ============================================================
+         SISTEMA HEXACORE - BANCO DE DADOS LOCAL
+         ============================================================ -->
+    <script>
+    const HX = {
+
+        /* =====================================================
+           DB - CHAVES DO LOCALSTORAGE
+           ===================================================== */
+        KEYS: {
+            usuarios: 'hx_usuarios',
+            logado: 'hx_usuarioLogado',          // chave unificada (objeto completo)
+            carrinho: uid => `hx_carrinho_${uid}`,
+            favoritos: uid => `hx_favoritos_${uid}`,
+            pedidos: uid => `hx_pedidos_${uid}`,
+            enderecos: uid => `hx_enderecos_${uid}`
+        },
+
+        /* =====================================================
+           DB - HELPERS
+           ===================================================== */
+        ls: {
+            get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
+            set(k,v){ localStorage.setItem(k, JSON.stringify(v)); },
+            del(k){ localStorage.removeItem(k); }
+        },
+
+        /* =====================================================
+           USUÁRIOS
+           ===================================================== */
+        getUsuarios(){ return this.ls.get(this.KEYS.usuarios) || []; },
+        setUsuarios(arr){ this.ls.set(this.KEYS.usuarios, arr); },
+
+        getUsuarioLogado(){
+            // Lê o objeto completo (padrão unificado)
+            const obj = this.ls.get(this.KEYS.logado);
+            if(!obj || typeof obj !== 'object') return null;
+            return obj;
+        },
+
+        cadastrar(nome, email, senha, telefone){
+            const usuarios = this.getUsuarios();
+            if(usuarios.find(u => u.email.toLowerCase() === email.toLowerCase())){
+                return { ok: false, msg: 'E-mail já cadastrado.' };
+            }
+            const id = Date.now();
+            const novoUser = { id, nome, email, senha, telefone, criadoEm: new Date().toLocaleDateString('pt-BR') };
+            usuarios.push(novoUser);
+            this.setUsuarios(usuarios);
+            return { ok: true };
+        },
+
+        login(email, senha){
+            const u = this.getUsuarios().find(u =>
+                u.email.toLowerCase() === email.toLowerCase() && u.senha === senha
+            );
+            if(!u) return { ok: false, msg: 'E-mail ou senha incorretos.' };
+            // Salva objeto completo (padrão unificado)
+            this.ls.set(this.KEYS.logado, u);
+            // Chaves globais do projeto
+            localStorage.setItem('usuarioLogado', 'true');
+            localStorage.setItem('nomeUsuario', u.nome);
+            localStorage.setItem('emailUsuario', u.email);
+            return { ok: true, usuario: u };
+        },
+
+        logout(){
+            this.ls.del(this.KEYS.logado);
+            // Remove chaves globais
+            localStorage.removeItem('usuarioLogado');
+            localStorage.removeItem('nomeUsuario');
+            localStorage.removeItem('emailUsuario');
+            atualizarHeaderConta();
+            toast('Até logo! 👋');
+        },
+
+        /* =====================================================
+           CARRINHO (POR USUÁRIO)
+           ===================================================== */
+        _keyCarrinho(){
+            const u = this.getUsuarioLogado();
+            return this.KEYS.carrinho(u ? u.id : 'guest');
+        },
+
+        getCarrinho(){ return this.ls.get(this._keyCarrinho()) || []; },
+        setCarrinho(arr){ this.ls.set(this._keyCarrinho(), arr); },
+
+        adicionarItem(produto){
+            const carrinho = this.getCarrinho();
+            const exist = carrinho.find(i => i.id === produto.id);
+            if(exist){
+                exist.qtd++;
+            } else {
+                carrinho.push({ ...produto, qtd: 1 });
+            }
+            this.setCarrinho(carrinho);
+        },
+
+        removerItem(id){
+            let carrinho = this.getCarrinho().filter(i => i.id !== id);
+            this.setCarrinho(carrinho);
+        },
+
+        alterarQtd(id, delta){
+            const carrinho = this.getCarrinho();
+            const item = carrinho.find(i => i.id === id);
+            if(!item) return;
+            item.qtd = Math.max(1, item.qtd + delta);
+            this.setCarrinho(carrinho);
+        },
+
+        totalCarrinho(){
+            return this.getCarrinho().reduce((s, i) => s + i.preco * i.qtd, 0);
+        },
+
+        limparCarrinho(){ this.setCarrinho([]); },
+
+        renderizarCarrinho(){
+            const carrinho = this.getCarrinho();
+            const lista = document.getElementById('listaCarrinho');
+            const totalBox = document.getElementById('totalCarrinho');
+            const qtdLabel = document.getElementById('carrinhoQtdLabel');
+            const badge = document.getElementById('badgeCarrinho');
+
+            const totalItens = carrinho.reduce((s,i) => s + i.qtd, 0);
+
+            // Badge
+            if(totalItens > 0){
+                badge.style.display = 'inline-block';
+                badge.textContent = totalItens;
+            } else {
+                badge.style.display = 'none';
+            }
+
+            qtdLabel.textContent = `${totalItens} ${totalItens === 1 ? 'item' : 'itens'}`;
+
+            if(carrinho.length === 0){
+                lista.innerHTML = `<div class="hx-vazio"><div class="hx-vazio-icon">🛒</div><p>Seu carrinho está vazio</p></div>`;
+                totalBox.style.display = 'none';
+                return;
+            }
+
+            lista.innerHTML = carrinho.map(item => `
+                <div class="carrinho-item">
+                    <img src="${item.imagem}" alt="${item.nome}">
+                    <div class="carrinho-item-info">
+                        <p>${item.nome.substring(0,50)}${item.nome.length>50?'...':''}</p>
+                        <strong>R$ ${(item.preco * item.qtd).toFixed(2).replace('.',',')}</strong>
+                    </div>
+                    <div class="carrinho-item-controles">
+                        <button onclick="HX.alterarQtd(${item.id}, -1); HX.renderizarCarrinho();">−</button>
+                        <span>${item.qtd}</span>
+                        <button onclick="HX.alterarQtd(${item.id}, 1); HX.renderizarCarrinho();">+</button>
+                    </div>
+                    <button class="carrinho-item-remover" onclick="HX.removerItem(${item.id}); HX.renderizarCarrinho();" title="Remover">🗑</button>
+                </div>
+            `).join('');
+
+            const tot = this.totalCarrinho();
+            totalBox.style.display = 'block';
+            document.getElementById('subtotalValor').textContent = 'R$ ' + tot.toFixed(2).replace('.',',');
+            document.getElementById('totalValor').textContent = 'R$ ' + tot.toFixed(2).replace('.',',');
+        },
+
+        /* =====================================================
+           FAVORITOS
+           ===================================================== */
+        _keyFav(){
+            const u = this.getUsuarioLogado();
+            return this.KEYS.favoritos(u ? u.id : 'guest');
+        },
+
+        getFavoritos(){ return this.ls.get(this._keyFav()) || []; },
+        setFavoritos(arr){ this.ls.set(this._keyFav(), arr); },
+
+        isFavorito(id){ return this.getFavoritos().some(f => f.id === id); },
+
+        toggleFavorito(produto){
+            const favs = this.getFavoritos();
+            const idx = favs.findIndex(f => f.id === produto.id);
+            if(idx >= 0){
+                favs.splice(idx, 1);
+                this.setFavoritos(favs);
+                return false;
+            } else {
+                favs.push(produto);
+                this.setFavoritos(favs);
+                return true;
+            }
+        },
+
+        /* =====================================================
+           PEDIDOS
+           ===================================================== */
+        _keyPedidos(){
+            const u = this.getUsuarioLogado();
+            return this.KEYS.pedidos(u ? u.id : 'guest');
+        },
+
+        getPedidos(){ return this.ls.get(this._keyPedidos()) || []; },
+
+        criarPedido(dados){
+            const pedidos = this.getPedidos();
+            const id = 'PED' + Date.now().toString().slice(-8);
+            const pedido = {
+                idPedido: id,
+                usuarioId: this.getUsuarioLogado()?.id,
+                produtos: this.getCarrinho(),
+                valorTotal: this.totalCarrinho(),
+                pagamento: dados.pagamento,
+                status: dados.pagamento === 'Boleto' ? 'Pendente' : 'Aprovado',
+                endereco: dados.endereco,
+                data: new Date().toLocaleDateString('pt-BR')
+            };
+            pedidos.unshift(pedido);
+            this.ls.set(this._keyPedidos(), pedidos);
+            return pedido;
+        },
+
+        /* =====================================================
+           ENDEREÇOS
+           ===================================================== */
+        _keyEnd(){
+            const u = this.getUsuarioLogado();
+            return this.KEYS.enderecos(u ? u.id : 'guest');
+        },
+
+        getEnderecos(){ return this.ls.get(this._keyEnd()) || []; },
+
+        salvarEndereco(end){
+            const ends = this.getEnderecos();
+            end.id = Date.now();
+            ends.push(end);
+            this.ls.set(this._keyEnd(), ends);
+        },
+
+        removerEndereco(id){
+            const ends = this.getEnderecos().filter(e => e.id !== id);
+            this.ls.set(this._keyEnd(), ends);
+        },
+
+        atualizarDados(dadosNovos){
+            const u = this.getUsuarioLogado();
+            if(!u) return;
+            const usuarios = this.getUsuarios();
+            const idx = usuarios.findIndex(x => x.id === u.id);
+            if(idx >= 0){
+                usuarios[idx] = { ...usuarios[idx], ...dadosNovos };
+                this.setUsuarios(usuarios);
+                // Atualiza objeto da sessão
+                this.ls.set(this.KEYS.logado, usuarios[idx]);
+                localStorage.setItem('nomeUsuario', usuarios[idx].nome);
+                localStorage.setItem('emailUsuario', usuarios[idx].email);
+            }
+        }
+    };
+
+    /* ==========================================================
+       TOAST
+       ========================================================== */
+    function toast(msg, tipo='info', duracao=3000){
+        const el = document.getElementById('toastMsg');
+        el.textContent = msg;
+        el.className = 'toast show';
+        if(tipo === 'erro') el.classList.add('erro');
+        if(tipo === 'sucesso') el.classList.add('sucesso');
+        clearTimeout(el._timer);
+        el._timer = setTimeout(() => { el.classList.remove('show'); }, duracao);
+    }
+
+    /* ==========================================================
+       HEADER - CONTA
+       ========================================================== */
+    function atualizarHeaderConta(){
+        const u = HX.getUsuarioLogado();
+        const el = document.getElementById('textoContaHeader');
+        if(u){
+            el.textContent = 'Olá, ' + u.nome.split(' ')[0];
+        } else {
+            el.textContent = 'Minha Conta';
+        }
+        HX.renderizarCarrinho();
+        atualizarBotoesFav();
+    }
+
+    function cliqueConta(){
+        const u = HX.getUsuarioLogado();
+        if(u){
+            abrirPainel();
+        } else {
+            abrirModalAuth();
+        }
+    }
+
+    /* ==========================================================
+       MODAL AUTH
+       ========================================================== */
+    function abrirModalAuth(tab){
+        document.getElementById('modalAuth').classList.add('ativo');
+        if(tab) trocarTab(tab);
+    }
+
+    function fecharModalAuth(){
+        document.getElementById('modalAuth').classList.remove('ativo');
+    }
+
+    function trocarTab(tab){
+        document.getElementById('tabLogin').classList.toggle('ativo', tab === 'login');
+        document.getElementById('tabCadastro').classList.toggle('ativo', tab === 'cadastro');
+        document.getElementById('painelLogin').style.display = tab === 'login' ? 'block' : 'none';
+        document.getElementById('painelCadastro').style.display = tab === 'cadastro' ? 'block' : 'none';
+    }
+
+    function realizarLogin(){
+        const email = document.getElementById('loginEmail').value.trim();
+        const senha = document.getElementById('loginSenha').value;
+        if(!email || !senha){ toast('Preencha e-mail e senha', 'erro'); return; }
+        const r = HX.login(email, senha);
+        if(r.ok){
+            fecharModalAuth();
+            atualizarHeaderConta();
+            toast(`Bem-vindo, ${r.usuario.nome.split(' ')[0]}! 🎉`, 'sucesso');
+        } else {
+            toast(r.msg, 'erro');
+        }
+    }
+
+    function realizarCadastro(){
+        const nome = document.getElementById('cadNome').value.trim();
+        const email = document.getElementById('cadEmail').value.trim();
+        const tel = document.getElementById('cadTelefone').value.trim();
+        const senha = document.getElementById('cadSenha').value;
+        const conf = document.getElementById('cadSenhaConf').value;
+
+        if(!nome || !email || !senha){ toast('Preencha todos os campos', 'erro'); return; }
+        if(senha.length < 6){ toast('Senha mínima: 6 caracteres', 'erro'); return; }
+        if(senha !== conf){ toast('Senhas não coincidem', 'erro'); return; }
+
+        const r = HX.cadastrar(nome, email, senha, tel);
+        if(r.ok){
+            const login = HX.login(email, senha);
+            fecharModalAuth();
+            atualizarHeaderConta();
+            toast(`Conta criada! Bem-vindo, ${nome.split(' ')[0]}! 🎉`, 'sucesso');
+        } else {
+            toast(r.msg, 'erro');
+        }
+    }
+
+    function realizarLogout(){
+        HX.logout();
+        fecharPainel();
+    }
+
+    /* ==========================================================
+       ADICIONAR AO CARRINHO
+       ========================================================== */
+    function adicionarAoCarrinho(btn){
+        const card = btn.closest('.produto-loja');
+        const produto = {
+            id: parseInt(card.dataset.id),
+            nome: card.dataset.nome,
+            preco: parseFloat(card.dataset.preco),
+            imagem: card.dataset.imagem
+        };
+        HX.adicionarItem(produto);
+        HX.renderizarCarrinho();
+        toast(`${produto.nome.substring(0,30)}... adicionado! 🛒`, 'sucesso');
+    }
+
+    /* ==========================================================
+       FAVORITOS
+       ========================================================== */
+    function toggleFavorito(id, nome, preco, imagem, btn){
+        const u = HX.getUsuarioLogado();
+        if(!u){ toast('Faça login para favoritar! 💙', 'info'); abrirModalAuth('login'); return; }
+        const r = HX.toggleFavorito({ id, nome, preco, imagem });
+        btn.textContent = r ? '❤️' : '🤍';
+        toast(r ? 'Adicionado aos favoritos! ❤️' : 'Removido dos favoritos', r ? 'sucesso' : 'info');
+    }
+
+    function atualizarBotoesFav(){
+        document.querySelectorAll('.btn-fav').forEach(btn => {
+            const card = btn.closest('.produto-loja');
+            if(!card) return;
+            const id = parseInt(card.dataset.id);
+            btn.textContent = HX.isFavorito(id) ? '❤️' : '🤍';
+        });
+    }
+
+    /* ==========================================================
+       CHECKOUT
+       ========================================================== */
+    let metodoPagamento = 'PIX';
+
+    function abrirCheckout(){
+        const u = HX.getUsuarioLogado();
+        if(!u){ fecharCarrinho(); toast('Faça login para finalizar a compra! 💙', 'info'); setTimeout(()=>abrirModalAuth('login'),400); return; }
+        if(HX.getCarrinho().length === 0){ toast('Carrinho vazio!', 'erro'); return; }
+        fecharCarrinho();
+        preencherResumoCheckout();
+        preencherDadosEndereco();
+        irParaPasso(1);
+        document.getElementById('modalCheckout').classList.add('ativo');
+        preencherParcelasCartao();
+    }
+
+    function fecharCheckout(){
+        document.getElementById('modalCheckout').classList.remove('ativo');
+    }
+
+    function preencherResumoCheckout(){
+        const carrinho = HX.getCarrinho();
+        const div = document.getElementById('resumoCheckout');
+        div.innerHTML = carrinho.map(i => `
+            <div class="checkout-resumo-item">
+                <span>${i.nome.substring(0,40)}${i.nome.length>40?'...':''} (x${i.qtd})</span>
+                <span>R$ ${(i.preco*i.qtd).toFixed(2).replace('.',',')}</span>
+            </div>
+        `).join('');
+        const tot = HX.totalCarrinho();
+        div.innerHTML += `<div class="checkout-resumo-item" style="font-weight:700; color:white; border-top:1px solid #1e2a3d; margin-top:4px; padding-top:8px;"><span>Total</span><span>R$ ${tot.toFixed(2).replace('.',',')}</span></div>`;
+    }
+
+    function preencherDadosEndereco(){
+        const u = HX.getUsuarioLogado();
+        if(u){
+            document.getElementById('endNome').value = u.nome || '';
+            document.getElementById('endTelefone').value = u.telefone || '';
+        }
+        const ends = HX.getEnderecos();
+        if(ends.length > 0){
+            const e = ends[0];
+            document.getElementById('endCEP').value = e.cep || '';
+            document.getElementById('endRua').value = e.rua || '';
+            document.getElementById('endNumero').value = e.numero || '';
+            document.getElementById('endComplemento').value = e.complemento || '';
+            document.getElementById('endBairro').value = e.bairro || '';
+            document.getElementById('endCidade').value = e.cidade || '';
+        }
+    }
+
+    function irParaPasso(n){
+        document.getElementById('checkoutPasso1').style.display = n===1?'block':'none';
+        document.getElementById('checkoutPasso2').style.display = n===2?'block':'none';
+        document.getElementById('checkoutPasso3').style.display = n===3?'block':'none';
+        [1,2,3].forEach(i => {
+            const el = document.getElementById('step'+i);
+            el.classList.remove('ativo','feito');
+            if(i < n) el.classList.add('feito');
+            if(i === n) el.classList.add('ativo');
+        });
+    }
+
+    function avancarPasso2(){
+        const nome = document.getElementById('endNome').value.trim();
+        const cep = document.getElementById('endCEP').value.trim();
+        const rua = document.getElementById('endRua').value.trim();
+        const numero = document.getElementById('endNumero').value.trim();
+        const cidade = document.getElementById('endCidade').value.trim();
+        if(!nome || !cep || !rua || !numero || !cidade){
+            toast('Preencha os campos obrigatórios', 'erro'); return;
+        }
+        if(document.getElementById('salvarEndereco').value === 'sim'){
+            HX.salvarEndereco({
+                label: 'Casa',
+                cep, rua, numero,
+                complemento: document.getElementById('endComplemento').value,
+                bairro: document.getElementById('endBairro').value,
+                cidade
+            });
+        }
+        const tot = HX.totalCarrinho();
+        document.getElementById('totalPagamento').textContent = 'R$ ' + tot.toFixed(2).replace('.',',');
+        irParaPasso(2);
+        selecionarMetodo('PIX');
+    }
+
+    function voltarPasso1(){ irParaPasso(1); }
+
+    function selecionarMetodo(m){
+        metodoPagamento = m;
+        ['PIX','Cartao','Boleto'].forEach(x => {
+            document.getElementById('met'+x).classList.toggle('selecionado', (x === m) || (x === 'Cartao' && m === 'Cartão'));
+        });
+        document.getElementById('painelPIX').style.display = m==='PIX'?'block':'none';
+        document.getElementById('painelCartao').style.display = m==='Cartão'?'block':'none';
+        document.getElementById('painelBoleto').style.display = m==='Boleto'?'block':'none';
+    }
+
+    function confirmarPedido(){
+        const endereco = {
+            nome: document.getElementById('endNome').value,
+            cpf: document.getElementById('endCPF').value,
+            cep: document.getElementById('endCEP').value,
+            rua: document.getElementById('endRua').value,
+            numero: document.getElementById('endNumero').value,
+            complemento: document.getElementById('endComplemento').value,
+            bairro: document.getElementById('endBairro').value,
+            cidade: document.getElementById('endCidade').value,
+            telefone: document.getElementById('endTelefone').value
+        };
+
+        if(metodoPagamento === 'Cartão'){
+            const num = document.getElementById('cartaoNum').value.replace(/\s/g,'');
+            const nome = document.getElementById('cartaoNome').value.trim();
+            const val = document.getElementById('cartaoVal').value.trim();
+            const cvv = document.getElementById('cartaoCVV').value.trim();
+            if(num.length < 16 || !nome || !val || !cvv){ toast('Preencha os dados do cartão', 'erro'); return; }
+        }
+
+        const pedido = HX.criarPedido({ pagamento: metodoPagamento, endereco });
+        HX.limparCarrinho();
+        HX.renderizarCarrinho();
+
+        document.getElementById('numeroPedidoGerado').textContent = pedido.idPedido;
+        document.getElementById('statusPagamentoFinal').innerHTML = `
+            Pagamento: <strong style="color:${pedido.status==='Aprovado'?'#4ade80':'#facc15'}">${pedido.status}</strong> via ${pedido.pagamento}
+        `;
+
+        irParaPasso(3);
+        toast('Pedido realizado com sucesso! 🎉', 'sucesso');
+    }
+
+    function buscarCEP(cep){
+        cep = cep.replace(/\D/g,'');
+        if(cep.length !== 8) return;
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(r=>r.json())
+            .then(d=>{
+                if(d.erro) return;
+                document.getElementById('endRua').value = d.logradouro || '';
+                document.getElementById('endBairro').value = d.bairro || '';
+                document.getElementById('endCidade').value = `${d.localidade} / ${d.uf}`;
+            }).catch(()=>{});
+    }
+
+    function preencherParcelasCartao(){
+        const sel = document.getElementById('cartaoParcelas');
+        if(!sel) return;
+        const tot = HX.totalCarrinho();
+        sel.innerHTML = '';
+        for(let i=1; i<=12; i++){
+            const v = (tot/i).toFixed(2).replace('.',',');
+            const opt = document.createElement('option');
+            opt.value = i;
+            opt.textContent = `${i}x de R$ ${v}${i>3?' (com juros)':''}`;
+            sel.appendChild(opt);
+        }
+    }
+
+    function formatarCartao(el){
+        let v = el.value.replace(/\D/g,'').substring(0,16);
+        el.value = v.match(/.{1,4}/g)?.join(' ') || v;
+    }
+
+    function copiarPIX(){
+        navigator.clipboard?.writeText('hexacore@pix.com.br').catch(()=>{});
+        toast('Chave PIX copiada! 📋', 'sucesso');
+    }
+
+    /* ==========================================================
+       PAINEL DO USUÁRIO
+       ========================================================== */
+    function abrirPainel(){
+        const u = HX.getUsuarioLogado();
+        if(!u) return;
+        document.getElementById('painelNomeUsuario').innerHTML = `<span>👤</span> Olá, ${u.nome.split(' ')[0]}`;
+        trocarSecaoPainel('pedidos', document.querySelector('.painel-nav-btn.ativo') || document.querySelector('.painel-nav-btn'));
+        document.getElementById('modalPainel').classList.add('ativo');
+    }
+
+    function fecharPainel(){
+        document.getElementById('modalPainel').classList.remove('ativo');
+    }
+
+    function trocarSecaoPainel(secao, btn){
+        document.querySelectorAll('.painel-secao').forEach(s => s.classList.remove('ativa'));
+        document.querySelectorAll('.painel-nav-btn').forEach(b => b.classList.remove('ativo'));
+        document.getElementById('secao'+secao.charAt(0).toUpperCase()+secao.slice(1)).classList.add('ativa');
+        if(btn) btn.classList.add('ativo');
+        renderizarSecao(secao);
+    }
+
+    function renderizarSecao(secao){
+        if(secao === 'pedidos') renderizarPedidos();
+        if(secao === 'favoritos') renderizarFavoritos();
+        if(secao === 'enderecos') renderizarEnderecos();
+        if(secao === 'dados') renderizarDados();
+    }
+
+    function renderizarPedidos(){
+        const pedidos = HX.getPedidos();
+        const el = document.getElementById('listaPedidosPainel');
+        if(pedidos.length === 0){
+            el.innerHTML = `<div class="hx-vazio"><div class="hx-vazio-icon">📦</div><p>Nenhum pedido ainda</p></div>`;
+            return;
+        }
+        el.innerHTML = pedidos.map(p => `
+            <div class="pedido-card">
+                <div class="pedido-header">
+                    <span class="pedido-id">${p.idPedido}</span>
+                    <span class="pedido-status ${p.status==='Aprovado'?'status-aprovado':p.status==='Pendente'?'status-pendente':'status-cancelado'}">${p.status}</span>
+                </div>
+                <div class="pedido-info">
+                    <span>📅 ${p.data}</span>
+                    <span>💳 ${p.pagamento}</span>
+                    <span>🛒 ${p.produtos?.length||0} ${(p.produtos?.length||0)===1?'item':'itens'}</span>
+                    <span><strong>R$ ${p.valorTotal?.toFixed(2).replace('.',',')||'0,00'}</strong></span>
+                </div>
+                <div style="margin-top:10px; font-size:12px; color:#555;">
+                    ${(p.produtos||[]).map(i=>`<span style="margin-right:6px;">• ${i.nome.substring(0,30)}... (x${i.qtd})</span>`).join('')}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderizarFavoritos(){
+        const favs = HX.getFavoritos();
+        const el = document.getElementById('listaFavoritosPainel');
+        if(favs.length === 0){
+            el.innerHTML = `<div class="hx-vazio"><div class="hx-vazio-icon">❤️</div><p>Nenhum favorito ainda</p></div>`;
+            return;
+        }
+        el.innerHTML = favs.map(f => `
+            <div class="fav-card">
+                <img src="${f.imagem}" alt="${f.nome}">
+                <div class="fav-info">
+                    <strong>${f.nome.substring(0,50)}${f.nome.length>50?'...':''}</strong>
+                    <p>${f.preco}</p>
+                </div>
+                <button class="hx-btn hx-btn-secundario" style="width:auto; padding:8px 14px; font-size:12px; margin-top:0;"
+                    onclick="HX.adicionarItem({id:${f.id},nome:'${f.nome.replace(/'/g,"\\'")}',preco:${parseFloat(f.preco.replace(/[^\d,]/g,'').replace(',','.'))},imagem:'${f.imagem}'}); HX.renderizarCarrinho(); toast('Adicionado ao carrinho! 🛒','sucesso');">
+                    🛒 Comprar
+                </button>
+            </div>
+        `).join('');
+    }
+
+    function renderizarEnderecos(){
+        const ends = HX.getEnderecos();
+        const el = document.getElementById('listaEnderecosPainel');
+        if(ends.length === 0){
+            el.innerHTML = `<div class="hx-vazio"><div class="hx-vazio-icon">📍</div><p>Nenhum endereço salvo</p></div>`;
+            return;
+        }
+        el.innerHTML = ends.map(e => `
+            <div class="end-card">
+                <h4>${e.label||'Endereço'}</h4>
+                <p>${e.rua}, ${e.numero}${e.complemento?', '+e.complemento:''}</p>
+                <p>${e.bairro} — ${e.cidade}</p>
+                <p>CEP: ${e.cep}</p>
+                <div class="end-card-acoes">
+                    <button onclick="HX.removerEndereco(${e.id}); renderizarEnderecos();">🗑 Remover</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderizarDados(){
+        const u = HX.getUsuarioLogado();
+        if(!u) return;
+        document.getElementById('dadosPessoaisConteudo').innerHTML = `
+            <div class="hx-campo">
+                <label>Nome completo</label>
+                <input type="text" id="editNome" value="${u.nome||''}">
+            </div>
+            <div class="hx-campo">
+                <label>E-mail</label>
+                <input type="email" id="editEmail" value="${u.email||''}">
+            </div>
+            <div class="hx-campo">
+                <label>Telefone</label>
+                <input type="text" id="editTelefone" value="${u.telefone||''}">
+            </div>
+            <div class="hx-campo">
+                <label>Nova senha (deixe em branco para manter)</label>
+                <input type="password" id="editSenha" placeholder="••••••••">
+            </div>
+            <div class="dados-pessoais-info">
+                <p>📅 Membro desde: <strong>${u.criadoEm||'—'}</strong></p>
+                <p>📦 Pedidos realizados: <strong>${HX.getPedidos().length}</strong></p>
+                <p>❤️ Favoritos: <strong>${HX.getFavoritos().length}</strong></p>
+            </div>
+        `;
+    }
+
+    function salvarDadosPessoais(){
+        const nome = document.getElementById('editNome')?.value.trim();
+        const email = document.getElementById('editEmail')?.value.trim();
+        const tel = document.getElementById('editTelefone')?.value.trim();
+        const senha = document.getElementById('editSenha')?.value;
+        if(!nome || !email){ toast('Nome e e-mail são obrigatórios', 'erro'); return; }
+        const dados = { nome, email, telefone: tel };
+        if(senha && senha.length >= 6) dados.senha = senha;
+        else if(senha && senha.length > 0){ toast('Senha mínima: 6 caracteres', 'erro'); return; }
+        HX.atualizarDados(dados);
+        atualizarHeaderConta();
+        toast('Dados atualizados! ✅', 'sucesso');
+    }
+
+    function abrirAdicionarEndereco(){
+        document.getElementById('modalAdicionarEndereco').classList.add('ativo');
+    }
+
+    function fecharAdicionarEndereco(){
+        document.getElementById('modalAdicionarEndereco').classList.remove('ativo');
+    }
+
+    function salvarNovoEndereco(){
+        const label = document.getElementById('novoEndId').value.trim() || 'Casa';
+        const cep = document.getElementById('novoEndCEP').value.trim();
+        const rua = document.getElementById('novoEndRua').value.trim();
+        const numero = document.getElementById('novoEndNum').value.trim();
+        const complemento = document.getElementById('novoEndComp').value.trim();
+        const bairro = document.getElementById('novoEndBairro').value.trim();
+        const cidade = document.getElementById('novoEndCidade').value.trim();
+        if(!rua || !numero || !cidade){ toast('Preencha os campos obrigatórios', 'erro'); return; }
+        HX.salvarEndereco({ label, cep, rua, numero, complemento, bairro, cidade });
+        fecharAdicionarEndereco();
+        renderizarEnderecos();
+        toast('Endereço salvo! 📍', 'sucesso');
+    }
+
+    /* ==========================================================
+       FECHAR MODAIS AO CLICAR NO OVERLAY
+       ========================================================== */
+    document.querySelectorAll('.hx-modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', function(e){
+            if(e.target === this){
+                this.classList.remove('ativo');
+            }
+        });
+    });
+
+    /* ==========================================================
+       FUNÇÃO GLOBAL logout() — funciona em todas as páginas
+       ========================================================== */
+    function logout(){
+        HX.logout();
+        fecharPainel();
+    }
+
+    /* ==========================================================
+       INICIALIZAÇÃO
+       ========================================================== */
+    (function init(){
+        atualizarHeaderConta();
+        // Se o usuário já estava logado (veio de outra página), não abre modal
+        // atualizarHeaderConta já lida com isso
+    })();
+
+    </script>
+
+</body>
+</html>

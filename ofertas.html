@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HexaCore - Ofertas</title>
+<style>
+/* ===== VARIÁVEIS GLOBAIS ===== */
+:root {
+    --bg: #0f1115;
+    --card: #181c23;
+    --card2: #11151b;
+    --card3: #1a1d24;
+    --azul: #0066ff;
+    --azul-hover: #0052cc;
+    --destaque: #00b7ff;
+    --texto: #ffffff;
+    --texto-sec: #9ca3af;
+    --cinza: #9ca3af;
+    --borda: #2a2f3a;
+    --verde: #00c853;
+    --fundo: #0f1115;
+}
+ 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+ 
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--texto);
+    overflow-x: hidden;
+    padding-top: 130px;
+}
+ 
+a { text-decoration: none; color: white; }
+ 
+/* ===== HEADER ===== */
+.header {
+    width: 100%;
+    background: var(--card2);
+    border-bottom: 1px solid var(--borda);
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+ 
+/* SCROLL — header compacto */
+.header.scroll {
+    background: rgba(17,21,27,0.92);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+ 
+.header.scroll .menu {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+}
+ 
+.header.scroll .header-top {
+    padding: 10px 40px;
+}
+ 
+.header.scroll .logo img {
+    width: 170px;
+}
+ 
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 60px;
+}
+ 
+.logo img { width: 220px; }
+ 
+.search {
+    flex: 1;
+    display: flex;
+    max-width: 700px;
+    margin: 0 50px;
+}
+ 
+.search input {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--borda);
+    padding: 15px 20px;
+    color: white;
+    outline: none;
+    border-radius: 14px 0 0 14px;
+    font-size: 15px;
+}
+ 
+.search button {
+    width: 65px;
+    border: none;
+    background: var(--azul);
+    color: white;
+    font-size: 20px;
+    border-radius: 0 14px 14px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+ 
+.search button:hover { background: var(--azul-hover); }
+ 
+.icons { display: flex; gap: 25px; }
+ 
+.icons a {
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+ 
+.icons a:hover { color: var(--azul); }
+ 
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    background: var(--card2);
+    padding: 18px;
+    border-top: 1px solid var(--borda);
+}
+ 
+.menu a {
+    position: relative;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+ 
+.menu a:hover { color: var(--azul); }
+ 
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 0%;
+    height: 2px;
+    background: var(--azul);
+    transition: 0.3s;
+}
+ 
+.menu a:hover::after { width: 100%; }
+ 
+/* ===== MODAL LOGIN ===== */
+.modal-login {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8);
+}
+ 
+.modal-conteudo {
+    background-color: #1a1a1a;
+    margin: 10% auto;
+    padding: 30px;
+    border: 1px solid #0047b3;
+    width: 320px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+}
+ 
+.fechar {
+    position: absolute;
+    right: 15px; top: 10px;
+    color: #aaa;
+    font-size: 24px;
+    cursor: pointer;
+}
+ 
+.modal-conteudo h2 { color: #0047b3; margin-bottom: 20px; }
+ 
+.modal-conteudo input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+ 
+.btn-login {
+    background: #0047b3;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+ 
+.links-modal { margin-top: 15px; font-size: 13px; }
+.links-modal a { color: #0047b3; text-decoration: underline; }
+ 
+/* ===== CARRINHO LATERAL ===== */
+.carrinho-lateral {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2000;
+    top: 0; right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    border-left: 2px solid #0047b3;
+}
+ 
+.carrinho-lateral .fechar-carrinho {
+    position: absolute;
+    top: 20px; left: 25px;
+    font-size: 36px;
+    color: #0047b3;
+    cursor: pointer;
+}
+ 
+.carrinho-conteudo { padding: 20px; text-align: center; }
+.item-carrinho-vazio { color: #888; margin-top: 50px; }
+ 
+.btn-finalizar {
+    background-color: #0047b3;
+    color: black;
+    padding: 15px;
+    text-decoration: none;
+    display: block;
+    margin: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+ 
+/* ===== PÁGINA OFERTAS ===== */
+#pagina-ofertas { display: block; }
+ 
+.banner {
+    margin: 60px 80px;
+    padding: 70px;
+    border-radius: 24px;
+    background: linear-gradient(90deg, #0066ff, #0047b3);
+    text-align: center;
+}
+ 
+.banner h2 { font-size: 40px; margin-bottom: 10px; }
+.banner p { color: #dbeafe; font-size: 18px; }
+ 
+.titulo-secao {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+ 
+.titulo-secao h1 { font-size: 40px; }
+ 
+.produtos-destaque {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    padding: 0 80px 80px;
+}
+ 
+.produto-loja {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: 22px;
+    overflow: hidden;
+    transition: 0.3s;
+    cursor: pointer;
+}
+ 
+.produto-loja:hover {
+    transform: translateY(-8px);
+    border-color: var(--azul);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+ 
+.produto-loja img {
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
+    background: var(--card2);
+    padding: 20px;
+}
+ 
+.info { padding: 20px; }
+.info h2 { font-size: 15px; line-height: 1.5; margin-bottom: 12px; font-weight: 600; }
+.estrelas { color: #facc15; margin-bottom: 10px; }
+.preco-antigo-lista { color: var(--texto-sec); text-decoration: line-through; margin-bottom: 5px; }
+.preco-lista { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+.parcelado { color: var(--texto-sec); font-size: 13px; margin-bottom: 18px; }
+ 
+.btn-comprar {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--azul);
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: 0.3s;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+ 
+.btn-comprar:hover { background: var(--azul-hover); }
+ 
+/* ===== PÁGINA PRODUTO ===== */
+#pagina-produto {
+    display: none;
+    padding-top: 40px;
+}
+ 
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--borda);
+    color: white;
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 20px 40px;
+    transition: 0.3s;
+}
+ 
+.btn-voltar:hover { background: var(--azul); border-color: var(--azul); }
+ 
+.container-produto {
+    max-width: 1400px;
+    margin: auto;
+    padding: 20px 40px 40px;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 40px;
+}
+ 
+.galeria {
+    background: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    padding: 20px;
+}
+ 
+.imagem-principal {
+    width: 60%;
+    max-width: 500px;
+    display: block;
+    margin: 0 auto 20px auto;
+    border-radius: 15px;
+}
+ 
+.miniaturas { display: flex; gap: 15px; flex-wrap: wrap; }
+ 
+.miniaturas img {
+    width: 70px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.3s;
+}
+ 
+.miniaturas img:hover {
+    border-color: var(--destaque);
+    transform: scale(1.05);
+}
+ 
+.info-produto {
+    background: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    padding: 30px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+ 
+.titulo-produto { font-size: 28px; margin-bottom: 15px; }
+.avaliacao { color: gold; margin-bottom: 15px; }
+ 
+.preco-antigo {
+    color: var(--cinza);
+    text-decoration: line-through;
+    font-size: 18px;
+}
+ 
+.preco {
+    font-size: 42px;
+    font-weight: bold;
+    color: var(--verde);
+    margin: 10px 0;
+}
+ 
+.pix { color: var(--cinza); margin-bottom: 20px; }
+ 
+.parcelamento {
+    background: #13161c;
+    border: 1px solid var(--borda);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    line-height: 30px;
+}
+ 
+.botao-comprar {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 14px;
+    background: var(--destaque);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 15px;
+}
+ 
+.botao-comprar:hover { transform: scale(1.02); background: #0095cc; }
+ 
+.botao-carrinho {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    border: 2px solid var(--destaque);
+    background: transparent;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+ 
+.botao-carrinho:hover { background: var(--destaque); }
+ 
+.descricao {
+    max-width: 1400px;
+    margin: 20px auto 40px;
+    padding: 0 40px;
+}
+ 
+.descricao-inner {
+    background: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    padding: 35px;
+}
+ 
+.descricao-inner h2 { margin-bottom: 20px; font-size: 28px; }
+.descricao-inner p { color: var(--cinza); line-height: 30px; font-size: 17px; }
+ 
+.especificacoes { margin-top: 30px; }
+ 
+.item-spec {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--borda);
+}
+ 
+.nome-spec { color: var(--cinza); }
+.valor-spec { font-weight: bold; }
+ 
+/* ===== FOOTER ===== */
+footer {
+    border-top: 1px solid var(--borda);
+    background: var(--card2);
+    text-align: center;
+    padding: 40px;
+    color: var(--texto-sec);
+}
+ 
+/* ===== RESPONSIVO ===== */
+@media (max-width: 1000px) {
+    .container-produto {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    .info-produto { position: static; }
+}
+ 
+/* ===== DESCRICAO-CARD ===== */
+.descricao-card { color: var(--texto-sec); font-size: 13px; margin-bottom: 8px; }
+ 
+/* ===== BTN FAVORITO CARD ===== */
+.btn-favorito {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    border: 1px solid var(--borda);
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #9ca3af;
+    margin-top: 8px;
+    transition: 0.3s;
+}
+.btn-favorito:hover, .btn-favorito.ativo { background: rgba(255,50,50,0.1); border-color: #ff4444; color: #ff4444; }
+ 
+/* ===== BTN FAVORITO PRODUTO ===== */
+.botao-favorito-prod {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: 2px solid #ff4444;
+    background: transparent;
+    color: #ff4444;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+.botao-favorito-prod:hover, .botao-favorito-prod.ativo { background: rgba(255,68,68,0.15); }
+ 
+/* ===== BADGE CARRINHO ===== */
+.hx-badge {
+    background: var(--azul);
+    color: white;
+    border-radius: 50%;
+    padding: 1px 6px;
+    font-size: 11px;
+    font-weight: 800;
+    vertical-align: super;
+}
+ 
+/* ===== OVERLAY ===== */
+.hx-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1500;
+    backdrop-filter: blur(4px);
+}
+.hx-overlay.ativo { display: block; }
+ 
+/* ===== MODAL MELHORADO ===== */
+.hx-modal { width: 380px; background: #0e1219; border: 1px solid #1e3a5f; border-radius: 20px; padding: 40px 35px; }
+.hx-modal-logo { font-size: 40px; margin-bottom: 15px; }
+.hx-modal h2 { color: #00b7ff; font-size: 22px; margin-bottom: 5px; }
+.hx-modal-sub { color: #9ca3af; font-size: 14px; margin-bottom: 20px; }
+.hx-modal input {
+    width: 100%;
+    background: #181c23;
+    border: 1px solid #2a2f3a;
+    color: white;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin: 8px 0;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+.hx-modal input:focus { border-color: #0066ff; }
+.hx-erro { color: #ff4444; font-size: 13px; margin: 5px 0; min-height: 18px; }
+ 
+/* ===== CARRINHO LATERAL MELHORADO ===== */
+.hx-item-carrinho {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #2a2f3a;
+}
+.hx-item-img { width: 60px; height: 60px; object-fit: contain; background: #181c23; border-radius: 8px; padding: 5px; }
+.hx-item-info { flex: 1; }
+.hx-item-nome { font-size: 12px; color: #e5e7eb; line-height: 1.4; margin-bottom: 4px; }
+.hx-item-preco { color: #00b7ff; font-weight: 700; font-size: 14px; }
+.hx-item-ctrl { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+.hx-qty-btn {
+    width: 24px; height: 24px; border: 1px solid #2a2f3a; background: #181c23;
+    color: white; border-radius: 6px; cursor: pointer; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    transition: 0.2s;
+}
+.hx-qty-btn:hover { background: #0066ff; border-color: #0066ff; }
+.hx-qty-num { color: white; font-weight: 700; font-size: 14px; min-width: 20px; text-align: center; }
+.hx-item-del { background: none; border: none; color: #9ca3af; cursor: pointer; font-size: 18px; margin-left: 5px; }
+.hx-item-del:hover { color: #ff4444; }
+ 
+.hx-carrinho-total {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 0; border-top: 1px solid #2a2f3a; margin-top: 10px;
+    font-size: 16px; font-weight: 700;
+}
+ 
+/* ===== TOAST ===== */
+.hx-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #0066ff;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    box-shadow: 0 8px 25px rgba(0,102,255,0.4);
+}
+.hx-toast.show { opacity: 1; transform: translateY(0); }
+.hx-toast.success { background: #00c853; box-shadow: 0 8px 25px rgba(0,200,83,0.4); }
+.hx-toast.error { background: #ff4444; box-shadow: 0 8px 25px rgba(255,68,68,0.4); }
+ 
+/* ===== FULLSCREEN MODAL ===== */
+.hx-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background: rgba(0,0,0,0.95);
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+}
+ 
+.hx-btn-fechar-full {
+    position: fixed;
+    top: 20px; right: 30px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 10;
+    transition: 0.2s;
+}
+.hx-btn-fechar-full:hover { background: rgba(255,68,68,0.3); border-color: #ff4444; }
+ 
+/* ===== CHECKOUT ===== */
+.hx-checkout-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 30px 80px;
+}
+ 
+.hx-step h2 { font-size: 24px; margin-bottom: 25px; color: #00b7ff; }
+ 
+.hx-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+@media (max-width: 600px) { .hx-form-grid { grid-template-columns: 1fr; } }
+.hx-span2 { grid-column: span 2; }
+@media (max-width: 600px) { .hx-span2 { grid-column: span 1; } }
+ 
+.hx-form-group { display: flex; flex-direction: column; gap: 6px; }
+.hx-form-group label { font-size: 13px; color: #9ca3af; font-weight: 600; }
+.hx-form-group input, .hx-form-group select {
+    background: #181c23;
+    border: 1px solid #2a2f3a;
+    color: white;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+.hx-form-group input:focus, .hx-form-group select:focus { border-color: #0066ff; }
+.hx-form-group select option { background: #181c23; }
+ 
+.hx-check-save {
+    display: flex; align-items: center; gap: 8px;
+    color: #9ca3af; font-size: 13px; cursor: pointer; margin-top: 10px;
+}
+.hx-check-save input { width: auto; }
+ 
+.hx-step-actions {
+    display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap;
+}
+.hx-btn-prim {
+    background: linear-gradient(135deg, #0066ff, #0047b3);
+    color: white; border: none; padding: 15px 30px;
+    border-radius: 12px; font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: 0.3s; flex: 1;
+}
+.hx-btn-prim:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,102,255,0.4); }
+.hx-btn-sec {
+    background: transparent; color: white;
+    border: 1px solid #2a2f3a; padding: 15px 30px;
+    border-radius: 12px; font-size: 16px; cursor: pointer; transition: 0.3s;
+}
+.hx-btn-sec:hover { border-color: #0066ff; }
+ 
+/* ===== PAGAMENTOS ===== */
+.hx-pagamentos { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+.hx-pag-opt {
+    display: flex; align-items: center; gap: 15px;
+    background: #181c23; border: 2px solid #2a2f3a;
+    padding: 18px 20px; border-radius: 14px; cursor: pointer; transition: 0.2s;
+}
+.hx-pag-opt:hover { border-color: #0066ff; }
+.hx-pag-opt.selecionado { border-color: #00b7ff; background: rgba(0,183,255,0.07); }
+.hx-pag-icon { font-size: 28px; }
+.hx-pag-opt strong { display: block; font-size: 16px; margin-bottom: 2px; }
+.hx-pag-opt p { color: #9ca3af; font-size: 13px; margin: 0; }
+.hx-pag-check { margin-left: auto; color: #2a2f3a; font-size: 20px; }
+.hx-pag-opt.selecionado .hx-pag-check { color: #00b7ff; }
+ 
+.hx-campos-pag { margin-bottom: 20px; }
+.hx-pix-box {
+    background: #181c23; border: 1px solid #2a2f3a;
+    border-radius: 14px; padding: 25px; text-align: center;
+}
+.hx-pix-icon { font-size: 48px; margin-bottom: 10px; }
+.hx-pix-box h3 { font-size: 20px; margin-bottom: 8px; }
+.hx-pix-box p { color: #9ca3af; }
+.hx-pix-chave {
+    margin-top: 15px; background: #0e1219; padding: 12px 20px;
+    border-radius: 10px; font-size: 14px; color: #9ca3af;
+}
+ 
+/* ===== RESUMO PEDIDO ===== */
+.hx-resumo-pedido {
+    background: #181c23; border: 1px solid #2a2f3a;
+    border-radius: 14px; padding: 20px; margin-top: 20px;
+}
+.hx-resumo-pedido h3 { font-size: 16px; margin-bottom: 15px; color: #9ca3af; }
+.hx-resumo-linha {
+    display: flex; justify-content: space-between;
+    padding: 8px 0; border-bottom: 1px solid #2a2f3a; font-size: 14px;
+}
+.hx-total-linha { border-bottom: none; padding-top: 15px; font-size: 16px; font-weight: 700; border-top: 2px solid #2a2f3a; margin-top: 5px; }
+ 
+/* ===== CONFIRMAÇÃO ===== */
+.hx-confirmacao { text-align: center; padding: 40px 20px; }
+.hx-conf-icon { font-size: 80px; margin-bottom: 20px; }
+.hx-confirmacao h2 { font-size: 28px; margin-bottom: 10px; color: #00c853; }
+.hx-conf-sub { color: #9ca3af; margin-bottom: 25px; font-size: 16px; }
+.hx-conf-num {
+    background: #181c23; border: 1px solid #2a2f3a;
+    padding: 15px 25px; border-radius: 12px; font-size: 16px; margin-bottom: 20px; display: inline-block;
+}
+.hx-conf-num strong { color: #00b7ff; font-size: 20px; }
+.hx-conf-pag-info {
+    background: rgba(0,200,83,0.1); border: 1px solid rgba(0,200,83,0.3);
+    border-radius: 12px; padding: 15px 20px; margin-bottom: 20px; font-size: 14px; color: #00c853;
+}
+.hx-conf-detalhes { color: #9ca3af; font-size: 14px; line-height: 1.8; margin-bottom: 30px; }
+ 
+/* ===== PAINEL ===== */
+.hx-painel-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 70px 30px 80px;
+}
+.hx-painel-header {
+    display: flex; align-items: center; gap: 20px;
+    background: #181c23; border: 1px solid #2a2f3a;
+    border-radius: 16px; padding: 25px; margin-bottom: 25px;
+}
+.hx-painel-avatar { font-size: 50px; }
+.hx-painel-header h2 { font-size: 22px; }
+.hx-btn-logout {
+    margin-left: auto; background: rgba(255,68,68,0.1); border: 1px solid rgba(255,68,68,0.3);
+    color: #ff4444; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-size: 14px; transition: 0.2s;
+}
+.hx-btn-logout:hover { background: rgba(255,68,68,0.2); }
+ 
+.hx-painel-nav { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+.hx-nav-btn {
+    background: #181c23; border: 1px solid #2a2f3a; color: #9ca3af;
+    padding: 12px 20px; border-radius: 10px; cursor: pointer; font-size: 14px;
+    font-weight: 600; transition: 0.2s;
+}
+.hx-nav-btn:hover { border-color: #0066ff; color: white; }
+.hx-nav-btn.active { background: #0066ff; border-color: #0066ff; color: white; }
+ 
+.hx-painel-conteudo { background: #181c23; border: 1px solid #2a2f3a; border-radius: 16px; padding: 25px; }
+.hx-painel-aba h3 { font-size: 18px; margin-bottom: 20px; color: #00b7ff; }
+ 
+/* CARDS PEDIDOS */
+.hx-pedido-card {
+    background: #0e1219; border: 1px solid #2a2f3a;
+    border-radius: 12px; padding: 18px; margin-bottom: 15px;
+}
+.hx-pedido-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+.hx-pedido-num { font-weight: 700; color: #00b7ff; font-size: 15px; }
+.hx-pedido-data { color: #9ca3af; font-size: 13px; }
+.hx-status {
+    padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;
+}
+.hx-status.aprovado { background: rgba(0,200,83,0.15); color: #00c853; border: 1px solid rgba(0,200,83,0.3); }
+.hx-status.pendente { background: rgba(250,204,21,0.15); color: #facc15; border: 1px solid rgba(250,204,21,0.3); }
+.hx-pedido-itens { color: #9ca3af; font-size: 13px; line-height: 1.8; }
+.hx-pedido-total { font-size: 18px; font-weight: 800; color: #00c853; margin-top: 10px; }
+ 
+/* CARDS ENDEREÇO */
+.hx-end-card {
+    background: #0e1219; border: 1px solid #2a2f3a;
+    border-radius: 12px; padding: 18px; margin-bottom: 15px;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 15px;
+}
+.hx-end-info { color: #e5e7eb; font-size: 14px; line-height: 1.8; }
+.hx-end-del { background: none; border: none; color: #9ca3af; cursor: pointer; font-size: 20px; transition: 0.2s; }
+.hx-end-del:hover { color: #ff4444; }
+.hx-vazio { text-align: center; color: #9ca3af; padding: 40px 0; font-size: 15px; }
+ 
+</style>
+</head>
+ 
+<body>
+ 
+<!-- ===================== MODAL LOGIN / CADASTRO ===================== -->
+<div id="modalLogin" class="modal-login">
+    <div class="modal-conteudo hx-modal">
+        <span class="fechar" onclick="fecharLogin()">&times;</span>
+        <!-- ABA LOGIN -->
+        <div id="abaLogin">
+            <div class="hx-modal-logo">🎮</div>
+            <h2>Entrar na Conta</h2>
+            <p class="hx-modal-sub">Acesse sua conta HexaCore</p>
+            <input type="email" id="loginEmail" placeholder="Seu e-mail" autocomplete="email">
+            <input type="password" id="loginSenha" placeholder="Sua senha" autocomplete="current-password">
+            <div id="loginErro" class="hx-erro"></div>
+            <button class="btn-login" onclick="realizarLogin()">ENTRAR</button>
+            <div class="links-modal">
+                <p>Não tem conta? <a href="javascript:void(0)" onclick="trocarAba('cadastro')">Cadastre-se grátis</a></p>
+            </div>
+        </div>
+        <!-- ABA CADASTRO -->
+        <div id="abaCadastro" style="display:none">
+            <div class="hx-modal-logo">✨</div>
+            <h2>Criar Conta</h2>
+            <p class="hx-modal-sub">Crie sua conta HexaCore gratuita</p>
+            <input type="text" id="cadNome" placeholder="Seu nome completo">
+            <input type="email" id="cadEmail" placeholder="Seu e-mail">
+            <input type="password" id="cadSenha" placeholder="Senha (mín. 6 caracteres)">
+            <input type="password" id="cadSenha2" placeholder="Confirmar senha">
+            <div id="cadErro" class="hx-erro"></div>
+            <button class="btn-login" onclick="realizarCadastro()">CRIAR CONTA</button>
+            <div class="links-modal">
+                <p>Já tem conta? <a href="javascript:void(0)" onclick="trocarAba('login')">Fazer login</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- ===================== CARRINHO LATERAL ===================== -->
+<div id="meuCarrinho" class="carrinho-lateral">
+    <span class="fechar-carrinho" onclick="fecharCarrinho()">&times;</span>
+    <div class="carrinho-conteudo">
+        <h2 style="color:#ffffff; font-size:20px; margin-bottom:5px;">🛒 Meu Carrinho</h2>
+        <hr style="border-color:#2a2f3a; margin:15px 0;">
+        <div id="itensCarrinho">
+            <p class="item-carrinho-vazio">Seu carrinho está vazio :(</p>
+        </div>
+        <div id="resumoCarrinho" style="display:none">
+            <div class="hx-carrinho-total">
+                <span>Subtotal:</span>
+                <span id="subtotalCarrinho" style="color:#00b7ff; font-weight:800;">R$ 0,00</span>
+            </div>
+            <button class="btn-finalizar" onclick="abrirCheckout()">FINALIZAR COMPRA →</button>
+        </div>
+    </div>
+</div>
+ 
+<!-- ===================== OVERLAY GERAL ===================== -->
+<div id="hxOverlay" class="hx-overlay" onclick="fecharTudo()"></div>
+ 
+<!-- ===================== MODAL CHECKOUT ===================== -->
+<div id="modalCheckout" class="hx-fullscreen" style="display:none">
+    <div class="hx-checkout-container">
+        <button class="hx-btn-fechar-full" onclick="fecharCheckout()">✕ Fechar</button>
+        <div class="hx-checkout-steps">
+            <!-- STEP 1: Endereço -->
+            <div id="stepEndereco" class="hx-step active">
+                <h2>📦 Endereço de Entrega</h2>
+                <div class="hx-form-grid">
+                    <div class="hx-form-group hx-span2">
+                        <label>Nome Completo *</label>
+                        <input type="text" id="endNome" placeholder="Seu nome completo">
+                    </div>
+                    <div class="hx-form-group">
+                        <label>CPF *</label>
+                        <input type="text" id="endCpf" placeholder="000.000.000-00" maxlength="14" oninput="mascaraCpf(this)">
+                    </div>
+                    <div class="hx-form-group">
+                        <label>Telefone *</label>
+                        <input type="text" id="endTel" placeholder="(00) 00000-0000" maxlength="15" oninput="mascaraTel(this)">
+                    </div>
+                    <div class="hx-form-group">
+                        <label>CEP *</label>
+                        <input type="text" id="endCep" placeholder="00000-000" maxlength="9" oninput="mascaraCep(this)">
+                    </div>
+                    <div class="hx-form-group hx-span2">
+                        <label>Rua / Logradouro *</label>
+                        <input type="text" id="endRua" placeholder="Nome da rua">
+                    </div>
+                    <div class="hx-form-group">
+                        <label>Número *</label>
+                        <input type="text" id="endNum" placeholder="123">
+                    </div>
+                    <div class="hx-form-group">
+                        <label>Complemento</label>
+                        <input type="text" id="endComp" placeholder="Apto, Bloco...">
+                    </div>
+                    <div class="hx-form-group">
+                        <label>Bairro *</label>
+                        <input type="text" id="endBairro" placeholder="Seu bairro">
+                    </div>
+                    <div class="hx-form-group">
+                        <label>Cidade *</label>
+                        <input type="text" id="endCidade" placeholder="Sua cidade">
+                    </div>
+                    <div class="hx-form-group">
+                        <label>Estado *</label>
+                        <select id="endEstado">
+                            <option value="">Selecione</option>
+                            <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+                            <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                            <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+                            <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+                            <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+                            <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+                            <option selected>SP</option><option>SE</option><option>TO</option>
+                        </select>
+                    </div>
+                </div>
+                <label class="hx-check-save">
+                    <input type="checkbox" id="salvarEnd" checked>
+                    Salvar endereço para próximas compras
+                </label>
+                <div id="endErro" class="hx-erro"></div>
+                <div class="hx-step-actions">
+                    <button class="hx-btn-prim" onclick="irStepPagamento()">CONTINUAR → PAGAMENTO</button>
+                </div>
+            </div>
+ 
+            <!-- STEP 2: Pagamento -->
+            <div id="stepPagamento" class="hx-step" style="display:none">
+                <h2>💳 Forma de Pagamento</h2>
+                <div class="hx-pagamentos">
+                    <div class="hx-pag-opt" id="optPix" onclick="selecionarPag('pix')">
+                        <div class="hx-pag-icon">📱</div>
+                        <div>
+                            <strong>PIX</strong>
+                            <p>Aprovação imediata · 15% OFF</p>
+                        </div>
+                        <div class="hx-pag-check">●</div>
+                    </div>
+                    <div class="hx-pag-opt" id="optCredito" onclick="selecionarPag('credito')">
+                        <div class="hx-pag-icon">💳</div>
+                        <div>
+                            <strong>Cartão de Crédito</strong>
+                            <p>Até 18x sem juros</p>
+                        </div>
+                        <div class="hx-pag-check">●</div>
+                    </div>
+                    <div class="hx-pag-opt" id="optBoleto" onclick="selecionarPag('boleto')">
+                        <div class="hx-pag-icon">📄</div>
+                        <div>
+                            <strong>Boleto Bancário</strong>
+                            <p>Vencimento em 3 dias úteis</p>
+                        </div>
+                        <div class="hx-pag-check">●</div>
+                    </div>
+                </div>
+ 
+                <!-- Campos PIX -->
+                <div id="camposPix" class="hx-campos-pag" style="display:none">
+                    <div class="hx-pix-box">
+                        <div class="hx-pix-icon">📲</div>
+                        <h3>Pagamento via PIX</h3>
+                        <p>Você receberá o QR Code após confirmar o pedido.</p>
+                        <div class="hx-pix-chave">Chave PIX: <strong>pagamentos@hexacore.com.br</strong></div>
+                    </div>
+                </div>
+ 
+                <!-- Campos Cartão -->
+                <div id="camposCredito" class="hx-campos-pag" style="display:none">
+                    <div class="hx-form-grid">
+                        <div class="hx-form-group hx-span2">
+                            <label>Número do Cartão *</label>
+                            <input type="text" id="ccNum" placeholder="0000 0000 0000 0000" maxlength="19" oninput="mascaraCartao(this)">
+                        </div>
+                        <div class="hx-form-group hx-span2">
+                            <label>Nome no Cartão *</label>
+                            <input type="text" id="ccNome" placeholder="NOME COMO NO CARTÃO">
+                        </div>
+                        <div class="hx-form-group">
+                            <label>Validade *</label>
+                            <input type="text" id="ccVal" placeholder="MM/AA" maxlength="5" oninput="mascaraValidade(this)">
+                        </div>
+                        <div class="hx-form-group">
+                            <label>CVV *</label>
+                            <input type="text" id="ccCvv" placeholder="000" maxlength="4">
+                        </div>
+                        <div class="hx-form-group hx-span2">
+                            <label>Parcelas</label>
+                            <select id="ccParc">
+                                <option>1x sem juros</option>
+                                <option>2x sem juros</option>
+                                <option>3x sem juros</option>
+                                <option>6x sem juros</option>
+                                <option>10x sem juros</option>
+                                <option>12x sem juros</option>
+                                <option>18x sem juros</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+ 
+                <!-- Campos Boleto -->
+                <div id="camposBoleto" class="hx-campos-pag" style="display:none">
+                    <div class="hx-pix-box">
+                        <div class="hx-pix-icon">📄</div>
+                        <h3>Boleto Bancário</h3>
+                        <p>O boleto será gerado após a confirmação do pedido.</p>
+                        <p style="color:#facc15; margin-top:10px;">⚠️ Vencimento: 3 dias úteis</p>
+                    </div>
+                </div>
+ 
+                <div id="pagErro" class="hx-erro"></div>
+ 
+                <!-- Resumo Pedido -->
+                <div class="hx-resumo-pedido">
+                    <h3>Resumo do Pedido</h3>
+                    <div id="resumoProdutos"></div>
+                    <div class="hx-resumo-linha hx-total-linha">
+                        <span>TOTAL</span>
+                        <span id="totalFinal" style="color:#00c853; font-size:22px; font-weight:800;"></span>
+                    </div>
+                </div>
+ 
+                <div class="hx-step-actions">
+                    <button class="hx-btn-sec" onclick="voltarStepEndereco()">← Voltar</button>
+                    <button class="hx-btn-prim" onclick="confirmarPedido()">CONFIRMAR PEDIDO ✓</button>
+                </div>
+            </div>
+ 
+            <!-- STEP 3: Confirmação -->
+            <div id="stepConfirmacao" class="hx-step" style="display:none">
+                <div class="hx-confirmacao">
+                    <div class="hx-conf-icon">✅</div>
+                    <h2>Pedido Realizado com Sucesso!</h2>
+                    <p class="hx-conf-sub">Obrigado pela sua compra na HexaCore!</p>
+                    <div class="hx-conf-num">
+                        Número do Pedido: <strong id="numPedidoConf"></strong>
+                    </div>
+                    <div id="confPagInfo" class="hx-conf-pag-info"></div>
+                    <div class="hx-conf-detalhes" id="confDetalhes"></div>
+                    <div class="hx-step-actions" style="justify-content:center">
+                        <button class="hx-btn-prim" onclick="fecharCheckout(); voltarOfertas()">Continuar Comprando</button>
+                        <button class="hx-btn-sec" onclick="fecharCheckout(); abrirPainel()">Ver Meus Pedidos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- ===================== PAINEL DO USUÁRIO ===================== -->
+<div id="modalPainel" class="hx-fullscreen" style="display:none">
+    <div class="hx-painel-container">
+        <button class="hx-btn-fechar-full" onclick="fecharPainel()">✕ Fechar</button>
+        <div class="hx-painel-header">
+            <div class="hx-painel-avatar">👤</div>
+            <div>
+                <h2 id="painelNome">Olá, usuário!</h2>
+                <p id="painelEmail" style="color:#9ca3af; font-size:14px;"></p>
+            </div>
+            <button class="hx-btn-logout" onclick="realizarLogout()">🚪 Sair</button>
+        </div>
+        <div class="hx-painel-nav">
+            <button class="hx-nav-btn active" onclick="trocarPainelAba('pedidos', this)">📦 Pedidos</button>
+            <button class="hx-nav-btn" onclick="trocarPainelAba('favoritos', this)">❤️ Favoritos</button>
+            <button class="hx-nav-btn" onclick="trocarPainelAba('enderecos', this)">📍 Endereços</button>
+            <button class="hx-nav-btn" onclick="trocarPainelAba('dados', this)">⚙️ Meus Dados</button>
+        </div>
+        <div class="hx-painel-conteudo">
+            <!-- ABA PEDIDOS -->
+            <div id="painelPedidos" class="hx-painel-aba">
+                <h3>Meus Pedidos</h3>
+                <div id="listaPedidos"></div>
+            </div>
+            <!-- ABA FAVORITOS -->
+            <div id="painelFavoritos" class="hx-painel-aba" style="display:none">
+                <h3>Meus Favoritos</h3>
+                <div id="listaFavoritos" class="produtos-destaque" style="padding:0; margin-top:20px;"></div>
+            </div>
+            <!-- ABA ENDEREÇOS -->
+            <div id="painelEnderecos" class="hx-painel-aba" style="display:none">
+                <h3>Endereços Salvos</h3>
+                <div id="listaEnderecos"></div>
+            </div>
+            <!-- ABA DADOS -->
+            <div id="painelDados" class="hx-painel-aba" style="display:none">
+                <h3>Meus Dados</h3>
+                <div class="hx-form-grid" style="margin-top:20px">
+                    <div class="hx-form-group hx-span2">
+                        <label>Nome Completo</label>
+                        <input type="text" id="dadosNome" placeholder="Seu nome">
+                    </div>
+                    <div class="hx-form-group hx-span2">
+                        <label>E-mail</label>
+                        <input type="email" id="dadosEmail" placeholder="Seu e-mail" disabled style="opacity:0.5">
+                    </div>
+                    <div class="hx-form-group">
+                        <label>Nova Senha (opcional)</label>
+                        <input type="password" id="dadosSenha" placeholder="Nova senha">
+                    </div>
+                    <div class="hx-form-group">
+                        <label>Confirmar Nova Senha</label>
+                        <input type="password" id="dadosSenha2" placeholder="Confirmar senha">
+                    </div>
+                </div>
+                <div id="dadosMsg" class="hx-erro" style="margin-top:10px;"></div>
+                <button class="hx-btn-prim" style="margin-top:20px" onclick="salvarDados()">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- ===================== TOAST NOTIFICATION ===================== -->
+<div id="hxToast" class="hx-toast"></div>
+ 
+<!-- HEADER -->
+<header class="header">
+    <div class="header-top">
+        <div class="logo">
+            <a href="javascript:void(0)" onclick="voltarOfertas()">
+                <img src="https://i.imgur.com/bri4wau.png">
+            </a>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="O que você está procurando?">
+            <button>🔍</button>
+        </div>
+        <div class="icons">
+            <a href="javascript:void(0)" onclick="clicarMinhaConta()" id="btnMinhaConta">👤 Minha Conta</a>
+            <a href="javascript:void(0)" onclick="abrirCarrinho()">🛒 Carrinho <span id="badgeCarrinho" class="hx-badge" style="display:none">0</span></a>
+        </div>
+    </div>
+    <nav class="menu">
+        <a href="Pc gamer.html">PC GAMER</a>
+        <a href="Notebook.html">NOTEBOOKS</a>
+        <a href="perifericos.html">PERIFÉRICOS</a>
+        <a href="ofertas.html">OFERTAS</a>
+    </nav>
+</header>
+ 
+<!-- ===================== PÁGINA DE OFERTAS ===================== -->
+<div id="pagina-ofertas">
+ 
+    <section class="banner">
+        <h2>SUPER PROMOÇÃO</h2>
+        <p>Descontos de até 35% em PCs Gamers e Periféricos</p>
+    </section>
+ 
+    <div class="titulo-secao"><h1>Ofertas da Semana</h1></div>
+ 
+    <div class="produtos-destaque">
+ 
+        <!-- Produto 1 -->
+        <div class="produto-loja">
+            <img src="https://m.media-amazon.com/images/I/51lu7SBf7YL._AC_SY300_SX300_QL70_ML2_.jpg">
+            <div class="info">
+                <h2>PC Gamer TOP Concórdia</h2>
+                <p class="descricao-card">i3 14100F • RTX 4060 • 16GB • SSD 256GB</p>
+                <div class="estrelas">★★★★★</div>
+                <div class="preco-antigo-lista">R$ 6.499,99</div>
+                <div class="preco-lista">R$ 4.999,99</div>
+                <div class="parcelado">em até 12x de R$ 416,99</div>
+                <button class="btn-comprar" onclick="abrirProduto(1)">Comprar</button>
+            </div>
+        </div>
+
+        <!-- Produto 2 -->
+        <div class="produto-loja">
+            <img src="https://m.media-amazon.com/images/I/8189uwDnMkL._AC_SX679_.jpg">
+            <div class="info">
+                <h2>Mouse Gamer Razer DeathAdder Essential</h2>
+                <p class="descricao-card">6400 DPI • Ultra leve • Classic Black</p>
+                <div class="estrelas">★★★★★</div>
+                <div class="preco-antigo-lista">R$ 229,99</div>
+                <div class="preco-lista">R$ 149,99</div>
+                <div class="parcelado">em até 12x de R$ 12,99</div>
+                <button class="btn-comprar" onclick="abrirProduto(2)">Comprar</button>
+            </div>
+        </div>
+
+        <!-- Produto 3 -->
+        <div class="produto-loja">
+            <img src="https://m.media-amazon.com/images/I/41Qzv5IRAGL._AC_SX679_.jpg">
+            <div class="info">
+                <h2>Mouse Gamer Redragon Cobra</h2>
+                <p class="descricao-card">1600 DPI • RGB • Sem Fio • Óptico</p>
+                <div class="estrelas">★★★★★</div>
+                <div class="preco-antigo-lista">R$ 199,99</div>
+                <div class="preco-lista">R$ 129,99</div>
+                <div class="parcelado">em até 12x de R$ 16,99</div>
+                <button class="btn-comprar" onclick="abrirProduto(3)">Comprar</button>
+            </div>
+        </div>
+
+        <!-- Produto 4 -->
+        <div class="produto-loja">
+            <img src="https://m.media-amazon.com/images/I/51NvYDtjy0L._AC_SL1000_.jpg">
+            <div class="info">
+                <h2>Mouse Gamer Sem Fio Logitech G703 LIGHTSPEED</h2>
+                <p class="descricao-card">6 Botões Programáveis • Sensor HERO 25K • RGB</p>
+                <div class="estrelas">★★★★★</div>
+                <div class="preco-antigo-lista">R$ 389,99</div>
+                <div class="preco-lista">R$ 289,99</div>
+                <div class="parcelado">em até 12x de R$ 23,99</div>
+                <button class="btn-comprar" onclick="abrirProduto(4)">Comprar</button>
+            </div>
+        </div>
+
+        <!-- Produto 5 -->
+        <div class="produto-loja">
+            <img src="https://m.media-amazon.com/images/I/51xoetNmlOL._AC_SX679_.jpg">
+            <div class="info">
+                <h2>Teclado Mecânico Redragon Dark Avenger</h2>
+                <p class="descricao-card">Lunar White • Switch Vermelho • RGB K568W</p>
+                <div class="estrelas">★★★★★</div>
+                <div class="preco-antigo-lista">R$ 269,99</div>
+                <div class="preco-lista">R$ 199,99</div>
+                <div class="parcelado">em até 12x de R$ 16,99</div>
+                <button class="btn-comprar" onclick="abrirProduto(5)">Comprar</button>
+            </div>
+        </div>
+
+        <!-- Produto 6 -->
+        <div class="produto-loja">
+            <img src="https://m.media-amazon.com/images/I/71PujoJuUbL._AC_SX300_SY300_QL70_ML2_.jpg">
+            <div class="info">
+                <h2>Monitor Gamer Samsung Odyssey Neo G9</h2>
+                <p class="descricao-card">57" • Mini LED • 240Hz • 1ms • Super Ultrawide</p>
+                <div class="estrelas">★★★★★</div>
+                <div class="preco-antigo-lista">R$ 17.199,00</div>
+                <div class="preco-lista">R$ 15.000,00</div>
+                <div class="parcelado">em até 12x de R$ 1.249,99</div>
+                <button class="btn-comprar" onclick="abrirProduto(6)">Comprar</button>
+            </div>
+        </div>
+
+        <!-- Produto 7 -->
+        <div class="produto-loja">
+            <img src="http://m.media-amazon.com/images/I/71VTXapXHIL._AC_SX679_.jpg">
+            <div class="info">
+                <h2>Monitor Gamer Curvo AOC AGON G4Z</h2>
+                <p class="descricao-card">27" • 300Hz • 0,3ms • HDR10 • Base Ajustável</p>
+                <div class="estrelas">★★★★★</div>
+                <div class="preco-antigo-lista">R$ 1.600,00</div>
+                <div class="preco-lista">R$ 1.199,00</div>
+                <div class="parcelado">em até 12x de R$ 99,99</div>
+                <button class="btn-comprar" onclick="abrirProduto(7)">Comprar</button>
+            </div>
+        </div>
+
+        <!-- Produto 8 -->
+        <div class="produto-loja">
+            <img src="https://m.media-amazon.com/images/I/81wfdDTIjHS._AC_SX679_.jpg">
+            <div class="info">
+                <h2>Monitor Gamer Curvo Samsung Odyssey G5</h2>
+                <p class="descricao-card">34" • Ultra WQHD • 165Hz • 1ms • Freesync</p>
+                <div class="estrelas">★★★★★</div>
+                <div class="preco-antigo-lista">R$ 2.200,00</div>
+                <div class="preco-lista">R$ 1.600,00</div>
+                <div class="parcelado">em até 12x de R$ 132,99</div>
+                <button class="btn-comprar" onclick="abrirProduto(8)">Comprar</button>
+            </div>
+        </div>
+
+        <!-- Produto 9 -->
+        <div class="produto-loja">
+            <img src="https://m.media-amazon.com/images/I/71RSZdY7pJL._AC_SX679_.jpg">
+            <div class="info">
+                <h2>Headset Gamer Sem Fio Logitech G733 7.1 Dolby</h2>
+                <p class="descricao-card">Blue VO!CE • RGB LIGHTSYNC • Bateria Recarregável</p>
+                <div class="estrelas">★★★★★</div>
+                <div class="preco-antigo-lista">R$ 1.229,99</div>
+                <div class="preco-lista">R$ 999,99</div>
+                <div class="parcelado">em até 12x de R$ 102,99</div>
+                <button class="btn-comprar" onclick="abrirProduto(9)">Comprar</button>
+            </div>
+        </div>
+
+        <!-- Produto 10 -->
+        <div class="produto-loja">
+            <img src="https://http2.mlstatic.com/D_NQ_NP_2X_807931-MLB76300626898_052024-F.webp">
+            <div class="info">
+                <h2>Mousepad Gamer Speed Extra Grande</h2>
+                <p class="descricao-card">120x60cm • Ninja Purple • Base Antiderrapante</p>
+                <div class="estrelas">★★★★★</div>
+                <div class="preco-antigo-lista">R$ 149,99</div>
+                <div class="preco-lista">R$ 89,99</div>
+                <div class="parcelado">em até 12x de R$ 7,49</div>
+                <button class="btn-comprar" onclick="abrirProduto(10)">Comprar</button>
+            </div>
+        </div>
+
+    </div>
+</div><!-- fim pagina-ofertas -->
+ 
+<!-- ===================== PÁGINA DE PRODUTO ===================== -->
+<div id="pagina-produto">
+ 
+    <button class="btn-voltar" onclick="voltarOfertas()">← Voltar às Ofertas</button>
+ 
+    <div class="container-produto">
+ 
+        <div class="galeria">
+            <img class="imagem-principal" id="imagemPrincipal" src="">
+            <div class="miniaturas" id="miniaturas"></div>
+        </div>
+ 
+        <div class="info-produto">
+            <h1 class="titulo-produto" id="prodTitulo"></h1>
+            <div class="avaliacao" id="prodAvaliacao"></div>
+            <div class="preco-antigo" id="prodPrecoAntigo"></div>
+            <div class="preco" id="prodPreco"></div>
+            <div class="pix">À vista no PIX com 15% OFF</div>
+            <div class="parcelamento" id="prodParcelamento"></div>
+            <button class="botao-comprar" id="btnComprarAgora" onclick="comprarAgora()">COMPRAR AGORA</button>
+            <button class="botao-carrinho" id="btnAdicionarCarrinho" onclick="adicionarAoCarrinho()">🛒 ADICIONAR AO CARRINHO</button>
+        </div>
+ 
+    </div>
+ 
+    <div class="descricao">
+        <div class="descricao-inner">
+            <h2>Descrição do Produto</h2>
+            <p id="prodDescricao"></p>
+            <div class="especificacoes" id="prodEspecificacoes"></div>
+        </div>
+    </div>
+ 
+</div><!-- fim pagina-produto -->
+ 
+<footer>
+    <p>©️ 2024 HexaCore — Todos os direitos reservados</p>
+</footer>
+ 
+<script>
+// ===== DADOS DOS PRODUTOS =====
+const produtos = {
+    1: {
+        titulo: "PC Gamer TOP Concórdia",
+        avaliacao: "★★★★★ (89 avaliações)",
+        precoAntigo: "R$ 6.499,99",
+        preco: "R$ 4.999,99",
+        parcelamento: "✔ 12x de R$ 416,99 sem juros <br>✔ 10x de R$ 499,99 sem juros <br>✔ Até 18x no cartão <br>✔ Frete grátis para todo Brasil",
+        descricao: "PC Gamer TOP Concórdia Processador i3 14100F 16GB SSD 256GB RTX 4060 Fonte 500W FreeDos. Marca: Concórdia",
+        specs: [
+            ["Marca", "Concordia"],
+            ["Cor", "Preto"],
+            ["Processador", "I3 14100F"],
+            ["Memória", "2 DDR de 16 GB"],
+            ["Placa de Vídeo", "RTX 4060"]
+        ],
+        imagens: [
+            "https://m.media-amazon.com/images/I/51lu7SBf7YL._AC_SY300_SX300_QL70_ML2_.jpg",
+            "https://m.media-amazon.com/images/I/41uUaXFEPzL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/51-MbCVTXxL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/51rLycg+w-L._AC_SX679_.jpg"
+        ]
+    },
+    2: {
+        titulo: "Mouse Gamer Razer DeathAdder Essential, Classic Black",
+        avaliacao: "★★★★★ (99 avaliações)",
+        precoAntigo: "R$ 229,99",
+        preco: "R$ 149,99",
+        parcelamento: "✔ 12x de R$ 12,99 sem juros <br>✔ 10x de R$ 13,99 sem juros <br>✔ Até 18x no cartão <br>✔ Frete grátis para todo Brasil",
+        descricao: "Mouse gamer Razer DeathAdder Essential, Classic Black",
+        specs: [
+            ["Marca", "Razer"],
+            ["Cor", "Preto"],
+            ["Tecnologia de conectividade", "Com Fio"],
+            ["Características especiais", "Botões programáveis, Design ergonômico, Durável, Leve, Sensor óptico"],
+            ["Tecnologia de detecção de movimento", "Óptico"]
+        ],
+        imagens: [
+            "https://m.media-amazon.com/images/I/8189uwDnMkL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/81QPJeREYXL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61Vbk62PIjS._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/71VkGcn9VZL._AC_SX679_.jpg"
+        ]
+    },
+    3: {
+        titulo: "Mouse Gamer Redragon Cobra",
+        avaliacao: "★★★★★ (110 avaliações)",
+        precoAntigo: "R$ 199,99",
+        preco: "R$ 129,99",
+        parcelamento: "✔ 12x de R$ 16,99 sem juros <br>✔ 10x de R$ 19,99 sem juros <br>✔ Até 18x no cartão <br>✔ Frete grátis para todo Brasil",
+        descricao: "Mouse Gamer Redragon Cobra PRO Sem Fio Preto M711-PRO",
+        specs: [
+            ["Marca", "Redragon"],
+            ["Cor", "Preto"],
+            ["Tecnologia de conectividade", "USB / WIFI"],
+            ["Características especiais", "Botões Programáveis / Sem Fio"],
+            ["Tecnologia de detecção de movimento", "Óptico"]
+        ],
+        imagens: [
+            "https://m.media-amazon.com/images/I/41Qzv5IRAGL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/41DSsXv1QJL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/418T0P5QMbL._AC_SL1000_.jpg",
+            "http://m.media-amazon.com/images/I/41IGQfURnIL._AC_SL1000_.jpg"
+        ]
+    },
+    4: {
+        titulo: "Mouse Gamer Sem Fio Logitech G703 LIGHTSPEED",
+        avaliacao: "★★★★★ (98 avaliações)",
+        precoAntigo: "R$ 389,99",
+        preco: "R$ 289,99",
+        parcelamento: "✔ 12x de R$ 23,99 sem juros <br>✔ 10x de R$ 28,99 sem juros <br>✔ Até 18x no cartão <br>✔ Frete grátis para todo Brasil",
+        descricao: "Mouse Gamer Sem Fio Logitech G703 LIGHTSPEED com RGB LIGHTSYNC, 6 Botões Programáveis, Sensor HERO 25K e Bateria Recarregável - Compatível com POWERPLAY",
+        specs: [
+            ["Marca", "LogiTech"],
+            ["Cor", "Preto"],
+            ["Tecnologia de conectividade", "Sem Fio"],
+            ["Características especiais", "Sem Fio"],
+            ["Tecnologia de detecção de movimento", "Óptico"]
+        ],
+        imagens: [
+            "https://m.media-amazon.com/images/I/51NvYDtjy0L._AC_SL1000_.jpg",
+            "https://m.media-amazon.com/images/I/51fgVUBaPRL._AC_SL1000_.jpg",
+            "https://m.media-amazon.com/images/I/51Lk237jGRL._AC_SL1000_.jpg",
+            "https://m.media-amazon.com/images/I/61XySPdqr+L._AC_SL1000_.jpg"
+        ]
+    },
+    5: {
+        titulo: "Teclado Mecânico Redragon Dark Avenger",
+        avaliacao: "★★★★★ (88 avaliações)",
+        precoAntigo: "R$ 269,99",
+        preco: "R$ 199,99",
+        parcelamento: "✔ 12x de R$ 16,99 sem juros <br>✔ 10x de R$ 19,99 sem juros <br>✔ Até 18x no cartão <br>✔ Frete grátis para todo Brasil",
+        descricao: "Teclado Mecânico Redragon Dark Avenger RGB Lunar White Switch Vermelho K568W-RGB",
+        specs: [
+            ["Marca", "Redragon"],
+            ["Cor", "Lunar White"],
+            ["Tecnologia de conectividade", "USB-A"],
+            ["Descrição do Teclado", "Mecânico"],
+            ["Adequação do controle por rádio", "Multimídia"]
+        ],
+        imagens: [
+            "https://m.media-amazon.com/images/I/51xoetNmlOL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/51WUwNmKfJL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/51ZeiizpP6L._AC_SX679_.jpg"
+        ]
+    },
+    6: {
+        titulo: "Monitor Gamer Samsung Odyssey Neo G9",
+        avaliacao: "★★★★★ (67 avaliações)",
+        precoAntigo: "R$ 17.199,00",
+        preco: "R$ 15.000,00",
+        parcelamento: "✔ 12x de R$ 1.249,99 sem juros <br>✔ 10x de R$ 1.499,00 sem juros <br>✔ Até 18x no cartão <br>✔ Frete grátis para todo Brasil",
+        descricao: "Monitor Gamer Samsung Odyssey 57\" Mini LED, DUHD, 240Hz, 1ms, tela super ultrawide, HDMI, Display Port, USB, Freesync Premium Pro, com ajuste de altura, branco, série Neo G9",
+        specs: [
+            ["Marca", "Samsung"],
+            ["Tamanho da Tela", "57 Polegadas"],
+            ["Proporção de Tela", "32:9"],
+            ["Descrição da Superfície da Tela", "Fosco"]
+        ],
+        imagens: [
+            "https://m.media-amazon.com/images/I/71PujoJuUbL._AC_SX300_SY300_QL70_ML2_.jpg",
+            "https://m.media-amazon.com/images/I/61eBgadtLoL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71hZ8hhU2fL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61j1CqbBEvL._AC_SL1500_.jpg"
+        ]
+    },
+    7: {
+        titulo: "Monitor Gamer Curvo AOC AGON G4Z",
+        avaliacao: "★★★★★ (67 avaliações)",
+        precoAntigo: "R$ 1.600,00",
+        preco: "R$ 1.199,00",
+        parcelamento: "✔ 12x de R$ 99,99 sem juros <br>✔ 10x de R$ 119,99 sem juros <br>✔ Até 18x no cartão <br>✔ Frete grátis para todo Brasil",
+        descricao: "Monitor Gamer Curvo AOC AGON G4Z 27\" 300Hz 0,3ms HDR10 Base Ajustável C27G4Z/P",
+        specs: [
+            ["Marca", "AOC"],
+            ["Tamanho da Tela", "27 Polegadas"],
+            ["Proporção de Tela", "16:9"],
+            ["Descrição da Superfície da Tela", "Fosco"]
+        ],
+        imagens: [
+            "http://m.media-amazon.com/images/I/71VTXapXHIL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/611aCblkNvL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/51g8OXolhWL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61mIglaJudL._AC_SL1500_.jpg"
+        ]
+    },
+    8: {
+        titulo: "Monitor Gamer Curvo Samsung Odyssey G5",
+        avaliacao: "★★★★★ (67 avaliações)",
+        precoAntigo: "R$ 2.200,00",
+        preco: "R$ 1.600,00",
+        parcelamento: "✔ 12x de R$ 132,99 sem juros <br>✔ 10x de R$ 159,99 sem juros <br>✔ Até 18x no cartão <br>✔ Frete grátis para todo Brasil",
+        descricao: "Monitor Gamer Curvo Samsung Odyssey 34'', Ultra WQHD, 165Hz, 1ms, tela ultrawide, HDMI, Display Port, Freesync Premium, preto, série G5",
+        specs: [
+            ["Marca", "Samsung"],
+            ["Tamanho da Tela", "34 Polegadas"],
+            ["Resolução da Tela", "UWQHD (3.440 x 1.440)"],
+            ["Proporção de Tela", "21:09"],
+            ["Descrição da Superfície da Tela", "Fosco"]
+        ],
+        imagens: [
+            "https://m.media-amazon.com/images/I/81wfdDTIjHS._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61E2onzFEZS._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/81Ol5CYCdwL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/81iN4ZWzqrL._AC_SL1500_.jpg"
+        ]
+    },
+    9: {
+        titulo: "Headset Gamer Sem Fio Logitech G733 7.1 Dolby",
+        avaliacao: "★★★★★ (89 avaliações)",
+        precoAntigo: "R$ 1.229,99",
+        preco: "R$ 999,99",
+        parcelamento: "✔ 12x de R$ 102,99 sem juros <br>✔ 10x de R$ 122,99 sem juros <br>✔ Até 18x no cartão <br>✔ Frete grátis para todo Brasil",
+        descricao: "Headset Gamer Sem Fio Logitech G733 7.1 Dolby Surround com Tecnologia Blue VO!CE, RGB LIGHTSYNC, Drivers de Áudio Avançados e Bateria Recarregável para PC e PlayStation - Branco",
+        specs: [
+            ["Marca", "LogiTech"],
+            ["Cor", "Branco"],
+            ["Colocação na orelha", "Circumaurais"],
+            ["Fator de forma dos fones de ouvido", "Circumaurais"],
+            ["Impedância", "39 Ohms"]
+        ],
+        imagens: [
+            "https://m.media-amazon.com/images/I/71RSZdY7pJL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/81mj9vmj0cL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/81xT7P4+tZL._AC_SX679_.jpg",
+            "https://m.media-amazon.com/images/I/81t2OQvDF2L._AC_SL1500_.jpg"
+        ]
+    },
+    10: {
+        titulo: "Mousepad Gamer Speed Extra Grande",
+        avaliacao: "★★★★★ (98 avaliações)",
+        precoAntigo: "R$ 149,99",
+        preco: "R$ 89,99",
+        parcelamento: "✔ 12x de R$ 7,49 sem juros <br>✔ 10x de R$ 8,99 sem juros <br>✔ Até 18x no cartão <br>✔ Frete grátis para todo Brasil",
+        descricao: "Mousepad Gamer Speed Extra Grande 120x60 Ninja Purple",
+        specs: [
+            ["Desenho Impresso", "Ninja Purple"],
+            ["Cor", "Preto"],
+            ["Tamanho do Mousepad", "Grande"],
+            ["Dimensões", "120x60"],
+            ["Espessura", "3mm"]
+        ],
+        imagens: [
+            "https://http2.mlstatic.com/D_NQ_NP_2X_807931-MLB76300626898_052024-F.webp",
+            "https://http2.mlstatic.com/D_NQ_NP_2X_915850-MLB76300626900_052024-F.webp"
+        ]
+    }
+};
+
+// ===== VARIÁVEL DE IMAGEM ATUAL =====
+let imagensAtivas = [];
+let imagemAtual = 0;
+let produtoAtualId = null;
+let pagamentoSelecionado = null;
+
+// ============================================================
+// ===== BANCO DE DADOS LOCAL (LocalStorage) =====
+// ============================================================
+
+const DB = {
+    // --- Usuários ---
+    getUsuarios() {
+        return JSON.parse(localStorage.getItem('hx_usuarios') || '[]');
+    },
+    salvarUsuarios(users) {
+        localStorage.setItem('hx_usuarios', JSON.stringify(users));
+    },
+
+    // --- Usuário Logado ---
+    getUsuarioLogado() {
+        return JSON.parse(localStorage.getItem('hx_usuarioLogado') || 'null');
+    },
+    salvarUsuarioLogado(user) {
+        localStorage.setItem('hx_usuarioLogado', JSON.stringify(user));
+        // Chaves globais do projeto
+        localStorage.setItem('usuarioLogado', 'true');
+        localStorage.setItem('nomeUsuario', user.nome || '');
+        localStorage.setItem('emailUsuario', user.email || '');
+    },
+    removerUsuarioLogado() {
+        localStorage.removeItem('hx_usuarioLogado');
+        localStorage.removeItem('usuarioLogado');
+        localStorage.removeItem('nomeUsuario');
+        localStorage.removeItem('emailUsuario');
+    },
+
+    // --- Carrinho (por UID) ---
+    getCarrinho(uid) {
+        return JSON.parse(localStorage.getItem('hx_carrinho_' + uid) || '[]');
+    },
+    salvarCarrinho(uid, carrinho) {
+        localStorage.setItem('hx_carrinho_' + uid, JSON.stringify(carrinho));
+    },
+
+    // --- Favoritos (por UID) ---
+    getFavoritos(uid) {
+        return JSON.parse(localStorage.getItem('hx_favoritos_' + uid) || '[]');
+    },
+    salvarFavoritos(uid, favs) {
+        localStorage.setItem('hx_favoritos_' + uid, JSON.stringify(favs));
+    },
+
+    // --- Pedidos (por UID) ---
+    getPedidos(uid) {
+        return JSON.parse(localStorage.getItem('hx_pedidos_' + uid) || '[]');
+    },
+    salvarPedidos(uid, pedidos) {
+        localStorage.setItem('hx_pedidos_' + uid, JSON.stringify(pedidos));
+    },
+
+    // --- Endereços (por UID) ---
+    getEnderecos(uid) {
+        return JSON.parse(localStorage.getItem('hx_enderecos_' + uid) || '[]');
+    },
+    salvarEnderecos(uid, enderecos) {
+        localStorage.setItem('hx_enderecos_' + uid, JSON.stringify(enderecos));
+    },
+
+    // --- Helpers ---
+    gerarId() {
+        return Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 4).toUpperCase();
+    },
+    gerarNumeroPedido() {
+        return 'PED' + Date.now().toString().slice(-6) + Math.floor(Math.random() * 100);
+    }
+};
+
+// ============================================================
+// ===== HELPERS =====
+// ============================================================
+
+function precoParaNumero(str) {
+    if (!str) return 0;
+    return parseFloat(str.replace('R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
+}
+
+function formatarPreco(valor) {
+    return 'R$ ' + valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function mostrarToast(msg, tipo) {
+    const t = document.getElementById('hxToast');
+    t.textContent = msg;
+    t.className = 'hx-toast show' + (tipo ? ' ' + tipo : '');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => { t.className = 'hx-toast'; }, 3000);
+}
+
+// ============================================================
+// ===== AUTENTICAÇÃO =====
+// ============================================================
+
+function realizarCadastro() {
+    const nome = document.getElementById('cadNome').value.trim();
+    const email = document.getElementById('cadEmail').value.trim().toLowerCase();
+    const senha = document.getElementById('cadSenha').value;
+    const senha2 = document.getElementById('cadSenha2').value;
+    const erroEl = document.getElementById('cadErro');
+
+    if (!nome || !email || !senha || !senha2) { erroEl.textContent = 'Preencha todos os campos.'; return; }
+    if (senha.length < 6) { erroEl.textContent = 'Senha deve ter mínimo 6 caracteres.'; return; }
+    if (senha !== senha2) { erroEl.textContent = 'As senhas não coincidem.'; return; }
+
+    const usuarios = DB.getUsuarios();
+    if (usuarios.find(u => u.email === email)) { erroEl.textContent = 'Este e-mail já está cadastrado.'; return; }
+
+    const novoUser = { id: DB.gerarId(), nome, email, senha, dataCadastro: new Date().toISOString() };
+    usuarios.push(novoUser);
+    DB.salvarUsuarios(usuarios);
+    DB.salvarUsuarioLogado(novoUser);
+
+    erroEl.textContent = '';
+    fecharLogin();
+    atualizarHeaderLogin();
+    mostrarToast('✅ Conta criada com sucesso! Bem-vindo(a), ' + nome + '!', 'success');
+    carregarCarrinhoUsuario();
+}
+
+function realizarLogin() {
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    const senha = document.getElementById('loginSenha').value;
+    const erroEl = document.getElementById('loginErro');
+
+    if (!email || !senha) { erroEl.textContent = 'Preencha e-mail e senha.'; return; }
+
+    const usuarios = DB.getUsuarios();
+    const user = usuarios.find(u => u.email === email && u.senha === senha);
+
+    if (!user) { erroEl.textContent = 'E-mail ou senha incorretos.'; return; }
+
+    DB.salvarUsuarioLogado(user);
+    erroEl.textContent = '';
+    fecharLogin();
+    atualizarHeaderLogin();
+    mostrarToast('✅ Login realizado! Bem-vindo(a), ' + user.nome + '!', 'success');
+    carregarCarrinhoUsuario();
+    atualizarBotoesCardsEProd();
+}
+
+// Função global logout() — usada em todas as páginas
+function logout() {
+    realizarLogout();
+}
+
+function realizarLogout() {
+    DB.removerUsuarioLogado();
+    fecharPainel();
+    atualizarHeaderLogin();
+    renderizarCarrinho();
+    mostrarToast('👋 Você saiu da sua conta.', '');
+    atualizarBotoesCardsEProd();
+}
+
+function atualizarHeaderLogin() {
+    const user = DB.getUsuarioLogado();
+    const btn = document.getElementById('btnMinhaConta');
+    if (user) {
+        btn.textContent = '👤 Olá, ' + user.nome.split(' ')[0];
+    } else {
+        btn.textContent = '👤 Minha Conta';
+    }
+}
+
+function clicarMinhaConta() {
+    const user = DB.getUsuarioLogado();
+    if (user) {
+        abrirPainel();
+    } else {
+        abrirLogin();
+    }
+}
+
+function abrirLogin() {
+    document.getElementById('modalLogin').style.display = 'flex';
+    document.getElementById('modalLogin').style.alignItems = 'center';
+    document.getElementById('modalLogin').style.justifyContent = 'center';
+    trocarAba('login');
+}
+
+function fecharLogin() {
+    document.getElementById('modalLogin').style.display = 'none';
+    document.getElementById('loginErro').textContent = '';
+    document.getElementById('cadErro').textContent = '';
+}
+
+function trocarAba(aba) {
+    document.getElementById('abaLogin').style.display = aba === 'login' ? 'block' : 'none';
+    document.getElementById('abaCadastro').style.display = aba === 'cadastro' ? 'block' : 'none';
+}
+
+window.onclick = function(e) {
+    if (e.target === document.getElementById('modalLogin')) fecharLogin();
+};
+
+// ============================================================
+// ===== CARRINHO =====
+// ============================================================
+
+function getUidAtivo() {
+    const user = DB.getUsuarioLogado();
+    return user ? user.id : 'guest';
+}
+
+function carregarCarrinhoUsuario() {
+    renderizarCarrinho();
+}
+
+function adicionarAoCarrinho(idOverride) {
+    const user = DB.getUsuarioLogado();
+    if (!user) {
+        mostrarToast('⚠️ Faça login para adicionar ao carrinho!', 'error');
+        abrirLogin();
+        return;
+    }
+    const id = idOverride || produtoAtualId;
+    if (!id) return;
+    const prod = produtos[id];
+    const uid = getUidAtivo();
+    const carrinho = DB.getCarrinho(uid);
+    const idx = carrinho.findIndex(i => i.id === id);
+
+    if (idx > -1) {
+        carrinho[idx].quantidade++;
+    } else {
+        carrinho.push({
+            id,
+            titulo: prod.titulo,
+            preco: prod.preco,
+            imagem: prod.imagens[0],
+            quantidade: 1
+        });
+    }
+    DB.salvarCarrinho(uid, carrinho);
+    renderizarCarrinho();
+    mostrarToast('🛒 Produto adicionado ao carrinho!', 'success');
+}
+
+function removerDoCarrinho(id) {
+    const uid = getUidAtivo();
+    let carrinho = DB.getCarrinho(uid).filter(i => i.id !== id);
+    DB.salvarCarrinho(uid, carrinho);
+    renderizarCarrinho();
+    mostrarToast('🗑️ Produto removido do carrinho.', '');
+}
+
+function alterarQuantidade(id, delta) {
+    const uid = getUidAtivo();
+    let carrinho = DB.getCarrinho(uid);
+    const idx = carrinho.findIndex(i => i.id === id);
+    if (idx < 0) return;
+    carrinho[idx].quantidade += delta;
+    if (carrinho[idx].quantidade <= 0) {
+        carrinho.splice(idx, 1);
+    }
+    DB.salvarCarrinho(uid, carrinho);
+    renderizarCarrinho();
+}
+
+function renderizarCarrinho() {
+    const uid = getUidAtivo();
+    const carrinho = DB.getCarrinho(uid);
+    const container = document.getElementById('itensCarrinho');
+    const resumo = document.getElementById('resumoCarrinho');
+    const badge = document.getElementById('badgeCarrinho');
+
+    if (carrinho.length === 0) {
+        container.innerHTML = '<p class="item-carrinho-vazio">Seu carrinho está vazio :(</p>';
+        resumo.style.display = 'none';
+        badge.style.display = 'none';
+        return;
+    }
+
+    let total = 0;
+    let totalQtd = 0;
+    let html = '';
+
+    carrinho.forEach(item => {
+        const preco = precoParaNumero(item.preco);
+        const subtotalItem = preco * item.quantidade;
+        total += subtotalItem;
+        totalQtd += item.quantidade;
+        html += `
+        <div class="hx-item-carrinho">
+            <img class="hx-item-img" src="${item.imagem}" alt="">
+            <div class="hx-item-info">
+                <div class="hx-item-nome">${item.titulo}</div>
+                <div class="hx-item-preco">${formatarPreco(subtotalItem)}</div>
+                <div class="hx-item-ctrl">
+                    <button class="hx-qty-btn" onclick="alterarQuantidade(${item.id}, -1)">−</button>
+                    <span class="hx-qty-num">${item.quantidade}</span>
+                    <button class="hx-qty-btn" onclick="alterarQuantidade(${item.id}, 1)">+</button>
+                    <button class="hx-item-del" onclick="removerDoCarrinho(${item.id})" title="Remover">🗑</button>
+                </div>
+            </div>
+        </div>`;
+    });
+
+    container.innerHTML = html;
+    resumo.style.display = 'block';
+    document.getElementById('subtotalCarrinho').textContent = formatarPreco(total);
+    badge.style.display = 'inline';
+    badge.textContent = totalQtd;
+}
+
+function abrirCarrinho() {
+    document.getElementById('meuCarrinho').style.width = '340px';
+}
+
+function fecharCarrinho() {
+    document.getElementById('meuCarrinho').style.width = '0';
+}
+
+// ============================================================
+// ===== FAVORITOS =====
+// ============================================================
+
+function toggleFavorito(id, event) {
+    if (event) event.stopPropagation();
+    const user = DB.getUsuarioLogado();
+    if (!user) {
+        mostrarToast('⚠️ Faça login para favoritar!', 'error');
+        abrirLogin();
+        return;
+    }
+    const uid = user.id;
+    let favs = DB.getFavoritos(uid);
+    const idx = favs.indexOf(id);
+    if (idx > -1) {
+        favs.splice(idx, 1);
+        mostrarToast('💔 Removido dos favoritos.', '');
+    } else {
+        favs.push(id);
+        mostrarToast('❤️ Adicionado aos favoritos!', 'success');
+    }
+    DB.salvarFavoritos(uid, favs);
+    atualizarBotoesCardsEProd();
+}
+
+function toggleFavoritoProd() {
+    toggleFavorito(produtoAtualId, null);
+}
+
+function estaFavoritado(id) {
+    const user = DB.getUsuarioLogado();
+    if (!user) return false;
+    return DB.getFavoritos(user.id).includes(id);
+}
+
+function atualizarBotoesCardsEProd() {
+    // Atualiza botões dos cards
+    for (let i = 1; i <= 10; i++) {
+        const btn = document.getElementById('favCard' + i);
+        if (btn) {
+            if (estaFavoritado(i)) {
+                btn.classList.add('ativo');
+                btn.textContent = '❤️ Favoritado';
+            } else {
+                btn.classList.remove('ativo');
+                btn.textContent = '❤️ Favoritar';
+            }
+        }
+    }
+    // Atualiza botão da página de produto
+    const btnFav = document.getElementById('btnFavProd');
+    if (btnFav && produtoAtualId) {
+        if (estaFavoritado(produtoAtualId)) {
+            btnFav.classList.add('ativo');
+            btnFav.textContent = '❤️ FAVORITADO';
+        } else {
+            btnFav.classList.remove('ativo');
+            btnFav.textContent = '❤️ ADICIONAR AOS FAVORITOS';
+        }
+    }
+}
+
+// ============================================================
+// ===== CHECKOUT =====
+// ============================================================
+
+function abrirCheckout() {
+    const user = DB.getUsuarioLogado();
+    if (!user) {
+        mostrarToast('⚠️ Faça login para finalizar a compra!', 'error');
+        fecharCarrinho();
+        abrirLogin();
+        return;
+    }
+    const uid = user.id;
+    const carrinho = DB.getCarrinho(uid);
+    if (carrinho.length === 0) {
+        mostrarToast('⚠️ Seu carrinho está vazio!', 'error');
+        return;
+    }
+
+    // Pré-preencher nome se logado
+    document.getElementById('endNome').value = user.nome || '';
+
+    // Pré-preencher último endereço salvo
+    const enderecos = DB.getEnderecos(uid);
+    if (enderecos.length > 0) {
+        const ultimo = enderecos[enderecos.length - 1];
+        document.getElementById('endCpf').value = ultimo.cpf || '';
+        document.getElementById('endTel').value = ultimo.tel || '';
+        document.getElementById('endCep').value = ultimo.cep || '';
+        document.getElementById('endRua').value = ultimo.rua || '';
+        document.getElementById('endNum').value = ultimo.num || '';
+        document.getElementById('endComp').value = ultimo.comp || '';
+        document.getElementById('endBairro').value = ultimo.bairro || '';
+        document.getElementById('endCidade').value = ultimo.cidade || '';
+        document.getElementById('endEstado').value = ultimo.estado || 'SP';
+    }
+
+    fecharCarrinho();
+    document.getElementById('modalCheckout').style.display = 'block';
+    document.getElementById('stepEndereco').style.display = 'block';
+    document.getElementById('stepPagamento').style.display = 'none';
+    document.getElementById('stepConfirmacao').style.display = 'none';
+    pagamentoSelecionado = null;
+    document.querySelectorAll('.hx-pag-opt').forEach(o => o.classList.remove('selecionado'));
+    document.querySelectorAll('.hx-campos-pag').forEach(c => c.style.display = 'none');
+}
+
+function fecharCheckout() {
+    document.getElementById('modalCheckout').style.display = 'none';
+}
+
+function irStepPagamento() {
+    // Validações
+    const campos = ['endNome','endCpf','endTel','endCep','endRua','endNum','endBairro','endCidade','endEstado'];
+    const nomes  = ['Nome','CPF','Telefone','CEP','Rua','Número','Bairro','Cidade','Estado'];
+    for (let i = 0; i < campos.length; i++) {
+        const v = document.getElementById(campos[i]).value.trim();
+        if (!v) {
+            document.getElementById('endErro').textContent = '⚠️ Preencha o campo: ' + nomes[i];
+            return;
+        }
+    }
+    document.getElementById('endErro').textContent = '';
+
+    // Salvar endereço se checkbox marcado
+    if (document.getElementById('salvarEnd').checked) {
+        const user = DB.getUsuarioLogado();
+        if (user) {
+            const uid = user.id;
+            const enderecos = DB.getEnderecos(uid);
+            const novoEnd = {
+                id: DB.gerarId(),
+                nome: document.getElementById('endNome').value.trim(),
+                cpf: document.getElementById('endCpf').value.trim(),
+                tel: document.getElementById('endTel').value.trim(),
+                cep: document.getElementById('endCep').value.trim(),
+                rua: document.getElementById('endRua').value.trim(),
+                num: document.getElementById('endNum').value.trim(),
+                comp: document.getElementById('endComp').value.trim(),
+                bairro: document.getElementById('endBairro').value.trim(),
+                cidade: document.getElementById('endCidade').value.trim(),
+                estado: document.getElementById('endEstado').value
+            };
+            // Evitar duplicatas idênticas
+            const jaExiste = enderecos.find(e =>
+                e.rua === novoEnd.rua && e.num === novoEnd.num && e.cep === novoEnd.cep
+            );
+            if (!jaExiste) {
+                enderecos.push(novoEnd);
+                DB.salvarEnderecos(uid, enderecos);
+            }
+        }
+    }
+
+    // Montar resumo
+    const uid = getUidAtivo();
+    const carrinho = DB.getCarrinho(uid);
+    let total = 0;
+    let resumoHTML = '';
+    carrinho.forEach(item => {
+        const preco = precoParaNumero(item.preco);
+        const sub = preco * item.quantidade;
+        total += sub;
+        resumoHTML += `<div class="hx-resumo-linha"><span>${item.titulo} x${item.quantidade}</span><span>${formatarPreco(sub)}</span></div>`;
+    });
+    document.getElementById('resumoProdutos').innerHTML = resumoHTML;
+    document.getElementById('totalFinal').textContent = formatarPreco(total);
+
+    document.getElementById('stepEndereco').style.display = 'none';
+    document.getElementById('stepPagamento').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function voltarStepEndereco() {
+    document.getElementById('stepPagamento').style.display = 'none';
+    document.getElementById('stepEndereco').style.display = 'block';
+}
+
+function selecionarPag(tipo) {
+    pagamentoSelecionado = tipo;
+    document.querySelectorAll('.hx-pag-opt').forEach(o => o.classList.remove('selecionado'));
+    document.querySelectorAll('.hx-campos-pag').forEach(c => c.style.display = 'none');
+    document.getElementById('opt' + tipo.charAt(0).toUpperCase() + tipo.slice(1)).classList.add('selecionado');
+    document.getElementById('campos' + tipo.charAt(0).toUpperCase() + tipo.slice(1)).style.display = 'block';
+}
+
+function confirmarPedido() {
+    const erroEl = document.getElementById('pagErro');
+    if (!pagamentoSelecionado) {
+        erroEl.textContent = '⚠️ Selecione uma forma de pagamento.';
+        return;
+    }
+
+    // Validar campos cartão
+    if (pagamentoSelecionado === 'credito') {
+        const num = document.getElementById('ccNum').value.trim();
+        const nome = document.getElementById('ccNome').value.trim();
+        const val = document.getElementById('ccVal').value.trim();
+        const cvv = document.getElementById('ccCvv').value.trim();
+        if (!num || !nome || !val || !cvv) {
+            erroEl.textContent = '⚠️ Preencha todos os dados do cartão.';
+            return;
+        }
+        if (num.replace(/\s/g,'').length < 16) {
+            erroEl.textContent = '⚠️ Número do cartão inválido.';
+            return;
+        }
+    }
+    erroEl.textContent = '';
+
+    const user = DB.getUsuarioLogado();
+    const uid = user.id;
+    const carrinho = DB.getCarrinho(uid);
+
+    let total = carrinho.reduce((acc, item) => acc + precoParaNumero(item.preco) * item.quantidade, 0);
+    if (pagamentoSelecionado === 'pix') total = total * 0.85; // 15% OFF
+
+    const numeroPedido = DB.gerarNumeroPedido();
+    const statusMap = { pix: 'Aprovado', credito: 'Aprovado', boleto: 'Pendente' };
+
+    const pedido = {
+        idPedido: numeroPedido,
+        usuarioId: uid,
+        produtos: [...carrinho],
+        valorTotal: total,
+        pagamento: pagamentoSelecionado,
+        status: statusMap[pagamentoSelecionado],
+        data: new Date().toLocaleDateString('pt-BR'),
+        endereco: {
+            nome: document.getElementById('endNome').value.trim(),
+            rua: document.getElementById('endRua').value.trim(),
+            num: document.getElementById('endNum').value.trim(),
+            bairro: document.getElementById('endBairro').value.trim(),
+            cidade: document.getElementById('endCidade').value.trim(),
+            estado: document.getElementById('endEstado').value,
+            cep: document.getElementById('endCep').value.trim()
+        }
+    };
+
+    // Salvar pedido
+    const pedidos = DB.getPedidos(uid);
+    pedidos.unshift(pedido);
+    DB.salvarPedidos(uid, pedidos);
+
+    // Limpar carrinho
+    DB.salvarCarrinho(uid, []);
+    renderizarCarrinho();
+
+    // Exibir confirmação
+    document.getElementById('numPedidoConf').textContent = numeroPedido;
+
+    const infoPag = { pix: '✅ Pagamento via PIX confirmado! Valor com 15% de desconto.', credito: '✅ Pagamento no cartão de crédito aprovado!', boleto: '⏳ Boleto gerado! Efetue o pagamento em até 3 dias úteis.' };
+    document.getElementById('confPagInfo').textContent = infoPag[pagamentoSelecionado];
+
+    document.getElementById('confDetalhes').innerHTML = `
+        Pedido realizado em: ${pedido.data}<br>
+        Forma de pagamento: ${pagamentoSelecionado.toUpperCase()}<br>
+        Total: ${formatarPreco(total)}<br>
+        Entrega para: ${pedido.endereco.rua}, ${pedido.endereco.num} — ${pedido.endereco.cidade}/${pedido.endereco.estado}
+    `;
+
+    document.getElementById('stepPagamento').style.display = 'none';
+    document.getElementById('stepConfirmacao').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    mostrarToast('🎉 Pedido ' + numeroPedido + ' confirmado!', 'success');
+}
+
+// ============================================================
+// ===== PAINEL DO USUÁRIO =====
+// ============================================================
+
+function abrirPainel() {
+    const user = DB.getUsuarioLogado();
+    if (!user) { abrirLogin(); return; }
+    document.getElementById('painelNome').textContent = 'Olá, ' + user.nome + '!';
+    document.getElementById('painelEmail').textContent = user.email;
+    document.getElementById('dadosNome').value = user.nome;
+    document.getElementById('dadosEmail').value = user.email;
+    document.getElementById('dadosSenha').value = '';
+    document.getElementById('dadosSenha2').value = '';
+    trocarPainelAba('pedidos', document.querySelector('.hx-nav-btn'));
+    document.getElementById('modalPainel').style.display = 'block';
+}
+
+function fecharPainel() {
+    document.getElementById('modalPainel').style.display = 'none';
+}
+
+function trocarPainelAba(aba, btn) {
+    // Esconder todas
+    document.querySelectorAll('.hx-painel-aba').forEach(a => a.style.display = 'none');
+    document.querySelectorAll('.hx-nav-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    const map = { pedidos: 'painelPedidos', favoritos: 'painelFavoritos', enderecos: 'painelEnderecos', dados: 'painelDados' };
+    if (map[aba]) document.getElementById(map[aba]).style.display = 'block';
+
+    if (aba === 'pedidos') renderizarPedidos();
+    if (aba === 'favoritos') renderizarFavoritosPainel();
+    if (aba === 'enderecos') renderizarEnderecos();
+    if (aba === 'dados') { /* já carregado no abrirPainel */ }
+}
+
+function renderizarPedidos() {
+    const user = DB.getUsuarioLogado();
+    if (!user) return;
+    const pedidos = DB.getPedidos(user.id);
+    const el = document.getElementById('listaPedidos');
+    if (pedidos.length === 0) {
+        el.innerHTML = '<div class="hx-vazio">📦 Nenhum pedido realizado ainda.</div>';
+        return;
+    }
+    el.innerHTML = pedidos.map(p => `
+        <div class="hx-pedido-card">
+            <div class="hx-pedido-header">
+                <span class="hx-pedido-num">${p.idPedido}</span>
+                <span class="hx-pedido-data">${p.data}</span>
+                <span class="hx-status ${p.status === 'Aprovado' ? 'aprovado' : 'pendente'}">${p.status}</span>
+            </div>
+            <div class="hx-pedido-itens">${p.produtos.map(i => `• ${i.titulo} x${i.quantidade}`).join('<br>')}</div>
+            <div class="hx-pedido-total">${formatarPreco(p.valorTotal)} · ${p.pagamento.toUpperCase()}</div>
+        </div>
+    `).join('');
+}
+
+function renderizarFavoritosPainel() {
+    const user = DB.getUsuarioLogado();
+    if (!user) return;
+    const favs = DB.getFavoritos(user.id);
+    const el = document.getElementById('listaFavoritos');
+    if (favs.length === 0) {
+        el.innerHTML = '<div class="hx-vazio">❤️ Nenhum favorito salvo ainda.</div>';
+        return;
+    }
+    el.innerHTML = favs.map(id => {
+        const p = produtos[id];
+        if (!p) return '';
+        return `
+        <div class="produto-loja">
+            <img src="${p.imagens[0]}">
+            <div class="info">
+                <h2>${p.titulo}</h2>
+                <div class="estrelas">★★★★★</div>
+                <div class="preco-lista">${p.preco}</div>
+                <button class="btn-comprar" onclick="fecharPainel(); abrirProduto(${id})">Ver Produto</button>
+                <button class="btn-favorito ativo" onclick="toggleFavorito(${id}, event); renderizarFavoritosPainel()">❤️ Remover</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function renderizarEnderecos() {
+    const user = DB.getUsuarioLogado();
+    if (!user) return;
+    const enderecos = DB.getEnderecos(user.id);
+    const el = document.getElementById('listaEnderecos');
+    if (enderecos.length === 0) {
+        el.innerHTML = '<div class="hx-vazio">📍 Nenhum endereço salvo ainda.</div>';
+        return;
+    }
+    el.innerHTML = enderecos.map(e => `
+        <div class="hx-end-card">
+            <div class="hx-end-info">
+                <strong>${e.nome}</strong><br>
+                ${e.rua}, ${e.num}${e.comp ? ' - ' + e.comp : ''}<br>
+                ${e.bairro} · ${e.cidade}/${e.estado}<br>
+                CEP: ${e.cep} · Tel: ${e.tel}
+            </div>
+            <button class="hx-end-del" onclick="excluirEndereco('${e.id}')" title="Excluir">🗑</button>
+        </div>
+    `).join('');
+}
+
+function excluirEndereco(id) {
+    const user = DB.getUsuarioLogado();
+    if (!user) return;
+    let enderecos = DB.getEnderecos(user.id).filter(e => e.id !== id);
+    DB.salvarEnderecos(user.id, enderecos);
+    renderizarEnderecos();
+    mostrarToast('🗑️ Endereço removido.', '');
+}
+
+function salvarDados() {
+    const user = DB.getUsuarioLogado();
+    if (!user) return;
+    const novoNome = document.getElementById('dadosNome').value.trim();
+    const novaSenha = document.getElementById('dadosSenha').value;
+    const novaSenha2 = document.getElementById('dadosSenha2').value;
+    const msgEl = document.getElementById('dadosMsg');
+
+    if (!novoNome) { msgEl.textContent = '⚠️ Nome não pode estar vazio.'; return; }
+    if (novaSenha && novaSenha.length < 6) { msgEl.textContent = '⚠️ Senha deve ter mínimo 6 caracteres.'; return; }
+    if (novaSenha && novaSenha !== novaSenha2) { msgEl.textContent = '⚠️ Senhas não coincidem.'; return; }
+
+    const usuarios = DB.getUsuarios();
+    const idx = usuarios.findIndex(u => u.id === user.id);
+    if (idx < 0) return;
+    usuarios[idx].nome = novoNome;
+    if (novaSenha) usuarios[idx].senha = novaSenha;
+    DB.salvarUsuarios(usuarios);
+    DB.salvarUsuarioLogado(usuarios[idx]);
+    atualizarHeaderLogin();
+    document.getElementById('painelNome').textContent = 'Olá, ' + novoNome + '!';
+
+    msgEl.style.color = '#00c853';
+    msgEl.textContent = '✅ Dados atualizados com sucesso!';
+    setTimeout(() => { msgEl.textContent = ''; msgEl.style.color = '#ff4444'; }, 3000);
+    mostrarToast('✅ Dados salvos!', 'success');
+}
+
+// ============================================================
+// ===== MÁSCARAS =====
+// ============================================================
+
+function mascaraCpf(el) {
+    let v = el.value.replace(/\D/g,'').slice(0,11);
+    v = v.replace(/(\d{3})(\d)/, '$1.$2');
+    v = v.replace(/(\d{3})(\d)/, '$1.$2');
+    v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    el.value = v;
+}
+
+function mascaraTel(el) {
+    let v = el.value.replace(/\D/g,'').slice(0,11);
+    v = v.replace(/(\d{2})(\d)/, '($1) $2');
+    v = v.replace(/(\d{5})(\d)/, '$1-$2');
+    el.value = v;
+}
+
+function mascaraCep(el) {
+    let v = el.value.replace(/\D/g,'').slice(0,8);
+    v = v.replace(/(\d{5})(\d)/, '$1-$2');
+    el.value = v;
+}
+
+function mascaraCartao(el) {
+    let v = el.value.replace(/\D/g,'').slice(0,16);
+    v = v.replace(/(\d{4})(?=\d)/g, '$1 ');
+    el.value = v.trim();
+}
+
+function mascaraValidade(el) {
+    let v = el.value.replace(/\D/g,'').slice(0,4);
+    v = v.replace(/(\d{2})(\d)/, '$1/$2');
+    el.value = v;
+}
+
+// ============================================================
+// ===== GALERIA E PRODUTO =====
+// ============================================================
+
+function atualizarImagem() {
+    document.getElementById("imagemPrincipal").src = imagensAtivas[imagemAtual];
+}
+
+function proximaImagem() {
+    imagemAtual++;
+    if (imagemAtual >= imagensAtivas.length) imagemAtual = 0;
+    atualizarImagem();
+}
+
+function imagemAnterior() {
+    imagemAtual--;
+    if (imagemAtual < 0) imagemAtual = imagensAtivas.length - 1;
+    atualizarImagem();
+}
+
+function selecionarImagem(index) {
+    imagemAtual = index;
+    atualizarImagem();
+}
+
+function abrirProduto(id) {
+    produtoAtualId = id;
+    const p = produtos[id];
+    imagensAtivas = p.imagens;
+    imagemAtual = 0;
+
+    document.getElementById("prodTitulo").textContent = p.titulo;
+    document.getElementById("prodAvaliacao").textContent = p.avaliacao;
+    document.getElementById("prodPrecoAntigo").textContent = p.precoAntigo;
+    document.getElementById("prodPreco").textContent = p.preco;
+    document.getElementById("prodParcelamento").innerHTML = p.parcelamento;
+    document.getElementById("prodDescricao").textContent = p.descricao;
+    document.getElementById("imagemPrincipal").src = p.imagens[0];
+
+    const mini = document.getElementById("miniaturas");
+    mini.innerHTML = "";
+    p.imagens.forEach((src, i) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.onclick = () => selecionarImagem(i);
+        mini.appendChild(img);
+    });
+
+    const specs = document.getElementById("prodEspecificacoes");
+    specs.innerHTML = "";
+    p.specs.forEach(([nome, valor]) => {
+        specs.innerHTML += `
+            <div class="item-spec">
+                <span class="nome-spec">${nome}</span>
+                <span class="valor-spec">${valor}</span>
+            </div>`;
+    });
+
+    document.getElementById("pagina-ofertas").style.display = "none";
+    document.getElementById("pagina-produto").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    atualizarBotoesCardsEProd();
+}
+
+function voltarOfertas() {
+    document.getElementById("pagina-produto").style.display = "none";
+    document.getElementById("pagina-ofertas").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    atualizarBotoesCardsEProd();
+}
+
+function comprarAgora() {
+    const user = DB.getUsuarioLogado();
+    if (!user) {
+        mostrarToast('⚠️ Faça login para comprar!', 'error');
+        abrirLogin();
+        return;
+    }
+    adicionarAoCarrinho(produtoAtualId);
+    setTimeout(() => abrirCheckout(), 300);
+}
+
+// ============================================================
+// ===== FECHAR TUDO =====
+// ============================================================
+
+function fecharTudo() {
+    fecharCarrinho();
+}
+
+// ============================================================
+// ===== SCROLL HEADER =====
+// ============================================================
+
+window.addEventListener('scroll', () => {
+    document.querySelector('.header').classList.toggle('scroll', window.scrollY > 100);
+});
+
+// ============================================================
+// ===== INICIALIZAÇÃO =====
+// ============================================================
+
+(function init() {
+    atualizarHeaderLogin();
+    renderizarCarrinho();
+    atualizarBotoesCardsEProd();
+})();
+</script>
+ 
+</body>
+</html>

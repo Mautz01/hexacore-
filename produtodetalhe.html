@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HexaCore - Produto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg: #0f1115;
+            --card: #181c23;
+            --card2: #11151b;
+            --azul: #0066ff;
+            --azul-hover: #0052cc;
+            --texto: #ffffff;
+            --texto-sec: #9ca3af;
+            --borda: #252b36;
+            --verde: #00c853;
+            --destaque: #00b7ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: Arial, sans-serif;
+            color: var(--texto);
+            padding-top: 170px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .header {
+            width: 100%;
+            background: var(--card2);
+            border-bottom: 1px solid var(--borda);
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 60px;
+        }
+
+        .logo img {
+            width: 300px;
+        }
+
+        .search {
+            flex: 1;
+            display: flex;
+            max-width: 700px;
+            margin: 0 50px;
+        }
+
+        .search input {
+            width: 100%;
+            background: var(--card);
+            border: 1px solid var(--borda);
+            padding: 15px 20px;
+            color: white;
+            outline: none;
+            border-radius: 14px 0 0 14px;
+            font-size: 15px;
+        }
+
+        .search button {
+            width: 65px;
+            border: none;
+            background: var(--azul);
+            color: white;
+            font-size: 20px;
+            border-radius: 0 14px 14px 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search button:hover {
+            background: var(--azul-hover);
+        }
+
+        .icons {
+            display: flex;
+            gap: 25px;
+        }
+
+        .icons a {
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .icons a:hover {
+            color: var(--azul);
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            background: var(--card2);
+            padding: 18px;
+            border-top: 1px solid var(--borda);
+        }
+
+        .menu a {
+            position: relative;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--azul);
+        }
+
+        .container-produto {
+            max-width: 1400px;
+            margin: auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 40px;
+        }
+
+        .galeria {
+            background: var(--card);
+            border: 1px solid var(--borda);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .container-imagem {
+            position: relative;
+        }
+
+        .imagem-principal {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            background: #11151b;
+        }
+
+        .miniaturas {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .miniaturas img {
+            width: 90px;
+            height: 70px;
+            object-fit: contain;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.3s;
+            background: #11151b;
+        }
+
+        .miniaturas img:hover {
+            border-color: var(--destaque);
+            transform: scale(1.05);
+        }
+
+        .seta {
+            position: absolute;
+            top: 45%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.3s;
+        }
+
+        .seta:hover {
+            background: var(--destaque);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .esquerda {
+            left: 15px;
+        }
+
+        .direita {
+            right: 15px;
+        }
+
+        .info-produto {
+            background: var(--card);
+            border: 1px solid var(--borda);
+            border-radius: 20px;
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 190px;
+        }
+
+        .titulo {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .avaliacao {
+            color: gold;
+            margin-bottom: 15px;
+        }
+
+        .preco-antigo {
+            color: var(--texto-sec);
+            text-decoration: line-through;
+            font-size: 18px;
+        }
+
+        .preco {
+            font-size: 42px;
+            font-weight: bold;
+            color: var(--verde);
+            margin: 10px 0;
+        }
+
+        .pix {
+            color: var(--texto-sec);
+            margin-bottom: 20px;
+        }
+
+        .parcelamento {
+            background: #13161c;
+            border: 1px solid var(--borda);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            line-height: 30px;
+        }
+
+        .botao-comprar {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 14px;
+            background: var(--destaque);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .botao-comprar:hover {
+            transform: scale(1.02);
+            background: #0095cc;
+        }
+
+        .botao-carrinho {
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            border: 2px solid var(--destaque);
+            background: transparent;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .botao-carrinho:hover {
+            background: var(--destaque);
+        }
+
+        .descricao {
+            grid-column: 1 / -1;
+            background: var(--card);
+            border: 1px solid var(--borda);
+            border-radius: 20px;
+            padding: 35px;
+        }
+
+        .descricao h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .descricao p {
+            color: var(--texto-sec);
+            line-height: 30px;
+            font-size: 17px;
+        }
+
+        .especificacoes {
+            margin-top: 30px;
+        }
+
+        .item-spec {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        .nome-spec {
+            color: var(--texto-sec);
+        }
+
+        .valor-spec {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .header.scroll {
+            background: rgba(17, 21, 27, 0.92);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .header.scroll .menu {
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+            padding: 0;
+            border: none;
+        }
+
+        .header.scroll .header-top {
+            padding: 10px 40px;
+        }
+
+        .header.scroll .logo img {
+            width: 210px;
+        }
+
+        @media(max-width: 1000px) {
+            body {
+                padding-top: 230px;
+            }
+
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .logo img {
+                width: 220px;
+            }
+
+            .search {
+                margin: 0;
+                width: 100%;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .container-produto {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .info-produto {
+                position: static;
+            }
+
+            .preco {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-top">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://i.imgur.com/bri4wau.png">
+                </a>
+            </div>
+
+            <div class="search">
+                <input type="text" placeholder="O que você está procurando?">
+                <button>🔍</button>
+            </div>
+
+            <div class="icons">
+                <a href="#">👤 Minha Conta</a>
+                <a href="#">🛒 Carrinho</a>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <a href="Pc gamer.html">PC GAMER</a>
+            <a href="Notebooks.html">NOTEBOOKS</a>
+            <a href="https://mautz01.github.io/perifericos-hexacore/">PERIFÉRICOS</a>
+            <a href="https://mautz01.github.io/ofertas-hexacore/">OFERTAS</a>
+        </nav>
+    </header>
+
+    <main class="container-produto" id="produtoDetalhe"></main>
+
+    <script src="produtos.js"></script>
+
+    <script>
+        carregarProdutoDetalhe();
+
+        const header = document.querySelector(".header");
+
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 100) {
+                header.classList.add("scroll");
+            } else {
+                header.classList.remove("scroll");
+            }
+        });
+    </script>
+
+</body>
+
+</html>

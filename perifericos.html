@@ -1,0 +1,2462 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HexaCore- Computadores</title>
+ 
+    <style>
+          :root {
+            --bg: #0f1115;
+            --card: #181c23;
+            --card2: #11151b;
+            --azul: #0066ff;
+            --azul-hover: #0052cc;
+            --texto: #ffffff;
+            --texto-sec: #9ca3af;
+            --borda: #252b36;
+        }
+ 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        html {
+            scroll-behavior: smooth;
+        }
+ 
+ body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--texto);
+            overflow-x: hidden;
+        }
+ 
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    .cardpc {
+            width: 250px;
+            height: 150px;
+            background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqCcCF8A-7fQcIoja1fpsBdIcbtRRtno6gaQ&s);
+            /* sua imagem */
+            background-size: cover;
+            /* faz preencher tudo */
+            background-position: center;
+            /* centraliza */
+        color: white;
+    padding: 10px;
+    border-radius: 10px;
+ 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* joga o texto pra baixo */
+ 
+    transition: 0.3s;
+    }
+    .cardnot {
+          width: 250px;
+    height: 150px;
+    background-image:url(https://s2-techtudo.glbimg.com/CuWOBee5VDISWBbxRAdqnIIfKBg=/0x0:1500x844/984x0/smart/filters:strip_icc/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2024/N/D/R1GfAESMWHcKZEQb4H3Q/acer-nitro-v15-06.jpg); /* sua imagem */
+    background-size: cover; /* faz preencher tudo */
+    background-position: center; /* centraliza */
+    
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+ 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* joga o texto pra baixo */
+ 
+    transition: 0.3s;
+    }
+    .cardwork{
+          width: 250px;
+    height: 150px;
+    background-image:url(https://i.pcmag.com/imagery/reviews/06Hhy7Tq7TovbpNakYlLJVK-1.fit_lim.size_120x68.v1650989464.jpg); /* sua imagem */
+    background-size: cover; /* faz preencher tudo */
+    background-position: center; /* centraliza */
+    
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+ 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* joga o texto pra baixo */
+ 
+    transition: 0.3s;   }
+ 
+    .cardpc:hover {
+    transform: scale(1.05); /* aumenta um pouco */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* sombra */
+}
+    .cardnot:hover {
+    transform: scale(1.05); /* aumenta um pouco */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* sombra */
+}
+    .cardwork:hover {
+    transform: scale(1.05); /* aumenta um pouco */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* sombra */
+}
+ 
+ 
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+    
+ 
+ .header {
+            width: 100%;
+            background: var(--card2);
+            border-bottom: 1px solid var(--borda);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+        }
+ 
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+ 
+            padding: 18px 60px;
+        }
+ 
+        .logo img {
+            width: 220px;
+        }
+         .search {
+            flex: 1;
+            display: flex;
+            max-width: 700px;
+            margin: 0 50px;
+        }
+ 
+        .search input {
+            width: 100%;
+            background: var(--card);
+            border: 1px solid var(--borda);
+            padding: 15px 20px;
+            color: white;
+            outline: none;
+            border-radius: 14px 0 0 14px;
+            font-size: 15px;
+        }
+ 
+        .search button {
+            width: 65px;
+            border: none;
+            background: var(--azul);
+            color: white;
+            font-size: 20px;
+            border-radius: 0 14px 14px 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+ 
+        .search button:hover {
+            background: var(--azul-hover);
+        }
+        /* ICONES */
+ 
+        .icons {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+ 
+        .icons a {
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+ 
+        .icons a:hover {
+            color: var(--azul);
+        }
+   
+        .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+ 
+            background: var(--card2);
+ 
+            padding: 18px;
+ 
+            border-top: 1px solid var(--borda);
+        }
+ 
+        .menu a {
+            position: relative;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+ 
+        .menu a:hover {
+            color: var(--azul);
+        }
+ 
+        .menu a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0%;
+            height: 2px;
+            background: var(--azul);
+            transition: 0.3s;
+        }
+ 
+        .menu a:hover::after {
+            width: 100%;
+        }
+  
+    nav {
+        background-color: #333;
+        padding: 10px;
+        text-align: center;
+    }
+ 
+    nav a {
+        color: white;
+        margin: 10px;
+        text-decoration: none;
+    }  
+     /* BANNER */
+ 
+        .banner {
+            margin: 60px 80px;
+ 
+            padding: 70px;
+ 
+            border-radius: 24px;
+ 
+            background: linear-gradient(90deg,
+                    #0066ff,
+                    #0047b3);
+ 
+            text-align: center;
+        }
+ 
+        .banner h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+ 
+        .banner p {
+            color: #dbeafe;
+            font-size: 18px;
+        }
+        
+        .card-conteudo {
+            position: relative;
+            z-index: 2;
+            padding: 25px;
+        }
+ 
+        .card-conteudo h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+ 
+        .card-conteudo p {
+            color: #d1d5db;
+        }
+ 
+        /* TITULO */
+ 
+        .titulo {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+ 
+        .titulo h1 {
+            font-size: 40px;
+        }
+ 
+        /* PRODUTOS */
+ 
+        .produtos-destaque {
+            display: grid;
+ 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+ 
+            gap: 25px;
+ 
+            padding: 0 80px 80px;
+        }
+        .produto-loja {
+ 
+    width: 100%;
+ 
+    background: var(--card);
+ 
+    border: 1px solid var(--borda);
+ 
+    border-radius: 22px;
+ 
+    overflow: hidden;
+ 
+}
+ 
+        .produto-loja:hover {
+            transform: translateY(-8px);
+ 
+            border-color: var(--azul);
+ 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+ 
+        .produto-loja img {
+            width: 100%;
+            height: 230px;
+ 
+            object-fit: contain;
+ 
+            background: var(--card2);
+ 
+            padding: 20px;
+        }
+ 
+        .info {
+            padding: 20px;
+        }
+ 
+        .info h2 {
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+ 
+        .estrelas {
+            color: #facc15;
+            margin-bottom: 10px;
+        }
+ 
+        .preco-antigo {
+            color: var(--texto-sec);
+            text-decoration: line-through;
+            margin-bottom: 5px;
+        }
+ 
+        .preco {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+ 
+        .parcelado {
+            color: var(--texto-sec);
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+ 
+        .btn-comprar {
+            display: block;
+ 
+            width: 100%;
+ 
+            text-align: center;
+ 
+            background: var(--azul);
+ 
+            padding: 14px;
+ 
+            border-radius: 12px;
+ 
+            font-weight: 700;
+ 
+            transition: 0.3s;
+        }
+ 
+        .btn-comprar:hover {
+            background: var(--azul-hover);
+        }
+ 
+        /* FOOTER */
+ 
+        footer {
+            border-top: 1px solid var(--borda);
+ 
+            background: var(--card2);
+ 
+            text-align: center;
+ 
+            padding: 40px;
+ 
+            color: var(--texto-sec);
+        }
+         /* RESPONSIVO */
+ 
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+ 
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+ 
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+ 
+/* --- ESTILO DO MODAL DE LOGIN --- */
+        .modal-login {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+ 
+        .modal-conteudo {
+            background-color: #1a1a1a;
+            margin: 5% auto;
+            padding: 30px;
+            border: 1px solid #0047b3;
+            width: 360px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+        }
+ 
+        .fechar {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            color: #aaa;
+            font-size: 24px;
+            cursor: pointer;
+        }
+ 
+        .modal-conteudo h2 {
+            color: #0047b3;
+            margin-bottom: 20px;
+        }
+ 
+        .modal-conteudo input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background: #111;
+            color: #fff;
+        }
+ 
+        .btn-login {
+            background: #0047b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+ 
+        .btn-login:hover { background: #0066ff; }
+ 
+        .links-modal {
+            margin-top: 15px;
+            font-size: 13px;
+        }
+ 
+        .links-modal a {
+            color: #0047b3;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+ 
+        /* --- NOVO: ESTILO DO CARRINHO LATERAL --- */
+        .carrinho-lateral {
+            height: 100%;
+            width: 0; /* Começa fechado */
+            position: fixed;
+            z-index: 2000; /* Acima de tudo */
+            top: 0;
+            right: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            overflow-y: auto;
+            transition: 0.5s; /* Efeito de deslizar */
+            padding-top: 60px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            border-left: 2px solid #0047b3;
+        }
+ 
+        .carrinho-lateral .fechar-carrinho {
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            font-size: 36px;
+            color: #0047b3;
+            cursor: pointer;
+        }
+ 
+        .carrinho-conteudo {
+            padding: 20px;
+            text-align: center;
+            min-width: 320px;
+        }
+ 
+        .item-carrinho-vazio {
+            color: #888;
+            margin-top: 50px;
+        }
+ 
+        .btn-finalizar {
+            background-color: #0047b3;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            display: block;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+        .btn-finalizar:hover { background: #0066ff; }
+ 
+        /* =============================================
+           ESTILOS DO MODAL DE PRODUTO (dos produtos_X)
+           ============================================= */
+        .modal-produto {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            overflow-y: auto;
+        }
+ 
+        .modal-produto.ativo {
+            display: block;
+        }
+ 
+        .modal-produto-conteudo {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+ 
+        .fechar-produto {
+            display: block;
+            text-align: right;
+            font-size: 40px;
+            color: #aaa;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+ 
+        .fechar-produto:hover {
+            color: #00b7ff;
+        }
+ 
+        /* Estilos internos do produto (copiados dos produtos_X) */
+        .mp-container-produto{
+            max-width: 1400px;
+            margin: auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 40px;
+        }
+ 
+        .mp-galeria{
+            background: #181c23;
+            border: 1px solid #2a2f3a;
+            border-radius: 20px;
+            padding: 20px;
+        }
+ 
+        .mp-imagem-principal{
+            width: 60%;
+            max-width: 500px;
+            display: block;
+            margin: 0 auto 20px auto;
+            border-radius: 15px;
+        }
+ 
+        .mp-miniaturas{
+            display: flex;
+            gap: 15px;
+        }
+ 
+        .mp-miniaturas img{
+            width: 70px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+ 
+        .mp-miniaturas img:hover{
+            border-color: #00b7ff;
+            transform: scale(1.05);
+        }
+ 
+        .mp-info-produto{
+            background: #181c23;
+            border: 1px solid #2a2f3a;
+            border-radius: 20px;
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+ 
+        .mp-titulo{
+            font-size: 30px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+ 
+        .mp-avaliacao{
+            color: gold;
+            margin-bottom: 15px;
+        }
+ 
+        .mp-preco-antigo{
+            color: #9ca3af;
+            text-decoration: line-through;
+            font-size: 18px;
+        }
+ 
+        .mp-preco{
+            font-size: 42px;
+            font-weight: bold;
+            color: #00c853;
+            margin: 10px 0;
+        }
+ 
+        .mp-pix{
+            color: #9ca3af;
+            margin-bottom: 20px;
+        }
+ 
+        .mp-parcelamento{
+            background: #13161c;
+            border: 1px solid #2a2f3a;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            line-height: 30px;
+            color: #ffffff;
+        }
+ 
+        .mp-botao-comprar{
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 14px;
+            background: #00b7ff;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+ 
+        .mp-botao-comprar:hover{
+            transform: scale(1.02);
+            background: #0095cc;
+        }
+ 
+        .mp-botao-carrinho{
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            border: 2px solid #00b7ff;
+            background: transparent;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+ 
+        .mp-botao-carrinho:hover{
+            background: #00b7ff;
+        }
+ 
+        .mp-botao-favorito {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            border: 2px solid #ff4d6d;
+            background: transparent;
+            color: #ff4d6d;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .mp-botao-favorito:hover, .mp-botao-favorito.ativo { background: #ff4d6d; color: white; }
+ 
+        .mp-descricao{
+            max-width: 1400px;
+            margin: auto;
+            margin-top: 20px;
+            background: #181c23;
+            border: 1px solid #2a2f3a;
+            border-radius: 20px;
+            padding: 35px;
+        }
+ 
+        .mp-descricao h2{
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #ffffff;
+        }
+ 
+        .mp-descricao p{
+            color: #9ca3af;
+            line-height: 30px;
+            font-size: 17px;
+        }
+ 
+        .mp-especificacoes{
+            margin-top: 30px;
+        }
+ 
+        .mp-item-spec{
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #2a2f3a;
+            color: #ffffff;
+        }
+ 
+        .mp-nome-spec{
+            color: #9ca3af;
+        }
+ 
+        .mp-valor-spec{
+            font-weight: bold;
+        }
+ 
+        @media(max-width: 1000px){
+            .mp-container-produto{
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .mp-info-produto{
+                position: static;
+            }
+        }
+ 
+        /* =============================================
+           CARRINHO ITENS
+           ============================================= */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid #222;
+            text-align: left;
+        }
+        .cart-item img { width: 55px; height: 55px; object-fit: contain; border-radius: 8px; background: #181c23; }
+        .cart-item-info { flex: 1; }
+        .cart-item-nome { font-size: 12px; color: #ccc; line-height: 1.4; margin-bottom: 4px; }
+        .cart-item-preco { font-size: 14px; font-weight: bold; color: #00b7ff; }
+        .cart-item-qtd { display: flex; align-items: center; gap: 6px; margin-top: 5px; }
+        .cart-item-qtd button { background: #0047b3; border: none; color: white; width: 24px; height: 24px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .cart-item-qtd span { font-size: 14px; min-width: 20px; text-align: center; }
+        .cart-item-remover { background: none; border: none; color: #ff4d6d; cursor: pointer; font-size: 18px; }
+        .cart-subtotal { padding: 15px 0; border-top: 1px solid #333; margin-top: 10px; }
+        .cart-subtotal-linha { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .cart-total-valor { font-size: 20px; font-weight: bold; color: #00c853; }
+        #carrinho-contador {
+            background: #ff4d6d;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 3px;
+        }
+        /* =============================================
+           SISTEMA AUTH / PAINEL
+           ============================================= */
+        .tab-auth { display: flex; margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1px solid #0047b3; }
+        .tab-auth-btn { flex: 1; padding: 10px; background: transparent; color: #aaa; border: none; cursor: pointer; font-size: 14px; transition: 0.3s; }
+        .tab-auth-btn.active { background: #0047b3; color: white; font-weight: bold; }
+        .form-auth { display: none; }
+        .form-auth.ativo { display: block; }
+        .msg-auth { font-size: 13px; margin-top: 10px; padding: 8px; border-radius: 6px; }
+        .msg-sucesso { background: rgba(0,200,83,0.2); color: #00c853; }
+        .msg-erro { background: rgba(255,77,109,0.2); color: #ff4d6d; }
+        .usuario-logado-header { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .usuario-logado-header:hover { color: #0066ff; }
+ 
+        /* PAINEL DO USUÁRIO */
+        .painel-overlay {
+            display: none;
+            position: fixed;
+            z-index: 4000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            overflow-y: auto;
+        }
+        .painel-overlay.ativo { display: block; }
+        .painel-container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #13161c;
+            border: 1px solid #0047b3;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .painel-header {
+            background: linear-gradient(90deg, #0047b3, #0066ff);
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .painel-header h2 { font-size: 22px; }
+        .painel-fechar { background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
+        .painel-nav { display: flex; background: #0f1115; border-bottom: 1px solid #252b36; overflow-x: auto; }
+        .painel-nav-btn {
+            padding: 14px 22px;
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: 0.3s;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+        .painel-nav-btn.ativo { color: #0066ff; border-bottom-color: #0066ff; }
+        .painel-nav-btn:hover { color: white; }
+        .painel-secao { display: none; padding: 25px 30px; }
+        .painel-secao.ativa { display: block; }
+        .painel-secao h3 { font-size: 18px; margin-bottom: 20px; color: #0066ff; }
+        .campo-painel { margin-bottom: 15px; }
+        .campo-painel label { display: block; font-size: 12px; color: #9ca3af; margin-bottom: 5px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .campo-painel input, .campo-painel select, .campo-painel textarea {
+            width: 100%; padding: 11px 14px; background: #181c23; border: 1px solid #252b36;
+            color: white; border-radius: 8px; font-size: 14px; outline: none; transition: 0.3s;
+        }
+        .campo-painel input:focus, .campo-painel select:focus { border-color: #0066ff; }
+        .painel-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .btn-painel-salvar {
+            background: #0047b3; color: white; border: none; padding: 12px 25px;
+            border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 5px;
+        }
+        .btn-painel-salvar:hover { background: #0066ff; }
+        .btn-painel-perigo { background: #ff4d6d; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-painel-perigo:hover { background: #cc0033; }
+        .pedido-card {
+            background: #181c23; border: 1px solid #252b36; border-radius: 12px;
+            padding: 18px; margin-bottom: 15px;
+        }
+        .pedido-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .pedido-id { font-weight: bold; color: #0066ff; font-size: 15px; }
+        .pedido-status { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .status-aprovado { background: rgba(0,200,83,0.2); color: #00c853; }
+        .status-pendente { background: rgba(255,193,7,0.2); color: #ffc107; }
+        .status-cancelado { background: rgba(255,77,109,0.2); color: #ff4d6d; }
+        .pedido-info-linha { display: flex; justify-content: space-between; font-size: 13px; color: #9ca3af; margin-bottom: 6px; }
+        .pedido-info-linha strong { color: white; }
+        .pedido-itens { margin-top: 10px; border-top: 1px solid #252b36; padding-top: 10px; }
+        .pedido-item-linha { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 13px; }
+        .pedido-item-linha img { width: 40px; height: 40px; object-fit: contain; border-radius: 6px; background: #0f1115; }
+        .endereco-card {
+            background: #181c23; border: 1px solid #252b36; border-radius: 12px;
+            padding: 18px; margin-bottom: 12px; position: relative;
+        }
+        .endereco-card-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .endereco-card p { font-size: 13px; color: #9ca3af; line-height: 1.7; margin-top: 6px; }
+        .endereco-acoes { display: flex; gap: 8px; }
+        .btn-endereco-remover { background: none; border: none; color: #ff4d6d; cursor: pointer; font-size: 13px; }
+        .favorito-card {
+            display: flex; align-items: center; gap: 15px;
+            background: #181c23; border: 1px solid #252b36; border-radius: 12px;
+            padding: 15px; margin-bottom: 12px;
+        }
+        .favorito-card img { width: 60px; height: 60px; object-fit: contain; background: #0f1115; border-radius: 8px; }
+        .favorito-card-info { flex: 1; }
+        .favorito-card-nome { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .favorito-card-preco { color: #00c853; font-weight: bold; }
+        .favorito-card-acoes { display: flex; flex-direction: column; gap: 8px; }
+        .btn-fav-carrinho { background: #0047b3; border: none; color: white; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+        .btn-fav-remover { background: none; border: 1px solid #ff4d6d; color: #ff4d6d; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+        .empty-state { text-align: center; padding: 40px 20px; color: #9ca3af; }
+        .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+ 
+        /* CHECKOUT */
+        .checkout-overlay {
+            display: none;
+            position: fixed;
+            z-index: 5000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            overflow-y: auto;
+        }
+        .checkout-overlay.ativo { display: block; }
+        .checkout-container {
+            max-width: 820px;
+            margin: 30px auto;
+            background: #13161c;
+            border: 1px solid #0047b3;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .checkout-header {
+            background: linear-gradient(90deg, #0047b3, #0066ff);
+            padding: 22px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .checkout-header h2 { font-size: 20px; }
+        .checkout-fechar { background: none; border: none; color: white; font-size: 26px; cursor: pointer; }
+        .checkout-body { padding: 30px; }
+        .checkout-step { display: none; }
+        .checkout-step.ativo { display: block; }
+        .checkout-step h3 { font-size: 17px; margin-bottom: 20px; color: #0066ff; border-bottom: 1px solid #252b36; padding-bottom: 10px; }
+        .checkout-resumo { background: #181c23; border-radius: 12px; padding: 18px; margin-bottom: 20px; }
+        .checkout-resumo-item { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid #252b36; }
+        .checkout-resumo-item:last-child { border: none; }
+        .checkout-total { font-size: 18px; font-weight: bold; color: #00c853; }
+        .pagamento-opcoes { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .pagamento-opcao {
+            display: flex; align-items: center; gap: 14px;
+            background: #181c23; border: 2px solid #252b36; border-radius: 12px;
+            padding: 16px; cursor: pointer; transition: 0.3s;
+        }
+        .pagamento-opcao:hover, .pagamento-opcao.selecionada { border-color: #0066ff; background: #1a1f2e; }
+        .pagamento-opcao .icon-pag { font-size: 28px; }
+        .pagamento-opcao-texto h4 { font-size: 15px; margin-bottom: 2px; }
+        .pagamento-opcao-texto p { font-size: 12px; color: #9ca3af; }
+        .pix-display {
+            background: #0f1115; border: 2px dashed #00c853; border-radius: 12px;
+            padding: 25px; text-align: center; margin: 15px 0;
+        }
+        .pix-codigo { font-family: monospace; font-size: 13px; color: #00c853; word-break: break-all; margin: 10px 0; }
+        .boleto-display {
+            background: #0f1115; border: 2px dashed #ffc107; border-radius: 12px;
+            padding: 25px; text-align: center; margin: 15px 0;
+        }
+        .cartao-form { display: none; margin-top: 15px; }
+        .cartao-form.ativo { display: block; }
+        .btn-nav-checkout {
+            background: #0047b3; color: white; border: none; padding: 14px 28px;
+            border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px;
+        }
+        .btn-nav-checkout:hover { background: #0066ff; }
+        .btn-nav-checkout.secundario { background: transparent; border: 2px solid #0047b3; color: #0066ff; margin-right: 10px; }
+        .checkout-acoes { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+        .pedido-concluido {
+            text-align: center; padding: 30px;
+        }
+        .pedido-concluido .check-icon { font-size: 64px; margin-bottom: 15px; }
+        .pedido-concluido h3 { font-size: 24px; color: #00c853; margin-bottom: 10px; }
+        .pedido-concluido p { color: #9ca3af; margin-bottom: 5px; }
+        .pedido-numero-destaque { font-size: 20px; font-weight: bold; color: #0066ff; margin: 15px 0; }
+        .toast {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #181c23; border: 1px solid #0047b3; border-radius: 12px;
+            padding: 14px 20px; color: white; font-size: 14px;
+            z-index: 9999; opacity: 0; transform: translateY(20px);
+            transition: all 0.3s; pointer-events: none;
+            max-width: 300px;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.sucesso { border-color: #00c853; }
+        .toast.erro { border-color: #ff4d6d; }
+        @media (max-width: 600px) {
+            .painel-grid-2 { grid-template-columns: 1fr; }
+            .painel-container, .checkout-container { margin: 10px; border-radius: 12px; }
+            .painel-secao, .checkout-body { padding: 15px; }
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+<!-- =============================================
+     TOAST NOTIFICATION
+     ============================================= -->
+<div id="toast" class="toast"></div>
+ 
+<!-- =============================================
+     MODAL DE LOGIN / CADASTRO
+     ============================================= -->
+<div id="modalLogin" class="modal-login">
+    <div class="modal-conteudo">
+        <span class="fechar" onclick="fecharLogin()">&times;</span>
+ 
+        <div class="tab-auth">
+            <button class="tab-auth-btn active" onclick="mudarTab('login')">Entrar</button>
+            <button class="tab-auth-btn" onclick="mudarTab('cadastro')">Cadastrar</button>
+        </div>
+ 
+        <!-- FORM LOGIN -->
+        <div id="form-login" class="form-auth ativo">
+            <h2>Área do Cliente</h2>
+            <input type="email" id="login-email" placeholder="E-mail" autocomplete="email">
+            <input type="password" id="login-senha" placeholder="Senha">
+            <button class="btn-login" onclick="fazerLogin()">ENTRAR</button>
+            <div id="msg-login"></div>
+        </div>
+ 
+        <!-- FORM CADASTRO -->
+        <div id="form-cadastro" class="form-auth">
+            <h2 style="color:#0047b3;">Criar Conta</h2>
+            <input type="text" id="cad-nome" placeholder="Nome completo">
+            <input type="email" id="cad-email" placeholder="E-mail">
+            <input type="tel" id="cad-telefone" placeholder="Telefone (opcional)">
+            <input type="password" id="cad-senha" placeholder="Senha (mín. 6 caracteres)">
+            <input type="password" id="cad-confirma" placeholder="Confirmar senha">
+            <button class="btn-login" onclick="fazerCadastro()">CRIAR CONTA</button>
+            <div id="msg-cadastro"></div>
+        </div>
+    </div>
+</div>
+ 
+<!-- =============================================
+     CARRINHO LATERAL (SIDEBAR)
+     ============================================= -->
+<div id="meuCarrinho" class="carrinho-lateral">
+    <span class="fechar-carrinho" onclick="fecharCarrinho()">&times;</span>
+    <div class="carrinho-conteudo">
+        <h2 style="color: #ffffff;">Meu Carrinho</h2>
+        <hr style="border-color:#333; margin:12px 0;">
+        <div id="carrinho-itens-lista"></div>
+        <div id="carrinho-subtotal-area" style="display:none;" class="cart-subtotal">
+            <div class="cart-subtotal-linha"><span>Subtotal</span><span id="cart-sub-val" class="cart-total-valor"></span></div>
+            <div class="cart-subtotal-linha"><span style="font-size:12px;color:#9ca3af;">Frete</span><span style="font-size:12px;color:#00c853;">Grátis</span></div>
+            <div class="cart-subtotal-linha" style="border-top:1px solid #333;padding-top:10px;margin-top:5px;"><span style="font-weight:bold;">Total</span><span id="cart-total-val" class="cart-total-valor"></span></div>
+        </div>
+        <button class="btn-finalizar" onclick="abrirCheckout()">FINALIZAR COMPRA</button>
+    </div>
+</div>
+ 
+<!-- =============================================
+     MODAL PRODUTO 1 - TEAMGROUP DDR5 64GB
+     ============================================= -->
+<div id="modalProduto1" class="modal-produto">
+    <div class="modal-produto-conteudo">
+        <span class="fechar-produto" onclick="fecharProduto(1)">&times;</span>
+        <div class="mp-container-produto">
+            <div class="mp-galeria">
+                <img src="https://m.media-amazon.com/images/I/81JEfdUVCTL._AC_SX679_.jpg" class="mp-imagem-principal" id="mpImagem1">
+                <div class="mp-miniaturas">
+                    <img src="https://m.media-amazon.com/images/I/81JEfdUVCTL._AC_SX679_.jpg" onclick="mpSelecionarImagem(1,0)">
+                    <img src="https://m.media-amazon.com/images/I/71fWtrlkOML._AC_SL1500_.jpg" onclick="mpSelecionarImagem(1,1)">
+                    <img src="https://m.media-amazon.com/images/I/71OWkkmxO3L._AC_SL1500_.jpg" onclick="mpSelecionarImagem(1,2)">
+                    <img src="https://m.media-amazon.com/images/I/718VBWtpLKL._AC_SL1500_.jpg" onclick="mpSelecionarImagem(1,3)">
+                </div>
+            </div>
+            <div class="mp-info-produto">
+                <h1 class="mp-titulo">TEAMGROUP T-Force Delta RGB DDR5 Ram 64GB</h1>
+                <div class="mp-avaliacao">★★★★★ (52 avaliações)</div>
+                <div class="mp-preco-antigo">R$ 13.999,99</div>
+                <div class="mp-preco">R$ 9.999,99</div>
+                <div class="mp-pix">À vista no PIX com 15% OFF</div>
+                <div class="mp-parcelamento">
+                    ✔ 12x de R$ 833,99 sem juros <br>
+                    ✔ 10x de R$ 999,99 sem juros <br>
+                    ✔ Até 18x no cartão <br>
+                    ✔ Frete grátis para todo Brasil
+                </div>
+                <button class="mp-botao-comprar" onclick="comprarAgora(1)">COMPRAR AGORA</button>
+                <button class="mp-botao-carrinho" onclick="adicionarAoCarrinho(1)">ADICIONAR AO CARRINHO</button>
+                <button class="mp-botao-favorito" id="fav-btn-1" onclick="toggleFavorito(1)">♡ ADICIONAR AOS FAVORITOS</button>
+            </div>
+        </div>
+        <div class="mp-descricao">
+            <h2>Descrição do Produto</h2>
+            <p>TEAMGROUP T-Force Delta RGB DDR5 Ram 64GB (2x32GB) 6000MHz CL38 Intel XMP 3.0 & AMD Expo Módulo de memória de desktop compatível branco FF4D564G6000HC38ADC01</p>
+            <div class="mp-especificacoes">
+                <div class="mp-item-spec"><span class="mp-nome-spec">Marca</span><span class="mp-valor-spec">TeamGroup</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Cor</span><span class="mp-valor-spec">Branco</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Tamanho da memória do computador</span><span class="mp-valor-spec">64 GB</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Tecnologia de memória RAM</span><span class="mp-valor-spec">DDR 5</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Velocidade da memória</span><span class="mp-valor-spec">6000 MHz</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- MODAL PRODUTO 2 - KINGSTON FURY BEAST 16GB -->
+<div id="modalProduto2" class="modal-produto">
+    <div class="modal-produto-conteudo">
+        <span class="fechar-produto" onclick="fecharProduto(2)">&times;</span>
+        <div class="mp-container-produto">
+            <div class="mp-galeria">
+                <img src="https://m.media-amazon.com/images/I/61Nu3Bh1+5L._AC_SX679_.jpg" class="mp-imagem-principal" id="mpImagem2">
+                <div class="mp-miniaturas">
+                    <img src="https://m.media-amazon.com/images/I/61Nu3Bh1+5L._AC_SX679_.jpg" onclick="mpSelecionarImagem(2,0)">
+                    <img src="https://m.media-amazon.com/images/I/61ccslaqOrL._AC_SX679_.jpg" onclick="mpSelecionarImagem(2,1)">
+                    <img src="https://m.media-amazon.com/images/I/71isB6CeiAL._AC_SX679_.jpg" onclick="mpSelecionarImagem(2,2)">
+                    <img src="https://m.media-amazon.com/images/I/71xMTws0sBL._AC_SX679_.jpg" onclick="mpSelecionarImagem(2,3)">
+                </div>
+            </div>
+            <div class="mp-info-produto">
+                <h1 class="mp-titulo">Kingston Memória de desktop Fury Beast RGB 16GB</h1>
+                <div class="mp-avaliacao">★★★★★ (58 avaliações)</div>
+                <div class="mp-preco-antigo">R$ 2.599,99</div>
+                <div class="mp-preco">R$ 1.999,99</div>
+                <div class="mp-pix">À vista no PIX com 15% OFF</div>
+                <div class="mp-parcelamento">
+                    ✔ 12x de R$ 165,99 sem juros <br>
+                    ✔ 10x de R$ 199,99 sem juros <br>
+                    ✔ Até 18x no cartão <br>
+                    ✔ Frete grátis para todo Brasil
+                </div>
+                <button class="mp-botao-comprar" onclick="comprarAgora(2)">COMPRAR AGORA</button>
+                <button class="mp-botao-carrinho" onclick="adicionarAoCarrinho(2)">ADICIONAR AO CARRINHO</button>
+                <button class="mp-botao-favorito" id="fav-btn-2" onclick="toggleFavorito(2)">♡ ADICIONAR AOS FAVORITOS</button>
+            </div>
+        </div>
+        <div class="mp-descricao">
+            <h2>Descrição do Produto</h2>
+            <p>Kingston Memória de desktop Fury Beast RGB 16GB 6000MT/s DDR5 CL36 | AMD Expo | Plug N Play | Módulo único | KF560C36BBE2A-16</p>
+            <div class="mp-especificacoes">
+                <div class="mp-item-spec"><span class="mp-nome-spec">Marca</span><span class="mp-valor-spec">Kingston</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Cor</span><span class="mp-valor-spec">Preto</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Tamanho da memória do computador</span><span class="mp-valor-spec">16 GB</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Tecnologia de memória RAM</span><span class="mp-valor-spec">DDR 5</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Velocidade da memória</span><span class="mp-valor-spec">6000 MT/s</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- MODAL PRODUTO 3 - RYZEN 9 9950X3D -->
+<div id="modalProduto3" class="modal-produto">
+    <div class="modal-produto-conteudo">
+        <span class="fechar-produto" onclick="fecharProduto(3)">&times;</span>
+        <div class="mp-container-produto">
+            <div class="mp-galeria">
+                <img src="https://m.media-amazon.com/images/I/71hZfMZNZuL._AC_SX679_.jpg" class="mp-imagem-principal" id="mpImagem3">
+                <div class="mp-miniaturas">
+                    <img src="https://m.media-amazon.com/images/I/71hZfMZNZuL._AC_SX679_.jpg" onclick="mpSelecionarImagem(3,0)">
+                    <img src="https://m.media-amazon.com/images/I/51mo6MoU8IL._AC_SX679_.jpg" onclick="mpSelecionarImagem(3,1)">
+                    <img src="https://m.media-amazon.com/images/I/71eEfALRLfL._AC_SX679_.jpg" onclick="mpSelecionarImagem(3,2)">
+                </div>
+            </div>
+            <div class="mp-info-produto">
+                <h1 class="mp-titulo">Processador AMD Ryzen 9 9950X3D</h1>
+                <div class="mp-avaliacao">★★★★★ (59 avaliações)</div>
+                <div class="mp-preco-antigo">R$ 4.499,99</div>
+                <div class="mp-preco">R$ 3.899,99</div>
+                <div class="mp-pix">À vista no PIX com 15% OFF</div>
+                <div class="mp-parcelamento">
+                    ✔ 12x de R$ 323,99 sem juros <br>
+                    ✔ 10x de R$ 389,99 sem juros <br>
+                    ✔ Até 18x no cartão <br>
+                    ✔ Frete grátis para todo Brasil
+                </div>
+                <button class="mp-botao-comprar" onclick="comprarAgora(3)">COMPRAR AGORA</button>
+                <button class="mp-botao-carrinho" onclick="adicionarAoCarrinho(3)">ADICIONAR AO CARRINHO</button>
+                <button class="mp-botao-favorito" id="fav-btn-3" onclick="toggleFavorito(3)">♡ ADICIONAR AOS FAVORITOS</button>
+            </div>
+        </div>
+        <div class="mp-descricao">
+            <h2>Descrição do Produto</h2>
+            <p>Processador AMD Ryzen 9 9950X3D (AM5/ 16 Cores/ 32 Threads/ 5.7 GHz/ 144Mb Cache/Radeon Graphics/Sem Cooler)</p>
+            <div class="mp-especificacoes">
+                <div class="mp-item-spec"><span class="mp-nome-spec">Marca</span><span class="mp-valor-spec">AMD</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Cor</span><span class="mp-valor-spec">Preto</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Modelo da CPU</span><span class="mp-valor-spec">Ryzen 9</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Velocidade da CPU</span><span class="mp-valor-spec">4,3 GHz</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Soquete da CPU</span><span class="mp-valor-spec">Socket AM5</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- MODAL PRODUTO 4 - RYZEN 7 5700X -->
+<div id="modalProduto4" class="modal-produto">
+    <div class="modal-produto-conteudo">
+        <span class="fechar-produto" onclick="fecharProduto(4)">&times;</span>
+        <div class="mp-container-produto">
+            <div class="mp-galeria">
+                <img src="https://m.media-amazon.com/images/I/41zGH486zyL._AC_SX679_.jpg" class="mp-imagem-principal" id="mpImagem4">
+                <div class="mp-miniaturas">
+                    <img src="https://m.media-amazon.com/images/I/41zGH486zyL._AC_SX679_.jpg" onclick="mpSelecionarImagem(4,0)">
+                </div>
+            </div>
+            <div class="mp-info-produto">
+                <h1 class="mp-titulo">Processador AMD Ryzen 7 5700X</h1>
+                <div class="mp-avaliacao">★★★★★ (89 avaliações)</div>
+                <div class="mp-preco-antigo">R$ 1.999,99</div>
+                <div class="mp-preco">R$ 1.299,99</div>
+                <div class="mp-pix">À vista no PIX com 15% OFF</div>
+                <div class="mp-parcelamento">
+                    ✔ 12x de R$ 108,99 sem juros <br>
+                    ✔ 10x de R$ 129,99 sem juros <br>
+                    ✔ Até 18x no cartão <br>
+                    ✔ Frete grátis para todo Brasil
+                </div>
+                <button class="mp-botao-comprar" onclick="comprarAgora(4)">COMPRAR AGORA</button>
+                <button class="mp-botao-carrinho" onclick="adicionarAoCarrinho(4)">ADICIONAR AO CARRINHO</button>
+                <button class="mp-botao-favorito" id="fav-btn-4" onclick="toggleFavorito(4)">♡ ADICIONAR AOS FAVORITOS</button>
+            </div>
+        </div>
+        <div class="mp-descricao">
+            <h2>Descrição do Produto</h2>
+            Processador AMD Ryzen 7 5700X, 3,4 GHz, 8 núcleos, 16 threads, cache de 32 MB, soquete AM4, OEM
+            <p></p>
+            <div class="mp-especificacoes">
+                <div class="mp-item-spec"><span class="mp-nome-spec">Marca</span><span class="mp-valor-spec">AMD</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Cor</span><span class="mp-valor-spec">Preto</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Modelo da CPU</span><span class="mp-valor-spec">Ryzen 7</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Velocidade da CPU</span><span class="mp-valor-spec">3,4 Mhz</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Soquete da CPU</span><span class="mp-valor-spec">Socket AM4</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- MODAL PRODUTO 5 - RTX 5090 GIGABYTE -->
+<div id="modalProduto5" class="modal-produto">
+    <div class="modal-produto-conteudo">
+        <span class="fechar-produto" onclick="fecharProduto(5)">&times;</span>
+        <div class="mp-container-produto">
+            <div class="mp-galeria">
+                <img src="https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/v/gv-n5090aorus-m-32gd4.jpg" class="mp-imagem-principal" id="mpImagem5">
+                <div class="mp-miniaturas">
+                    <img src="https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/v/gv-n5090aorus-m-32gd4.jpg" onclick="mpSelecionarImagem(5,0)">
+                    <img src="https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/v/gv-n5090aorus-m-32gd7.jpg" onclick="mpSelecionarImagem(5,1)">
+                    <img src="https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/v/gv-n5090aorus-m-32gd1.jpg" onclick="mpSelecionarImagem(5,2)">
+                    <img src="https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/v/gv-n5090aorus-m-32gd.jpg" onclick="mpSelecionarImagem(5,3)">
+                </div>
+            </div>
+            <div class="mp-info-produto">
+                <h1 class="mp-titulo">Placa de Video Gigabyte GeForce RTX 5090</h1>
+                <div class="mp-avaliacao">★★★★★ (89 avaliações)</div>
+                <div class="mp-preco-antigo">R$ 28.999,99</div>
+                <div class="mp-preco">R$ 26.999,99</div>
+                <div class="mp-pix">À vista no PIX com 15% OFF</div>
+                <div class="mp-parcelamento">
+                    ✔ 12x de R$ 2.249,99 sem juros <br>
+                    ✔ 10x de R$ 2.699,99 sem juros <br>
+                    ✔ Até 18x no cartão <br>
+                    ✔ Frete grátis para todo Brasil
+                </div>
+                <button class="mp-botao-comprar" onclick="comprarAgora(5)">COMPRAR AGORA</button>
+                <button class="mp-botao-carrinho" onclick="adicionarAoCarrinho(5)">ADICIONAR AO CARRINHO</button>
+                <button class="mp-botao-favorito" id="fav-btn-5" onclick="toggleFavorito(5)">♡ ADICIONAR AOS FAVORITOS</button>
+            </div>
+        </div>
+        <div class="mp-descricao">
+            <h2>Descrição do Produto</h2>
+            <p>Placa de Video Gigabyte GeForce RTX 5090 Aorus Master, 32GB, GDDR7, 512-bit, GV-N5090AORUS-M-32GD</p>
+            <div class="mp-especificacoes">
+                <div class="mp-item-spec"><span class="mp-nome-spec">Marca</span><span class="mp-valor-spec">GigaByte</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Cor</span><span class="mp-valor-spec">Preto</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Modelo</span><span class="mp-valor-spec">GV-N5090AORUS-M-32GD</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">GPU</span><span class="mp-valor-spec">GeForce RTX™ 5090</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Tamanho de memoria</span><span class="mp-valor-spec">32 GB GDDR7</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- MODAL PRODUTO 6 - RX 9070 XT ASROCK -->
+<div id="modalProduto6" class="modal-produto">
+    <div class="modal-produto-conteudo">
+        <span class="fechar-produto" onclick="fecharProduto(6)">&times;</span>
+        <div class="mp-container-produto">
+            <div class="mp-galeria">
+                <img src="https://img.terabyteshop.com.br/produto/g/placa-de-video-asrock-amd-radeon-rx-9070-xt-steel-legend-16gb-gddr6-fsr-ray-tracing-white-90-ga5dzz-00uanf_231129.jpg" class="mp-imagem-principal" id="mpImagem6">
+                <div class="mp-miniaturas">
+                    <img src="https://img.terabyteshop.com.br/produto/g/placa-de-video-asrock-amd-radeon-rx-9070-xt-steel-legend-16gb-gddr6-fsr-ray-tracing-white-90-ga5dzz-00uanf_231129.jpg" onclick="mpSelecionarImagem(6,0)">
+                    <img src="https://img.terabyteshop.com.br/produto/g/placa-de-video-asrock-amd-radeon-rx-9070-xt-steel-legend-16gb-gddr6-fsr-ray-tracing-white-90-ga5dzz-00uanf_231131.jpg" onclick="mpSelecionarImagem(6,1)">
+                    <img src="https://img.terabyteshop.com.br/produto/g/placa-de-video-asrock-amd-radeon-rx-9070-xt-steel-legend-16gb-gddr6-fsr-ray-tracing-white-90-ga5dzz-00uanf_231134.jpg" onclick="mpSelecionarImagem(6,2)">
+                    <img src="https://img.terabyteshop.com.br/produto/g/placa-de-video-asrock-amd-radeon-rx-9070-xt-steel-legend-16gb-gddr6-fsr-ray-tracing-white-90-ga5dzz-00uanf_231133.jpg" onclick="mpSelecionarImagem(6,3)">
+                </div>
+            </div>
+            <div class="mp-info-produto">
+                <h1 class="mp-titulo">Placa de Vídeo ASRock AMD Radeon RX 9070</h1>
+                <div class="mp-avaliacao">★★★★★ (79 avaliações)</div>
+                <div class="mp-preco-antigo">R$ 12.499,99</div>
+                <div class="mp-preco">R$ 10.289,99</div>
+                <div class="mp-pix">À vista no PIX com 15% OFF</div>
+                <div class="mp-parcelamento">
+                    ✔ 12x de R$ 857,99 sem juros <br>
+                    ✔ 10x de R$ 1.028,99 sem juros <br>
+                    ✔ Até 18x no cartão <br>
+                    ✔ Frete grátis para todo Brasil
+                </div>
+                <button class="mp-botao-comprar" onclick="comprarAgora(6)">COMPRAR AGORA</button>
+                <button class="mp-botao-carrinho" onclick="adicionarAoCarrinho(6)">ADICIONAR AO CARRINHO</button>
+                <button class="mp-botao-favorito" id="fav-btn-6" onclick="toggleFavorito(6)">♡ ADICIONAR AOS FAVORITOS</button>
+            </div>
+        </div>
+        <div class="mp-descricao">
+            <h2>Descrição do Produto</h2>
+            <p>Placa de Vídeo ASRock AMD Radeon RX 9070 XT Steel Legend, 16GB, GDDR6, FSR, Ray Tracing, White, 90-GA5DZZ-00UANF</p>
+            <div class="mp-especificacoes">
+                <div class="mp-item-spec"><span class="mp-nome-spec">Marca</span><span class="mp-valor-spec">AMD</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Cor</span><span class="mp-valor-spec">White</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Memoria</span><span class="mp-valor-spec">16GB</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Placa de Video</span><span class="mp-valor-spec">RX 9070 XT</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- MODAL PRODUTO 7 - GIGABYTE X870 AORUS -->
+<div id="modalProduto7" class="modal-produto">
+    <div class="modal-produto-conteudo">
+        <span class="fechar-produto" onclick="fecharProduto(7)">&times;</span>
+        <div class="mp-container-produto">
+            <div class="mp-galeria">
+                <img src="https://images9.kabum.com.br/produtos/fotos/933389/placa-mae-gigabyte-x870-aorus-elite-wf7-ice-am5-atx-ddr5-pcie-5-0-rgb-wi-fi-7-bluetooth-branco-x870-a-elite-wf7-ice_1771934802_gg.jpg" class="mp-imagem-principal" id="mpImagem7">
+                <div class="mp-miniaturas">
+                    <img src="https://images9.kabum.com.br/produtos/fotos/933389/placa-mae-gigabyte-x870-aorus-elite-wf7-ice-am5-atx-ddr5-pcie-5-0-rgb-wi-fi-7-bluetooth-branco-x870-a-elite-wf7-ice_1771934802_gg.jpg" onclick="mpSelecionarImagem(7,0)">
+                    <img src="https://images9.kabum.com.br/produtos/fotos/933389/placa-mae-gigabyte-x870-aorus-elite-wf7-ice-am5-atx-ddr5-pcie-5-0-rgb-wi-fi-7-bluetooth-branco-x870-a-elite-wf7-ice_1771934804_gg.jpg" onclick="mpSelecionarImagem(7,1)">
+                    <img src="https://images9.kabum.com.br/produtos/fotos/933389/placa-mae-gigabyte-x870-aorus-elite-wf7-ice-am5-atx-ddr5-pcie-5-0-rgb-wi-fi-7-bluetooth-branco-x870-a-elite-wf7-ice_1771934806_gg.jpg" onclick="mpSelecionarImagem(7,2)">
+                    <img src="https://images9.kabum.com.br/produtos/fotos/933389/placa-mae-gigabyte-x870-aorus-elite-wf7-ice-am5-atx-ddr5-pcie-5-0-rgb-wi-fi-7-bluetooth-branco-x870-a-elite-wf7-ice_1771934808_gg.jpg" onclick="mpSelecionarImagem(7,3)">
+                </div>
+            </div>
+            <div class="mp-info-produto">
+                <h1 class="mp-titulo">Placa-Mãe Gigabyte X870 AORUS</h1>
+                <div class="mp-avaliacao">★★★★★ (99 avaliações)</div>
+                <div class="mp-preco-antigo">R$ 5.999,99</div>
+                <div class="mp-preco">R$ 3.999,99</div>
+                <div class="mp-pix">À vista no PIX com 15% OFF</div>
+                <div class="mp-parcelamento">
+                    ✔ 12x de R$ 333,99 sem juros <br>
+                    ✔ 10x de R$ 399,99 sem juros <br>
+                    ✔ Até 18x no cartão <br>
+                    ✔ Frete grátis para todo Brasil
+                </div>
+                <button class="mp-botao-comprar" onclick="comprarAgora(7)">COMPRAR AGORA</button>
+                <button class="mp-botao-carrinho" onclick="adicionarAoCarrinho(7)">ADICIONAR AO CARRINHO</button>
+                <button class="mp-botao-favorito" id="fav-btn-7" onclick="toggleFavorito(7)">♡ ADICIONAR AOS FAVORITOS</button>
+            </div>
+        </div>
+        <div class="mp-descricao">
+            <h2>Descrição do Produto</h2>
+            <p>Placa-Mãe Gigabyte X870 AORUS ELITE WF7 ICE, AM5, ATX, DDR5, PCIe 5.0, RGB, Wi-Fi 7, Bluetooth, Branco - X870 A ELITE WF7 ICE</p>
+            <div class="mp-especificacoes">
+                <div class="mp-item-spec"><span class="mp-nome-spec">Marca</span><span class="mp-valor-spec">GigaByte</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Cor</span><span class="mp-valor-spec">White</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Modelo</span><span class="mp-valor-spec">X870 AORUS STEALTH ICE</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Memoria</span><span class="mp-valor-spec">Slots: 4x DIMM DDR5</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Soquete</span><span class="mp-valor-spec">AM5</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- MODAL PRODUTO 8 - ASUS TUF GAMING B550M -->
+<div id="modalProduto8" class="modal-produto">
+    <div class="modal-produto-conteudo">
+        <span class="fechar-produto" onclick="fecharProduto(8)">&times;</span>
+        <div class="mp-container-produto">
+            <div class="mp-galeria">
+                <img src="https://m.media-amazon.com/images/I/81p4nj7F2tL._AC_SX679_.jpg" class="mp-imagem-principal" id="mpImagem8">
+                <div class="mp-miniaturas">
+                    <img src="https://m.media-amazon.com/images/I/81p4nj7F2tL._AC_SX679_.jpg" onclick="mpSelecionarImagem(8,0)">
+                    <img src="https://m.media-amazon.com/images/I/61obYYJKIUL._AC_.jpg" onclick="mpSelecionarImagem(8,1)">
+                    <img src="https://m.media-amazon.com/images/I/61QenLBIUCL._AC_SX679_.jpg" onclick="mpSelecionarImagem(8,2)">
+                    <img src="https://m.media-amazon.com/images/I/51yDC80+dlL._AC_.jpg" onclick="mpSelecionarImagem(8,3)">
+                </div>
+            </div>
+            <div class="mp-info-produto">
+                <h1 class="mp-titulo">Placa-Mãe ASUS TUF Gaming</h1>
+                <div class="mp-avaliacao">★★★★★ (69 avaliações)</div>
+                <div class="mp-preco-antigo">R$ 1.499,99</div>
+                <div class="mp-preco">R$ 899,99</div>
+                <div class="mp-pix">À vista no PIX com 15% OFF</div>
+                <div class="mp-parcelamento">
+                    ✔ 12x de R$ 74,99 sem juros <br>
+                    ✔ 10x de R$ 89,99 sem juros <br>
+                    ✔ Até 18x no cartão <br>
+                    ✔ Frete grátis para todo Brasil
+                </div>
+                <button class="mp-botao-comprar" onclick="comprarAgora(8)">COMPRAR AGORA</button>
+                <button class="mp-botao-carrinho" onclick="adicionarAoCarrinho(8)">ADICIONAR AO CARRINHO</button>
+                <button class="mp-botao-favorito" id="fav-btn-8" onclick="toggleFavorito(8)">♡ ADICIONAR AOS FAVORITOS</button>
+            </div>
+        </div>
+        <div class="mp-descricao">
+            <h2>Descrição do Produto</h2>
+            <p>Placa-Mãe ASUS TUF Gaming B550M-PLUS AM4 mATX — Suporte Ryzen, PCIe 4.0, M.2 NVMe, DDR4, HDMI/DP, LAN Gigabit, Durabilidade Militar para PC Gamer</p>
+            <div class="mp-especificacoes">
+                <div class="mp-item-spec"><span class="mp-nome-spec">Marca</span><span class="mp-valor-spec">ASUS</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Cor</span><span class="mp-valor-spec">Preto</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Soquete da CPU</span><span class="mp-valor-spec">Soquete AM4</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Tecnologia de memória RAM</span><span class="mp-valor-spec">DDR 4</span></div>
+                <div class="mp-item-spec"><span class="mp-nome-spec">Processadores compatíveis</span><span class="mp-valor-spec">10th Generation Intel Core</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- =============================================
+     PAINEL DO USUÁRIO
+     ============================================= -->
+<div id="painelUsuario" class="painel-overlay">
+    <div class="painel-container">
+        <div class="painel-header">
+            <div>
+                <h2>👤 Meu Painel</h2>
+                <p id="painel-boas-vindas" style="font-size:13px;opacity:0.8;margin-top:4px;"></p>
+            </div>
+            <button class="painel-fechar" onclick="fecharPainel()">&times;</button>
+        </div>
+        <div class="painel-nav">
+            <button class="painel-nav-btn ativo" onclick="mudarSecao('pedidos')">📦 Meus Pedidos</button>
+            <button class="painel-nav-btn" onclick="mudarSecao('historico')">🕐 Histórico</button>
+            <button class="painel-nav-btn" onclick="mudarSecao('favoritos')">♡ Favoritos</button>
+            <button class="painel-nav-btn" onclick="mudarSecao('enderecos')">📍 Endereços</button>
+            <button class="painel-nav-btn" onclick="mudarSecao('dados')">✏️ Meus Dados</button>
+            <button class="painel-nav-btn" onclick="fazerLogout()" style="color:#ff4d6d;">🚪 Sair</button>
+        </div>
+ 
+        <!-- PEDIDOS -->
+        <div id="secao-pedidos" class="painel-secao ativa">
+            <h3>📦 Meus Pedidos</h3>
+            <div id="lista-pedidos"></div>
+        </div>
+ 
+        <!-- HISTÓRICO -->
+        <div id="secao-historico" class="painel-secao">
+            <h3>🕐 Histórico de Compras</h3>
+            <div id="lista-historico"></div>
+        </div>
+ 
+        <!-- FAVORITOS -->
+        <div id="secao-favoritos" class="painel-secao">
+            <h3>♡ Produtos Favoritos</h3>
+            <div id="lista-favoritos"></div>
+        </div>
+ 
+        <!-- ENDEREÇOS -->
+        <div id="secao-enderecos" class="painel-secao">
+            <h3>📍 Endereços Salvos</h3>
+            <div id="lista-enderecos"></div>
+            <hr style="border-color:#252b36;margin:20px 0;">
+            <h3>➕ Adicionar Endereço</h3>
+            <div class="campo-painel"><label>Apelido (Ex: Casa, Trabalho)</label><input type="text" id="end-apelido" placeholder="Casa"></div>
+            <div class="painel-grid-2">
+                <div class="campo-painel"><label>CEP</label><input type="text" id="end-cep" placeholder="00000-000" maxlength="9"></div>
+                <div class="campo-painel"><label>Estado</label><input type="text" id="end-estado" placeholder="SP"></div>
+            </div>
+            <div class="painel-grid-2">
+                <div class="campo-painel"><label>Cidade</label><input type="text" id="end-cidade" placeholder="São Paulo"></div>
+                <div class="campo-painel"><label>Bairro</label><input type="text" id="end-bairro" placeholder="Centro"></div>
+            </div>
+            <div class="campo-painel"><label>Rua</label><input type="text" id="end-rua" placeholder="Rua das Flores"></div>
+            <div class="painel-grid-2">
+                <div class="campo-painel"><label>Número</label><input type="text" id="end-numero" placeholder="123"></div>
+                <div class="campo-painel"><label>Complemento</label><input type="text" id="end-complemento" placeholder="Apto 45"></div>
+            </div>
+            <button class="btn-painel-salvar" onclick="salvarEndereco()">💾 Salvar Endereço</button>
+        </div>
+ 
+        <!-- DADOS PESSOAIS -->
+        <div id="secao-dados" class="painel-secao">
+            <h3>✏️ Meus Dados</h3>
+            <div class="campo-painel"><label>Nome completo</label><input type="text" id="dados-nome"></div>
+            <div class="campo-painel"><label>E-mail</label><input type="email" id="dados-email"></div>
+            <div class="campo-painel"><label>Telefone</label><input type="tel" id="dados-telefone"></div>
+            <div class="campo-painel"><label>CPF</label><input type="text" id="dados-cpf" placeholder="000.000.000-00"></div>
+            <button class="btn-painel-salvar" onclick="salvarDados()">💾 Salvar Dados</button>
+            <hr style="border-color:#252b36;margin:25px 0;">
+            <h3>🔒 Alterar Senha</h3>
+            <div class="campo-painel"><label>Senha atual</label><input type="password" id="senha-atual"></div>
+            <div class="campo-painel"><label>Nova senha</label><input type="password" id="senha-nova"></div>
+            <div class="campo-painel"><label>Confirmar nova senha</label><input type="password" id="senha-confirma"></div>
+            <button class="btn-painel-salvar" onclick="alterarSenha()">🔐 Alterar Senha</button>
+        </div>
+    </div>
+</div>
+ 
+<!-- =============================================
+     CHECKOUT
+     ============================================= -->
+<div id="checkoutOverlay" class="checkout-overlay">
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h2>🛒 Finalizar Compra</h2>
+            <button class="checkout-fechar" onclick="fecharCheckout()">&times;</button>
+        </div>
+        <div class="checkout-body">
+ 
+            <!-- STEP 1: ENDEREÇO -->
+            <div id="checkout-step-1" class="checkout-step ativo">
+                <h3>📍 Dados de Entrega</h3>
+                <div class="painel-grid-2">
+                    <div class="campo-painel"><label>Nome completo *</label><input type="text" id="ck-nome"></div>
+                    <div class="campo-painel"><label>E-mail *</label><input type="email" id="ck-email"></div>
+                </div>
+                <div class="painel-grid-2">
+                    <div class="campo-painel"><label>Telefone *</label><input type="tel" id="ck-telefone"></div>
+                    <div class="campo-painel"><label>CPF *</label><input type="text" id="ck-cpf" placeholder="000.000.000-00"></div>
+                </div>
+                <div class="painel-grid-2">
+                    <div class="campo-painel"><label>CEP *</label><input type="text" id="ck-cep" placeholder="00000-000" maxlength="9"></div>
+                    <div class="campo-painel"><label>Estado *</label><input type="text" id="ck-estado" placeholder="SP"></div>
+                </div>
+                <div class="painel-grid-2">
+                    <div class="campo-painel"><label>Cidade *</label><input type="text" id="ck-cidade"></div>
+                    <div class="campo-painel"><label>Bairro *</label><input type="text" id="ck-bairro"></div>
+                </div>
+                <div class="campo-painel"><label>Rua *</label><input type="text" id="ck-rua"></div>
+                <div class="painel-grid-2">
+                    <div class="campo-painel"><label>Número *</label><input type="text" id="ck-numero"></div>
+                    <div class="campo-painel"><label>Complemento</label><input type="text" id="ck-complemento"></div>
+                </div>
+                <div id="ck-enderecos-salvos" style="margin-top:10px;"></div>
+                <div class="checkout-acoes">
+                    <div></div>
+                    <button class="btn-nav-checkout" onclick="irParaStep(2)">Continuar → Pagamento</button>
+                </div>
+            </div>
+ 
+            <!-- STEP 2: PAGAMENTO -->
+            <div id="checkout-step-2" class="checkout-step">
+                <h3>💳 Forma de Pagamento</h3>
+                <div class="checkout-resumo" id="checkout-resumo-pag"></div>
+                <div class="pagamento-opcoes">
+                    <div class="pagamento-opcao" onclick="selecionarPagamento('PIX')">
+                        <span class="icon-pag">📱</span>
+                        <div class="pagamento-opcao-texto"><h4>PIX</h4><p>Aprovação imediata · 15% de desconto</p></div>
+                    </div>
+                    <div class="pagamento-opcao" onclick="selecionarPagamento('CARTAO')">
+                        <span class="icon-pag">💳</span>
+                        <div class="pagamento-opcao-texto"><h4>Cartão de Crédito</h4><p>Em até 12x sem juros</p></div>
+                    </div>
+                    <div class="pagamento-opcao" onclick="selecionarPagamento('BOLETO')">
+                        <span class="icon-pag">📄</span>
+                        <div class="pagamento-opcao-texto"><h4>Boleto Bancário</h4><p>Vencimento em 3 dias úteis</p></div>
+                    </div>
+                </div>
+                <!-- PIX -->
+                <div id="pix-area" style="display:none;" class="pix-display">
+                    <p style="font-size:13px;color:#9ca3af;margin-bottom:8px;">Chave PIX para pagamento:</p>
+                    <div class="pix-codigo">hexacore@pagamentos.com.br</div>
+                    <p style="font-size:12px;color:#9ca3af;">Copie a chave e efetue o pagamento no app do seu banco.<br>Após o pagamento, clique em Confirmar.</p>
+                    <button style="margin-top:12px;" class="btn-nav-checkout" onclick="confirmarPagamento()">✅ Confirmar Pagamento PIX</button>
+                </div>
+                <!-- BOLETO -->
+                <div id="boleto-area" style="display:none;" class="boleto-display">
+                    <p style="font-size:13px;color:#9ca3af;margin-bottom:8px;">Código de barras:</p>
+                    <div id="boleto-codigo" style="font-family:monospace;font-size:12px;color:#ffc107;word-break:break-all;margin:10px 0;"></div>
+                    <p style="font-size:12px;color:#9ca3af;">Copie o código e pague em qualquer banco ou lotérica.<br>Válido por 3 dias úteis.</p>
+                    <button style="margin-top:12px;" class="btn-nav-checkout" onclick="confirmarPagamento()">✅ Confirmar Boleto Gerado</button>
+                </div>
+                <!-- CARTÃO -->
+                <div id="cartao-area" class="cartao-form">
+                    <div class="campo-painel"><label>Número do Cartão</label><input type="text" id="ck-cartao-num" placeholder="0000 0000 0000 0000" maxlength="19"></div>
+                    <div class="campo-painel"><label>Nome no Cartão</label><input type="text" id="ck-cartao-nome" placeholder="NOME SOBRENOME"></div>
+                    <div class="painel-grid-2">
+                        <div class="campo-painel"><label>Validade</label><input type="text" id="ck-cartao-val" placeholder="MM/AA" maxlength="5"></div>
+                        <div class="campo-painel"><label>CVV</label><input type="text" id="ck-cartao-cvv" placeholder="123" maxlength="3"></div>
+                    </div>
+                    <div class="campo-painel">
+                        <label>Parcelas</label>
+                        <select id="ck-parcelas">
+                            <option value="1">1x à vista</option>
+                            <option value="2">2x sem juros</option>
+                            <option value="3">3x sem juros</option>
+                            <option value="6">6x sem juros</option>
+                            <option value="10">10x sem juros</option>
+                            <option value="12">12x sem juros</option>
+                        </select>
+                    </div>
+                    <button class="btn-nav-checkout" onclick="confirmarPagamento()">💳 Confirmar Pagamento</button>
+                </div>
+                <div class="checkout-acoes">
+                    <button class="btn-nav-checkout secundario" onclick="irParaStep(1)">← Voltar</button>
+                    <div></div>
+                </div>
+            </div>
+ 
+            <!-- STEP 3: CONFIRMAÇÃO -->
+            <div id="checkout-step-3" class="checkout-step">
+                <div class="pedido-concluido">
+                    <div class="check-icon">✅</div>
+                    <h3>Pedido Realizado com Sucesso!</h3>
+                    <div class="pedido-numero-destaque" id="pedido-num-display"></div>
+                    <p id="checkout-metodo-display"></p>
+                    <p id="checkout-valor-display"></p>
+                    <p style="margin-top:15px;font-size:13px;">Você receberá uma confirmação em breve.<br>Acesse seu painel para acompanhar o pedido.</p>
+                    <button class="btn-nav-checkout" style="margin-top:20px;" onclick="fecharCheckout(); abrirPainel()">Ver Meus Pedidos</button>
+                </div>
+            </div>
+ 
+        </div>
+    </div>
+</div>
+ 
+<!-- =============================================
+     HEADER ORIGINAL
+     ============================================= -->
+<header class="header">
+    <!-- TOPO -->
+    <div class="header-top">
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://i.imgur.com/bri4wau.png">
+            </a>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="O que você está procurando?">
+            <button>🔍</button>
+        </div>
+        <div class="icons">
+            <span id="header-auth-area">
+                <a href="javascript:void(0)" onclick="abrirLogin()">👤 Minha Conta</a>
+            </span>
+            <span>
+                <a href="javascript:void(0)" onclick="abrirCarrinho()">🛒 Carrinho <span id="carrinho-contador" style="display:none;">0</span></a>
+            </span>
+        </div>
+    </div>
+    <nav class="menu">
+        <a href="Pc gamer.html">PC GAMER</a>
+        <a href="Notebook.html">NOTEBOOKS</a>
+        <a href="perifericos.html">PERIFÉRICOS</a>
+        <a href="ofertas.html">OFERTAS</a>
+    </nav>
+</header>
+ 
+<section class="banner">
+    <h2>Vamos Turbina Seu Pc</h2>
+</section>
+ 
+<div class="container">
+ 
+    <!-- Memória RAM -->
+    <div class="produto-loja">
+        <img src="https://m.media-amazon.com/images/I/81JEfdUVCTL._AC_SX679_.jpg" alt="Memória RAM">
+        <div class="info">
+            <h2>TEAMGROUP T-Force Delta RGB DDR5 Ram 64GB</h2>
+            <p> 6000MHz CL38 Intel XMP 3.0 & AMD</p>
+            <div class="estrelas">★★★★★</div>
+            <div class="preco">R$ 10.000,00</div>
+            <a href="javascript:void(0)" onclick="abrirProduto(1)" class="btn-comprar">Comprar</a>
+        </div>
+    </div>
+ 
+    <!-- Memória RAM -->
+    <div class="produto-loja">
+        <img src="https://m.media-amazon.com/images/I/61Nu3Bh1+5L._AC_SX679_.jpg" alt="Memória RAM">
+        <div class="info">
+            <h2>Kingston Memória de desktop Fury Beast RGB 16GB</h2>
+            <p> 6000MT/s DDR5 CL36 | AMD Expo | Plug N Play | Módulo único | KF560C36BBE2A-16</p>
+            <div class="estrelas">★★★★★</div>
+            <div class="preco">R$ 2.200,00</div>
+            <a href="javascript:void(0)" onclick="abrirProduto(2)" class="btn-comprar">Comprar</a>
+        </div>
+    </div>
+ 
+    <!-- Processador -->
+    <div class="produto-loja">
+        <img src="https://m.media-amazon.com/images/I/71hZfMZNZuL._AC_SX679_.jpg" alt="CPU">
+        <div class="info">
+            <h2>Processador AMD Ryzen 9 9950X3D</h2>
+            <p>AM5/ 16 Cores/ 32 Threads/ 5.7 GHz/ 144Mb Cache/Radeon Graphics/Sem Cooler</p>
+            <div class="estrelas">★★★★★</div>
+            <div class="preco">R$ 3.899,99</div>
+            <a href="javascript:void(0)" onclick="abrirProduto(3)" class="btn-comprar">Comprar</a>
+        </div>
+    </div>
+ 
+    <!-- Processador -->
+    <div class="produto-loja">
+        <img src="https://m.media-amazon.com/images/I/41zGH486zyL._AC_SX679_.jpg" alt="CPU">
+        <div class="info">
+            <h2>Processador AMD Ryzen 7 5700X, 3,4 GHz</h2>
+            <p>8 núcleos, 16 threads, cache de 32 MB, soquete AM4, OEM</p>
+            <div class="estrelas">★★★★★</div>
+            <div class="preco">R$ 1.299,99</div>
+            <a href="javascript:void(0)" onclick="abrirProduto(4)" class="btn-comprar">Comprar</a>
+        </div>
+    </div>
+ 
+    <!-- Placa De Video -->
+    <div class="produto-loja">
+        <img src="https://down-br.img.susercontent.com/file/sg-11134201-7rdwh-mdnmgr75yqga04.webp" alt="CPU">
+        <div class="info">
+            <h2>Placa de Video Gigabyte GeForce RTX 5090 Aorus Master - 32GB</h2>
+            <p>GDDR7 / 512-bit / GV-N5090AORUS-M-32GD</p>
+            <div class="estrelas">★★★★★</div>
+            <div class="preco">R$ 26.999,99</div>
+            <a href="javascript:void(0)" onclick="abrirProduto(5)" class="btn-comprar">Comprar</a>
+        </div>
+    </div>
+ 
+    <!-- Placa De Video -->
+    <div class="produto-loja">
+        <img src="https://img.terabyteshop.com.br/produto/g/placa-de-video-asrock-amd-radeon-rx-9070-xt-steel-legend-16gb-gddr6-fsr-ray-tracing-white-90-ga5dzz-00uanf_231129.jpg" alt="CPU">
+        <div class="info">
+            <h2>Placa de Vídeo ASRock AMD Radeon RX 9070 XT Steel Legend / 16GB</h2>
+            <p>GDDR6 / FSR / Ray Tracing / White / 90-GA5DZZ-00UANF</p>
+            <div class="estrelas">★★★★★</div>
+            <div class="preco">R$ 10.289,99</div>
+            <a href="javascript:void(0)" onclick="abrirProduto(6)" class="btn-comprar">Comprar</a>
+        </div>
+    </div>
+ 
+    <!-- Placa Mãe -->
+    <div class="produto-loja">
+        <img src="https://images9.kabum.com.br/produtos/fotos/933389/placa-mae-gigabyte-x870-aorus-elite-wf7-ice-am5-atx-ddr5-pcie-5-0-rgb-wi-fi-7-bluetooth-branco-x870-a-elite-wf7-ice_1771934802_gg.jpg" alt="CPU">
+        <div class="info">
+            <h2>Placa-Mãe Gigabyte X870 AORUS ELITE WF7 ICE</h2>
+            <p>AM5 / ATX / DDR5 / PCIe 5.0, RGB / Wi-Fi 7 / Bluetooth / Branco - X870 A ELITE WF7 ICE</p>
+            <div class="estrelas">★★★★★</div>
+            <div class="preco">R$ 3.999,99</div>
+            <a href="javascript:void(0)" onclick="abrirProduto(7)" class="btn-comprar">Comprar</a>
+        </div>
+    </div>
+ 
+    <!-- Placa Mãe -->
+    <div class="produto-loja">
+        <img src="https://m.media-amazon.com/images/I/81p4nj7F2tL._AC_SX679_.jpg" alt="CPU">
+        <div class="info">
+            <h2>Placa-Mãe ASUS TUF Gaming B550M-PLUS AM4 mATX — Suporte Ryzen</h2>
+            <p>PCIe 4.0 / M.2 NVMe / DDR4 / HDMI/DP / LAN Gigabit / Durabilidade Militar para PC Gamer</p>
+            <div class="estrelas">★★★★★</div>
+            <div class="preco">R$ 899,99</div>
+            <a href="javascript:void(0)" onclick="abrirProduto(8)" class="btn-comprar">Comprar</a>
+        </div>
+    </div>
+ 
+</div>
+ 
+<!-- =============================================
+     JAVASCRIPT - BANCO DE DADOS LOCALSTORAGE
+     ============================================= -->
+<script>
+/* =========================================
+   DADOS DOS PRODUTOS (referência interna)
+   ========================================= */
+const PRODUTOS_DB = {
+    1: { id: 1, nome: 'TEAMGROUP T-Force Delta RGB DDR5 Ram 64GB', preco: 9999.99, precoStr: 'R$ 9.999,99', img: 'https://m.media-amazon.com/images/I/81JEfdUVCTL._AC_SX679_.jpg' },
+    2: { id: 2, nome: 'Kingston Fury Beast RGB 16GB DDR5', preco: 1999.99, precoStr: 'R$ 1.999,99', img: 'https://m.media-amazon.com/images/I/61Nu3Bh1+5L._AC_SX679_.jpg' },
+    3: { id: 3, nome: 'Processador AMD Ryzen 9 9950X3D', preco: 3899.99, precoStr: 'R$ 3.899,99', img: 'https://m.media-amazon.com/images/I/71hZfMZNZuL._AC_SX679_.jpg' },
+    4: { id: 4, nome: 'Processador AMD Ryzen 7 5700X', preco: 1299.99, precoStr: 'R$ 1.299,99', img: 'https://m.media-amazon.com/images/I/41zGH486zyL._AC_SX679_.jpg' },
+    5: { id: 5, nome: 'Gigabyte GeForce RTX 5090 Aorus Master 32GB', preco: 26999.99, precoStr: 'R$ 26.999,99', img: 'https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/v/gv-n5090aorus-m-32gd4.jpg' },
+    6: { id: 6, nome: 'ASRock AMD Radeon RX 9070 XT Steel Legend 16GB', preco: 10289.99, precoStr: 'R$ 10.289,99', img: 'https://img.terabyteshop.com.br/produto/g/placa-de-video-asrock-amd-radeon-rx-9070-xt-steel-legend-16gb-gddr6-fsr-ray-tracing-white-90-ga5dzz-00uanf_231129.jpg' },
+    7: { id: 7, nome: 'Placa-Mãe Gigabyte X870 AORUS ELITE WF7 ICE', preco: 3999.99, precoStr: 'R$ 3.999,99', img: 'https://images9.kabum.com.br/produtos/fotos/933389/placa-mae-gigabyte-x870-aorus-elite-wf7-ice-am5-atx-ddr5-pcie-5-0-rgb-wi-fi-7-bluetooth-branco-x870-a-elite-wf7-ice_1771934802_gg.jpg' },
+    8: { id: 8, nome: 'Placa-Mãe ASUS TUF Gaming B550M-PLUS AM4', preco: 899.99, precoStr: 'R$ 899,99', img: 'https://m.media-amazon.com/images/I/81p4nj7F2tL._AC_SX679_.jpg' }
+};
+ 
+/* =========================================
+   BANCO DE DADOS - LOCALSTORAGE
+   ========================================= */
+const DB = {
+    // ---- USUÁRIOS — chave unificada ----
+    getUsuarios() { return JSON.parse(localStorage.getItem('hx_usuarios') || '[]'); },
+    setUsuarios(u) { localStorage.setItem('hx_usuarios', JSON.stringify(u)); },
+    
+    // ---- USUÁRIO LOGADO — chave unificada ----
+    getUsuarioLogado() { return JSON.parse(localStorage.getItem('hx_usuarioLogado') || 'null'); },
+    setUsuarioLogado(u) {
+        localStorage.setItem('hx_usuarioLogado', JSON.stringify(u));
+        // Chaves globais do projeto
+        localStorage.setItem('usuarioLogado', 'true');
+        localStorage.setItem('nomeUsuario', u.nome || '');
+        localStorage.setItem('emailUsuario', u.email || '');
+    },
+    logoutUsuario() {
+        localStorage.removeItem('hx_usuarioLogado');
+        localStorage.removeItem('usuarioLogado');
+        localStorage.removeItem('nomeUsuario');
+        localStorage.removeItem('emailUsuario');
+    },
+    
+    // ---- CARRINHO (por UID) — chave unificada ----
+    getCarrinho(uid) { return JSON.parse(localStorage.getItem('hx_carrinho_' + uid) || '[]'); },
+    setCarrinho(uid, c) { localStorage.setItem('hx_carrinho_' + uid, JSON.stringify(c)); },
+    
+    // ---- FAVORITOS (por UID) — chave unificada ----
+    getFavoritos(uid) { return JSON.parse(localStorage.getItem('hx_favoritos_' + uid) || '[]'); },
+    setFavoritos(uid, f) { localStorage.setItem('hx_favoritos_' + uid, JSON.stringify(f)); },
+    
+    // ---- PEDIDOS (por UID) — chave unificada ----
+    getPedidos(uid) { return JSON.parse(localStorage.getItem('hx_pedidos_' + uid) || '[]'); },
+    setPedidos(uid, p) { localStorage.setItem('hx_pedidos_' + uid, JSON.stringify(p)); },
+    adicionarPedido(uid, pedido) {
+        const pedidos = this.getPedidos(uid);
+        pedidos.unshift(pedido);
+        this.setPedidos(uid, pedidos);
+    },
+    
+    // ---- ENDEREÇOS (por UID) — chave unificada ----
+    getEnderecos(uid) { return JSON.parse(localStorage.getItem('hx_enderecos_' + uid) || '[]'); },
+    setEnderecos(uid, e) { localStorage.setItem('hx_enderecos_' + uid, JSON.stringify(e)); },
+    
+    // ---- ATUALIZAR USUARIO NO ARRAY ----
+    atualizarUsuario(uid, dados) {
+        const usuarios = this.getUsuarios();
+        const idx = usuarios.findIndex(u => u.id === uid);
+        if (idx !== -1) {
+            usuarios[idx] = { ...usuarios[idx], ...dados };
+            this.setUsuarios(usuarios);
+            // Atualiza sessão
+            const logado = this.getUsuarioLogado();
+            if (logado && logado.id === uid) {
+                this.setUsuarioLogado(usuarios[idx]);
+            }
+        }
+    }
+};
+ 
+/* =========================================
+   ESTADO DA APLICAÇÃO
+   ========================================= */
+let usuarioAtual = null;
+let pagamentoSelecionado = '';
+let checkoutStepAtual = 1;
+ 
+/* =========================================
+   INICIALIZAÇÃO
+   ========================================= */
+document.addEventListener('DOMContentLoaded', () => {
+    usuarioAtual = DB.getUsuarioLogado();
+    atualizarHeaderAuth();
+    renderizarCarrinho();
+    atualizarContadorCarrinho();
+});
+ 
+/* =========================================
+   FUNÇÕES DE AUTH
+   ========================================= */
+function mudarTab(tab) {
+    document.querySelectorAll('.tab-auth-btn').forEach((b, i) => {
+        b.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'cadastro'));
+    });
+    document.getElementById('form-login').classList.toggle('ativo', tab === 'login');
+    document.getElementById('form-cadastro').classList.toggle('ativo', tab === 'cadastro');
+}
+ 
+function fazerLogin() {
+    const email = document.getElementById('login-email').value.trim();
+    const senha = document.getElementById('login-senha').value;
+    const msg = document.getElementById('msg-login');
+ 
+    if (!email || !senha) { mostrarMsg(msg, 'Preencha todos os campos.', 'erro'); return; }
+ 
+    const usuarios = DB.getUsuarios();
+    const user = usuarios.find(u => u.email.toLowerCase() === email.toLowerCase() && u.senha === senha);
+ 
+    if (!user) { mostrarMsg(msg, 'E-mail ou senha incorretos.', 'erro'); return; }
+ 
+    usuarioAtual = user;
+    DB.setUsuarioLogado(user);
+    fecharLogin();
+    atualizarHeaderAuth();
+    renderizarCarrinho();
+    atualizarContadorCarrinho();
+    atualizarBotoesVendaCatalogo();
+    mostrarToast('✅ Bem-vindo, ' + user.nome.split(' ')[0] + '!', 'sucesso');
+}
+ 
+function fazerCadastro() {
+    const nome = document.getElementById('cad-nome').value.trim();
+    const email = document.getElementById('cad-email').value.trim();
+    const telefone = document.getElementById('cad-telefone').value.trim();
+    const senha = document.getElementById('cad-senha').value;
+    const confirma = document.getElementById('cad-confirma').value;
+    const msg = document.getElementById('msg-cadastro');
+ 
+    if (!nome || !email || !senha) { mostrarMsg(msg, 'Nome, e-mail e senha são obrigatórios.', 'erro'); return; }
+    if (senha.length < 6) { mostrarMsg(msg, 'A senha deve ter no mínimo 6 caracteres.', 'erro'); return; }
+    if (senha !== confirma) { mostrarMsg(msg, 'As senhas não conferem.', 'erro'); return; }
+ 
+    const usuarios = DB.getUsuarios();
+    if (usuarios.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+        mostrarMsg(msg, 'Este e-mail já está cadastrado.', 'erro'); return;
+    }
+ 
+    const novoUser = {
+        id: Date.now(),
+        nome, email, telefone, senha,
+        dataCadastro: new Date().toISOString()
+    };
+    usuarios.push(novoUser);
+    DB.setUsuarios(usuarios);
+ 
+    usuarioAtual = novoUser;
+    DB.setUsuarioLogado(novoUser);
+    fecharLogin();
+    atualizarHeaderAuth();
+    mostrarToast('🎉 Conta criada com sucesso! Bem-vindo(a), ' + nome.split(' ')[0] + '!', 'sucesso');
+}
+ 
+function fazerLogout() {
+    usuarioAtual = null;
+    DB.logoutUsuario();
+    fecharPainel();
+    atualizarHeaderAuth();
+    renderizarCarrinho();
+    atualizarContadorCarrinho();
+    atualizarBotoesVendaCatalogo();
+    mostrarToast('👋 Você saiu da conta.', '');
+}
+ 
+// Função global logout() — usada em todas as páginas
+function logout() {
+    fazerLogout();
+}
+
+function atualizarHeaderAuth() {
+    const area = document.getElementById('header-auth-area');
+    if (usuarioAtual) {
+        area.innerHTML = `<a href="javascript:void(0)" onclick="abrirPainel()" class="usuario-logado-header">👤 Olá, ${usuarioAtual.nome.split(' ')[0]}</a>`;
+    } else {
+        area.innerHTML = `<a href="javascript:void(0)" onclick="abrirLogin()">👤 Minha Conta</a>`;
+    }
+}
+ 
+function mostrarMsg(el, texto, tipo) {
+    el.textContent = texto;
+    el.className = 'msg-auth ' + (tipo === 'erro' ? 'msg-erro' : 'msg-sucesso');
+    setTimeout(() => { el.textContent = ''; el.className = 'msg-auth'; }, 4000);
+}
+ 
+/* =========================================
+   FUNÇÕES DO MODAL DE LOGIN E CARRINHO
+   ========================================= */
+function abrirLogin() {
+    document.getElementById("modalLogin").style.display = "block";
+}
+function fecharLogin() {
+    document.getElementById("modalLogin").style.display = "none";
+}
+function abrirCarrinho() {
+    renderizarCarrinho();
+    document.getElementById("meuCarrinho").style.width = "340px";
+}
+function fecharCarrinho() {
+    document.getElementById("meuCarrinho").style.width = "0";
+}
+ 
+/* =========================================
+   FUNÇÕES DOS MODAIS DE PRODUTO
+   ========================================= */
+const mpImagens = {
+    1: ["https://m.media-amazon.com/images/I/81JEfdUVCTL._AC_SX679_.jpg","https://m.media-amazon.com/images/I/71fWtrlkOML._AC_SL1500_.jpg","https://m.media-amazon.com/images/I/71OWkkmxO3L._AC_SL1500_.jpg","https://m.media-amazon.com/images/I/718VBWtpLKL._AC_SL1500_.jpg"],
+    2: ["https://m.media-amazon.com/images/I/61Nu3Bh1+5L._AC_SX679_.jpg","https://m.media-amazon.com/images/I/61ccslaqOrL._AC_SX679_.jpg","https://m.media-amazon.com/images/I/71isB6CeiAL._AC_SX679_.jpg","https://m.media-amazon.com/images/I/71xMTws0sBL._AC_SX679_.jpg"],
+    3: ["https://m.media-amazon.com/images/I/71hZfMZNZuL._AC_SX679_.jpg","https://m.media-amazon.com/images/I/51mo6MoU8IL._AC_SX679_.jpg","https://m.media-amazon.com/images/I/71eEfALRLfL._AC_SX679_.jpg"],
+    4: ["https://m.media-amazon.com/images/I/41zGH486zyL._AC_SX679_.jpg"],
+    5: ["https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/v/gv-n5090aorus-m-32gd4.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/v/gv-n5090aorus-m-32gd7.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/v/gv-n5090aorus-m-32gd1.jpg","https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/g/v/gv-n5090aorus-m-32gd.jpg"],
+    6: ["https://img.terabyteshop.com.br/produto/g/placa-de-video-asrock-amd-radeon-rx-9070-xt-steel-legend-16gb-gddr6-fsr-ray-tracing-white-90-ga5dzz-00uanf_231129.jpg","https://img.terabyteshop.com.br/produto/g/placa-de-video-asrock-amd-radeon-rx-9070-xt-steel-legend-16gb-gddr6-fsr-ray-tracing-white-90-ga5dzz-00uanf_231131.jpg","https://img.terabyteshop.com.br/produto/g/placa-de-video-asrock-amd-radeon-rx-9070-xt-steel-legend-16gb-gddr6-fsr-ray-tracing-white-90-ga5dzz-00uanf_231134.jpg","https://img.terabyteshop.com.br/produto/g/placa-de-video-asrock-amd-radeon-rx-9070-xt-steel-legend-16gb-gddr6-fsr-ray-tracing-white-90-ga5dzz-00uanf_231133.jpg"],
+    7: ["https://images9.kabum.com.br/produtos/fotos/933389/placa-mae-gigabyte-x870-aorus-elite-wf7-ice-am5-atx-ddr5-pcie-5-0-rgb-wi-fi-7-bluetooth-branco-x870-a-elite-wf7-ice_1771934802_gg.jpg","https://images9.kabum.com.br/produtos/fotos/933389/placa-mae-gigabyte-x870-aorus-elite-wf7-ice-am5-atx-ddr5-pcie-5-0-rgb-wi-fi-7-bluetooth-branco-x870-a-elite-wf7-ice_1771934804_gg.jpg","https://images9.kabum.com.br/produtos/fotos/933389/placa-mae-gigabyte-x870-aorus-elite-wf7-ice-am5-atx-ddr5-pcie-5-0-rgb-wi-fi-7-bluetooth-branco-x870-a-elite-wf7-ice_1771934806_gg.jpg","https://images9.kabum.com.br/produtos/fotos/933389/placa-mae-gigabyte-x870-aorus-elite-wf7-ice-am5-atx-ddr5-pcie-5-0-rgb-wi-fi-7-bluetooth-branco-x870-a-elite-wf7-ice_1771934808_gg.jpg"],
+    8: ["https://m.media-amazon.com/images/I/81p4nj7F2tL._AC_SX679_.jpg","https://m.media-amazon.com/images/I/61obYYJKIUL._AC_.jpg","https://m.media-amazon.com/images/I/61QenLBIUCL._AC_SX679_.jpg","https://m.media-amazon.com/images/I/51yDC80+dlL._AC_.jpg"]
+};
+ 
+function abrirProduto(id) {
+    document.getElementById("modalProduto" + id).classList.add("ativo");
+    document.body.style.overflow = "hidden";
+    atualizarBotaoFavorito(id);
+}
+function fecharProduto(id) {
+    document.getElementById("modalProduto" + id).classList.remove("ativo");
+    document.body.style.overflow = "";
+}
+function mpSelecionarImagem(produtoId, index) {
+    document.getElementById("mpImagem" + produtoId).src = mpImagens[produtoId][index];
+}
+document.querySelectorAll(".modal-produto").forEach(function(modal) {
+    modal.addEventListener("click", function(e) {
+        if (e.target === modal) {
+            modal.classList.remove("ativo");
+            document.body.style.overflow = "";
+        }
+    });
+});
+ 
+/* =========================================
+   CARRINHO
+   ========================================= */
+function getCarrinhoAtual() {
+    if (!usuarioAtual) return [];
+    return DB.getCarrinho(usuarioAtual.id);
+}
+function salvarCarrinho(carrinho) {
+    if (!usuarioAtual) return;
+    DB.setCarrinho(usuarioAtual.id, carrinho);
+}
+ 
+function adicionarAoCarrinho(prodId) {
+    if (!usuarioAtual) { abrirLogin(); mostrarToast('⚠️ Faça login para adicionar ao carrinho.', 'erro'); return; }
+    const produto = PRODUTOS_DB[prodId];
+    if (!produto) return;
+    const carrinho = getCarrinhoAtual();
+    const idx = carrinho.findIndex(i => i.id === prodId);
+    if (idx !== -1) {
+        carrinho[idx].quantidade++;
+    } else {
+        carrinho.push({ ...produto, quantidade: 1 });
+    }
+    salvarCarrinho(carrinho);
+    renderizarCarrinho();
+    atualizarContadorCarrinho();
+    mostrarToast('🛒 ' + produto.nome.substring(0, 30) + '... adicionado!', 'sucesso');
+}
+ 
+function removerDoCarrinho(prodId) {
+    const carrinho = getCarrinhoAtual().filter(i => i.id !== prodId);
+    salvarCarrinho(carrinho);
+    renderizarCarrinho();
+    atualizarContadorCarrinho();
+}
+ 
+function alterarQuantidade(prodId, delta) {
+    const carrinho = getCarrinhoAtual();
+    const idx = carrinho.findIndex(i => i.id === prodId);
+    if (idx === -1) return;
+    carrinho[idx].quantidade += delta;
+    if (carrinho[idx].quantidade <= 0) carrinho.splice(idx, 1);
+    salvarCarrinho(carrinho);
+    renderizarCarrinho();
+    atualizarContadorCarrinho();
+}
+ 
+function renderizarCarrinho() {
+    const lista = document.getElementById('carrinho-itens-lista');
+    const subtotalArea = document.getElementById('carrinho-subtotal-area');
+    const carrinho = getCarrinhoAtual();
+ 
+    if (!carrinho.length) {
+        lista.innerHTML = '<p class="item-carrinho-vazio">Seu carrinho está vazio :(</p>';
+        subtotalArea.style.display = 'none';
+        return;
+    }
+ 
+    let total = 0;
+    lista.innerHTML = carrinho.map(item => {
+        const sub = item.preco * item.quantidade;
+        total += sub;
+        return `<div class="cart-item">
+            <img src="${item.img}" alt="${item.nome}">
+            <div class="cart-item-info">
+                <div class="cart-item-nome">${item.nome.substring(0, 45)}...</div>
+                <div class="cart-item-preco">${formatarPreco(sub)}</div>
+                <div class="cart-item-qtd">
+                    <button onclick="alterarQuantidade(${item.id}, -1)">−</button>
+                    <span>${item.quantidade}</span>
+                    <button onclick="alterarQuantidade(${item.id}, 1)">+</button>
+                </div>
+            </div>
+            <button class="cart-item-remover" onclick="removerDoCarrinho(${item.id})" title="Remover">🗑</button>
+        </div>`;
+    }).join('');
+ 
+    document.getElementById('cart-sub-val').textContent = formatarPreco(total);
+    document.getElementById('cart-total-val').textContent = formatarPreco(total);
+    subtotalArea.style.display = 'block';
+}
+ 
+function atualizarContadorCarrinho() {
+    const contador = document.getElementById('carrinho-contador');
+    const carrinho = getCarrinhoAtual();
+    const total = carrinho.reduce((a, i) => a + i.quantidade, 0);
+    contador.textContent = total;
+    contador.style.display = total > 0 ? 'inline' : 'none';
+}
+ 
+/* =========================================
+   FAVORITOS
+   ========================================= */
+function toggleFavorito(prodId) {
+    if (!usuarioAtual) { abrirLogin(); mostrarToast('⚠️ Faça login para favoritar.', 'erro'); return; }
+    const favoritos = DB.getFavoritos(usuarioAtual.id);
+    const idx = favoritos.findIndex(f => f.id === prodId);
+    if (idx !== -1) {
+        favoritos.splice(idx, 1);
+        mostrarToast('💔 Removido dos favoritos.', '');
+    } else {
+        favoritos.push(PRODUTOS_DB[prodId]);
+        mostrarToast('❤️ Adicionado aos favoritos!', 'sucesso');
+    }
+    DB.setFavoritos(usuarioAtual.id, favoritos);
+    atualizarBotaoFavorito(prodId);
+}
+ 
+function atualizarBotaoFavorito(prodId) {
+    const btn = document.getElementById('fav-btn-' + prodId);
+    if (!btn) return;
+    if (!usuarioAtual) { btn.textContent = '♡ ADICIONAR AOS FAVORITOS'; btn.classList.remove('ativo'); return; }
+    const favoritos = DB.getFavoritos(usuarioAtual.id);
+    const isFav = favoritos.some(f => f.id === prodId);
+    btn.textContent = isFav ? '❤️ NOS SEUS FAVORITOS' : '♡ ADICIONAR AOS FAVORITOS';
+    btn.classList.toggle('ativo', isFav);
+}
+ 
+function atualizarBotoesVendaCatalogo() {
+    for (let i = 1; i <= 8; i++) atualizarBotaoFavorito(i);
+}
+ 
+/* =========================================
+   COMPRAR AGORA (atalho checkout)
+   ========================================= */
+function comprarAgora(prodId) {
+    if (!usuarioAtual) { abrirLogin(); mostrarToast('⚠️ Faça login para comprar.', 'erro'); return; }
+    // Adiciona ao carrinho se não estiver
+    const carrinho = getCarrinhoAtual();
+    if (!carrinho.find(i => i.id === prodId)) {
+        adicionarAoCarrinho(prodId);
+    }
+    // Fecha modal do produto
+    fecharProduto(prodId);
+    // Abre checkout
+    setTimeout(abrirCheckout, 200);
+}
+ 
+/* =========================================
+   CHECKOUT
+   ========================================= */
+function abrirCheckout() {
+    if (!usuarioAtual) { fecharCarrinho(); abrirLogin(); return; }
+    const carrinho = getCarrinhoAtual();
+    if (!carrinho.length) { mostrarToast('⚠️ Seu carrinho está vazio!', 'erro'); return; }
+ 
+    fecharCarrinho();
+    checkoutStepAtual = 1;
+    irParaStep(1);
+ 
+    // Preenche dados do usuário automaticamente
+    document.getElementById('ck-nome').value = usuarioAtual.nome || '';
+    document.getElementById('ck-email').value = usuarioAtual.email || '';
+    document.getElementById('ck-telefone').value = usuarioAtual.telefone || '';
+    document.getElementById('ck-cpf').value = usuarioAtual.cpf || '';
+ 
+    // Endereços salvos
+    const enderecos = DB.getEnderecos(usuarioAtual.id);
+    const endDiv = document.getElementById('ck-enderecos-salvos');
+    if (enderecos.length) {
+        endDiv.innerHTML = `<p style="font-size:13px;color:#9ca3af;margin-bottom:8px;">Selecionar endereço salvo:</p>` +
+            enderecos.map((e, i) => `<button onclick="preencherEndereco(${i})" style="background:#181c23;border:1px solid #252b36;color:#9ca3af;padding:8px 14px;border-radius:6px;cursor:pointer;margin:3px;font-size:12px;">${e.apelido || 'Endereço ' + (i+1)}</button>`).join('');
+    } else {
+        endDiv.innerHTML = '';
+    }
+ 
+    document.getElementById('checkoutOverlay').classList.add('ativo');
+    document.body.style.overflow = 'hidden';
+}
+ 
+function preencherEndereco(idx) {
+    const e = DB.getEnderecos(usuarioAtual.id)[idx];
+    if (!e) return;
+    document.getElementById('ck-cep').value = e.cep || '';
+    document.getElementById('ck-estado').value = e.estado || '';
+    document.getElementById('ck-cidade').value = e.cidade || '';
+    document.getElementById('ck-bairro').value = e.bairro || '';
+    document.getElementById('ck-rua').value = e.rua || '';
+    document.getElementById('ck-numero').value = e.numero || '';
+    document.getElementById('ck-complemento').value = e.complemento || '';
+    mostrarToast('📍 Endereço preenchido!', 'sucesso');
+}
+ 
+function fecharCheckout() {
+    document.getElementById('checkoutOverlay').classList.remove('ativo');
+    document.body.style.overflow = '';
+    pagamentoSelecionado = '';
+    document.querySelectorAll('.pagamento-opcao').forEach(o => o.classList.remove('selecionada'));
+    document.getElementById('pix-area').style.display = 'none';
+    document.getElementById('boleto-area').style.display = 'none';
+    document.getElementById('cartao-area').classList.remove('ativo');
+}
+ 
+function irParaStep(step) {
+    if (step === 2) {
+        // Validação básica
+        const nome = document.getElementById('ck-nome').value.trim();
+        const email = document.getElementById('ck-email').value.trim();
+        if (!nome || !email) { mostrarToast('⚠️ Preencha nome e e-mail.', 'erro'); return; }
+        // Monta resumo
+        const carrinho = getCarrinhoAtual();
+        let total = carrinho.reduce((a, i) => a + i.preco * i.quantidade, 0);
+        let html = carrinho.map(i => `<div class="checkout-resumo-item"><span>${i.nome.substring(0,35)}... x${i.quantidade}</span><span>${formatarPreco(i.preco * i.quantidade)}</span></div>`).join('');
+        html += `<div class="checkout-resumo-item" style="border:none;"><span style="font-weight:bold;">Total</span><span class="checkout-total">${formatarPreco(total)}</span></div>`;
+        document.getElementById('checkout-resumo-pag').innerHTML = html;
+    }
+    checkoutStepAtual = step;
+    document.querySelectorAll('.checkout-step').forEach((s, i) => s.classList.toggle('ativo', i + 1 === step));
+}
+ 
+function selecionarPagamento(metodo) {
+    pagamentoSelecionado = metodo;
+    document.querySelectorAll('.pagamento-opcao').forEach(o => o.classList.remove('selecionada'));
+    event.currentTarget.classList.add('selecionada');
+    
+    document.getElementById('pix-area').style.display = metodo === 'PIX' ? 'block' : 'none';
+    document.getElementById('boleto-area').style.display = metodo === 'BOLETO' ? 'block' : 'none';
+    document.getElementById('cartao-area').classList.toggle('ativo', metodo === 'CARTAO');
+ 
+    if (metodo === 'BOLETO') {
+        const codigo = '34191.75005 14584.916503 53678.918900 6 ' + (10000000 + Math.floor(Math.random() * 89999999));
+        document.getElementById('boleto-codigo').textContent = codigo;
+    }
+}
+ 
+function confirmarPagamento() {
+    if (!pagamentoSelecionado) { mostrarToast('⚠️ Selecione uma forma de pagamento.', 'erro'); return; }
+ 
+    const carrinho = getCarrinhoAtual();
+    const total = carrinho.reduce((a, i) => a + i.preco * i.quantidade, 0);
+    const idPedido = 'PED' + Date.now().toString().slice(-8);
+    const data = new Date().toLocaleDateString('pt-BR');
+ 
+    const pedido = {
+        idPedido,
+        usuarioId: usuarioAtual.id,
+        produtos: carrinho.map(i => ({ id: i.id, nome: i.nome, img: i.img, preco: i.preco, quantidade: i.quantidade })),
+        valorTotal: total,
+        pagamento: pagamentoSelecionado,
+        status: pagamentoSelecionado === 'BOLETO' ? 'Pendente' : 'Aprovado',
+        data,
+        endereco: {
+            nome: document.getElementById('ck-nome').value,
+            cep: document.getElementById('ck-cep').value,
+            cidade: document.getElementById('ck-cidade').value,
+            estado: document.getElementById('ck-estado').value,
+            rua: document.getElementById('ck-rua').value,
+            numero: document.getElementById('ck-numero').value
+        }
+    };
+ 
+    DB.adicionarPedido(usuarioAtual.id, pedido);
+ 
+    // Limpa carrinho
+    DB.setCarrinho(usuarioAtual.id, []);
+    renderizarCarrinho();
+    atualizarContadorCarrinho();
+ 
+    // Tela de confirmação
+    document.getElementById('pedido-num-display').textContent = '📦 Pedido #' + idPedido;
+    document.getElementById('checkout-metodo-display').textContent = '💳 Pagamento: ' + pagamentoSelecionado;
+    document.getElementById('checkout-valor-display').textContent = '💰 Total: ' + formatarPreco(total);
+    irParaStep(3);
+}
+ 
+/* =========================================
+   PAINEL DO USUÁRIO
+   ========================================= */
+function abrirPainel() {
+    if (!usuarioAtual) { abrirLogin(); return; }
+    document.getElementById('painel-boas-vindas').textContent = 'Olá, ' + usuarioAtual.nome + ' 👋';
+    // Preenche dados pessoais
+    document.getElementById('dados-nome').value = usuarioAtual.nome || '';
+    document.getElementById('dados-email').value = usuarioAtual.email || '';
+    document.getElementById('dados-telefone').value = usuarioAtual.telefone || '';
+    document.getElementById('dados-cpf').value = usuarioAtual.cpf || '';
+ 
+    mudarSecao('pedidos');
+    document.getElementById('painelUsuario').classList.add('ativo');
+    document.body.style.overflow = 'hidden';
+}
+ 
+function fecharPainel() {
+    document.getElementById('painelUsuario').classList.remove('ativo');
+    document.body.style.overflow = '';
+}
+ 
+function mudarSecao(secao) {
+    document.querySelectorAll('.painel-secao').forEach(s => s.classList.remove('ativa'));
+    document.querySelectorAll('.painel-nav-btn').forEach(b => b.classList.remove('ativo'));
+    document.getElementById('secao-' + secao).classList.add('ativa');
+    event && event.currentTarget && event.currentTarget.classList.add('ativo');
+ 
+    if (secao === 'pedidos' || secao === 'historico') renderizarPedidos(secao);
+    if (secao === 'favoritos') renderizarFavoritos();
+    if (secao === 'enderecos') renderizarEnderecos();
+}
+ 
+function renderizarPedidos(secao) {
+    const lista = document.getElementById('lista-' + secao);
+    const pedidos = DB.getPedidos(usuarioAtual.id);
+    if (!pedidos.length) {
+        lista.innerHTML = '<div class="empty-state"><div class="icon">📦</div><p>Nenhum pedido encontrado.</p></div>';
+        return;
+    }
+    lista.innerHTML = pedidos.map(p => `
+        <div class="pedido-card">
+            <div class="pedido-card-header">
+                <span class="pedido-id">#${p.idPedido}</span>
+                <span class="pedido-status status-${p.status === 'Aprovado' ? 'aprovado' : p.status === 'Pendente' ? 'pendente' : 'cancelado'}">${p.status}</span>
+            </div>
+            <div class="pedido-info-linha"><span>Data:</span><strong>${p.data}</strong></div>
+            <div class="pedido-info-linha"><span>Pagamento:</span><strong>${p.pagamento}</strong></div>
+            <div class="pedido-info-linha"><span>Total:</span><strong style="color:#00c853;">${formatarPreco(p.valorTotal)}</strong></div>
+            <div class="pedido-itens">
+                ${p.produtos.map(prod => `<div class="pedido-item-linha"><img src="${prod.img}" alt="${prod.nome}"><span>${prod.nome.substring(0,40)}...</span><span style="margin-left:auto;color:#9ca3af;">x${prod.quantidade}</span></div>`).join('')}
+            </div>
+        </div>`).join('');
+}
+ 
+function renderizarFavoritos() {
+    const lista = document.getElementById('lista-favoritos');
+    const favs = DB.getFavoritos(usuarioAtual.id);
+    if (!favs.length) {
+        lista.innerHTML = '<div class="empty-state"><div class="icon">♡</div><p>Nenhum produto favoritado ainda.</p></div>';
+        return;
+    }
+    lista.innerHTML = favs.map(f => `
+        <div class="favorito-card">
+            <img src="${f.img}" alt="${f.nome}">
+            <div class="favorito-card-info">
+                <div class="favorito-card-nome">${f.nome.substring(0,45)}...</div>
+                <div class="favorito-card-preco">${f.precoStr}</div>
+            </div>
+            <div class="favorito-card-acoes">
+                <button class="btn-fav-carrinho" onclick="adicionarAoCarrinho(${f.id}); fecharPainel();">🛒 Comprar</button>
+                <button class="btn-fav-remover" onclick="removerFavorito(${f.id})">🗑 Remover</button>
+            </div>
+        </div>`).join('');
+}
+ 
+function removerFavorito(prodId) {
+    const favs = DB.getFavoritos(usuarioAtual.id).filter(f => f.id !== prodId);
+    DB.setFavoritos(usuarioAtual.id, favs);
+    renderizarFavoritos();
+    atualizarBotaoFavorito(prodId);
+    mostrarToast('💔 Removido dos favoritos.', '');
+}
+ 
+function renderizarEnderecos() {
+    const lista = document.getElementById('lista-enderecos');
+    const enderecos = DB.getEnderecos(usuarioAtual.id);
+    if (!enderecos.length) {
+        lista.innerHTML = '<div class="empty-state"><div class="icon">📍</div><p>Nenhum endereço salvo.</p></div>';
+        return;
+    }
+    lista.innerHTML = enderecos.map((e, i) => `
+        <div class="endereco-card">
+            <div class="endereco-card-header">
+                <strong>${e.apelido || 'Endereço ' + (i+1)}</strong>
+                <div class="endereco-acoes">
+                    <button class="btn-endereco-remover" onclick="removerEndereco(${i})">🗑 Remover</button>
+                </div>
+            </div>
+            <p>${e.rua}, ${e.numero}${e.complemento ? ' - ' + e.complemento : ''}<br>${e.bairro}, ${e.cidade} - ${e.estado}<br>CEP: ${e.cep}</p>
+        </div>`).join('');
+}
+ 
+function salvarEndereco() {
+    const apelido = document.getElementById('end-apelido').value.trim();
+    const cep = document.getElementById('end-cep').value.trim();
+    const estado = document.getElementById('end-estado').value.trim();
+    const cidade = document.getElementById('end-cidade').value.trim();
+    const bairro = document.getElementById('end-bairro').value.trim();
+    const rua = document.getElementById('end-rua').value.trim();
+    const numero = document.getElementById('end-numero').value.trim();
+    const complemento = document.getElementById('end-complemento').value.trim();
+ 
+    if (!cep || !cidade || !rua || !numero) { mostrarToast('⚠️ Preencha os campos obrigatórios.', 'erro'); return; }
+ 
+    const enderecos = DB.getEnderecos(usuarioAtual.id);
+    enderecos.push({ apelido, cep, estado, cidade, bairro, rua, numero, complemento });
+    DB.setEnderecos(usuarioAtual.id, enderecos);
+    renderizarEnderecos();
+    ['end-apelido','end-cep','end-estado','end-cidade','end-bairro','end-rua','end-numero','end-complemento'].forEach(id => document.getElementById(id).value = '');
+    mostrarToast('📍 Endereço salvo!', 'sucesso');
+}
+ 
+function removerEndereco(idx) {
+    const enderecos = DB.getEnderecos(usuarioAtual.id);
+    enderecos.splice(idx, 1);
+    DB.setEnderecos(usuarioAtual.id, enderecos);
+    renderizarEnderecos();
+    mostrarToast('🗑 Endereço removido.', '');
+}
+ 
+function salvarDados() {
+    const nome = document.getElementById('dados-nome').value.trim();
+    const email = document.getElementById('dados-email').value.trim();
+    const telefone = document.getElementById('dados-telefone').value.trim();
+    const cpf = document.getElementById('dados-cpf').value.trim();
+    if (!nome || !email) { mostrarToast('⚠️ Nome e e-mail são obrigatórios.', 'erro'); return; }
+    DB.atualizarUsuario(usuarioAtual.id, { nome, email, telefone, cpf });
+    usuarioAtual = DB.getUsuarioLogado();
+    atualizarHeaderAuth();
+    document.getElementById('painel-boas-vindas').textContent = 'Olá, ' + usuarioAtual.nome + ' 👋';
+    mostrarToast('✅ Dados atualizados!', 'sucesso');
+}
+ 
+function alterarSenha() {
+    const atual = document.getElementById('senha-atual').value;
+    const nova = document.getElementById('senha-nova').value;
+    const confirma = document.getElementById('senha-confirma').value;
+    if (!atual || !nova) { mostrarToast('⚠️ Preencha todos os campos.', 'erro'); return; }
+    if (atual !== usuarioAtual.senha) { mostrarToast('❌ Senha atual incorreta.', 'erro'); return; }
+    if (nova.length < 6) { mostrarToast('⚠️ Nova senha deve ter mínimo 6 caracteres.', 'erro'); return; }
+    if (nova !== confirma) { mostrarToast('⚠️ As senhas não conferem.', 'erro'); return; }
+    DB.atualizarUsuario(usuarioAtual.id, { senha: nova });
+    usuarioAtual = DB.getUsuarioLogado();
+    ['senha-atual','senha-nova','senha-confirma'].forEach(id => document.getElementById(id).value = '');
+    mostrarToast('🔐 Senha alterada com sucesso!', 'sucesso');
+}
+ 
+/* =========================================
+   UTILITÁRIOS
+   ========================================= */
+function formatarPreco(valor) {
+    return 'R$ ' + valor.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+ 
+function mostrarToast(msg, tipo) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (tipo ? ' ' + tipo : '');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => { t.className = 'toast'; }, 3000);
+}
+ 
+// Fechar modal de login ao clicar fora
+document.getElementById('modalLogin').addEventListener('click', function(e) {
+    if (e.target === this) fecharLogin();
+});
+// Fechar painel ao clicar fora
+document.getElementById('painelUsuario').addEventListener('click', function(e) {
+    if (e.target === this) fecharPainel();
+});
+</script>
+ 
+</body>
+</html>
